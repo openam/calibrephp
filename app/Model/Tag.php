@@ -1,0 +1,38 @@
+<?php
+App::uses('AppModel', 'Model');
+/**
+ * Tag Model
+ *
+ */
+class Tag extends AppModel {
+
+/**
+ * Display field
+ *
+ * @var string
+ */
+	public $displayField = 'name';
+
+/**
+ * Default order
+ *
+ * @var string
+ */
+	public $order = 'Tag.name ASC';
+
+/**
+ * hasAndBelongsToMany associations
+ *
+ * @var array
+ */
+	public $hasAndBelongsToMany = array(
+		'Book' => array(
+			'className'             => 'Book',
+			'joinTable'             => 'books_tags_link',
+			'foreignKey'            => 'tag',
+			'associationForeignKey' => 'book',
+			'unique'                => true
+		)
+	);
+
+}
