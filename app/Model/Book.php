@@ -72,6 +72,20 @@ class Book extends AppModel {
 			'associationForeignKey' => 'author',
 			'unique'                => true
 		),
+		'Publisher' => array(
+			'className'             => 'Publisher',
+			'joinTable'             => 'books_publishers_link',
+			'foreignKey'            => 'book',
+			'associationForeignKey' => 'publisher',
+			'unique'                => true
+		),
+		'Rating' => array(
+			'className'             => 'Rating',
+			'joinTable'             => 'books_ratings_link',
+			'foreignKey'            => 'book',
+			'associationForeignKey' => 'rating',
+			'unique'                => true
+		),
 		'Tag' => array(
 			'className'             => 'Tag',
 			'joinTable'             => 'books_tags_link',
