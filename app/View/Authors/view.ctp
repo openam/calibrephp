@@ -23,11 +23,7 @@
 		<?php else: ?>
 			<span class="img-rounded pull-left cover">No Cover</span>
 		<?php endif; ?>
-		<div class="btn-group btn-group-vertical pull-right">
-			<?php foreach ($book['Datum'] as $file): ?>
-				<button type="button" class="btn"><?php echo $this->Html->link($file['format'], $this->Html->url(DS . 'calibre-library' . DS . $book['path'] . DS . $file['name'] . '.' . strtolower($file['format']), true)); ?></button>
-			<?php endforeach; ?>
-		</div>
+		<?php echo $this->Image->ebookLinks($book['path'], $book['Datum'], 'btn-group btn-group-vertical pull-right'); ?>
 		<div>
 			<h5><?php echo $this->Html->link($book['sort'], array('controller'=>'books', 'action'=>'view', $book['id'])); ?></h5>
 		</div>

@@ -3,11 +3,7 @@
 		<?php echo $this->Image->thumbnail($book['Book']['path'], 'view'); ?>
 	</div>
 	<div class="book-row">
-		<div class="btn-group btn-group-vertical pull-right hidden-phone">
-			<?php foreach ($book['Datum'] as $file): ?>
-				<button type="button" class="btn"><?php echo $this->Html->link($file['format'], $this->Html->url(DS . 'calibre-library' . DS . $book['Book']['path'] . DS . $file['name'] . '.' . strtolower($file['format']), true)); ?></button>
-			<?php endforeach; ?>
-		</div>
+		<?php echo $this->Image->ebookLinks($book['Book']['path'], $book['Datum'], 'btn-group btn-group-vertical pull-right hidden-phone'); ?>
 		<h3><?php  echo h($book['Book']['sort']); ?></h3>
 		<?php
 			echo $this->Txt->definition(array(__('Author') => $this->Txt->habtmLinks($book['Author'], 'authors')));
@@ -18,11 +14,7 @@
 			echo $this->Txt->definition(array(__('Tags') => $this->Txt->habtmLinks($book['Tag'], 'tags')));
 		?>
 	</div>
-	<div class="btn-group  visible-phone">
-		<?php foreach ($book['Datum'] as $file): ?>
-			<button type="button" class="btn"><?php echo $this->Html->link($file['format'], $this->Html->url(DS . 'calibre-library' . DS . $book['Book']['path'] . DS . $file['name'] . '.' . strtolower($file['format']), true)); ?></button>
-		<?php endforeach; ?>
-	</div>
+	<?php echo $this->Image->ebookLinks($book['Book']['path'], $book['Datum'], 'btn-group visible-phone'); ?>
 </div>
 <div>
 	<?php if (!empty($book['Comment']['text'])): ?>

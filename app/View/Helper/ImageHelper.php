@@ -79,4 +79,20 @@ class ImageHelper extends AppHelper {
 		return '<img class="img-rounded pull-left cover" src="'. $this->resizeUrl($bookPath, $resizeSettings) . '">';
 	}
 
+/**
+ * ebookLinks
+ *
+ * @param string $bookPath path for the book relative to the calibre library/
+ * @param array $files the controller that you want to check
+ * @return string a string with the links to all the book formats items
+ */
+	public function ebookLinks($bookPath = "", $files = array(), $divClass = 'btn-group') {
+		$links = '<div class="' . $divClass . '">';
+		foreach ($files as $key => $file) {
+			$links .= '<button type="button" class="btn">' . $this->Html->link($file['format'], $this->Html->url('/' . $this->calibrePath . $bookPath . '/' . $file['name'] . '.' . strtolower($file['format']), true)) . '</button>';
+		}
+		$links .= '</div>';
+		return $links;
+	}
+
 }
