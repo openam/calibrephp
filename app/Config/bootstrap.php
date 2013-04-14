@@ -108,3 +108,5 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+App::import('Vendor', 'ImageResize', array('file' => 'image.resize.php'));

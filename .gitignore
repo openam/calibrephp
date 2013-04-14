@@ -24,6 +24,8 @@ Thumbs.db
 /app/webroot/css/.sass-cache
 /app/webroot/js/combined/*.js
 /app/webroot/css/compass_app_log.txt
+/app/webroot/cache/*
+!/app/webroot/cache/empty
 
 /app/tmp/cache/*
 /app/tmp/cache/*/*
