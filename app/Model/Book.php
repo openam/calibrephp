@@ -21,18 +21,6 @@ class Book extends AppModel {
 	public $order = 'Book.sort ASC';
 
 /**
- * belongsTo associations
- *
- * @var array
- */
-	public $belongsTo = array(
-		'Series' => array(
-			'className'  => 'Series',
-			'foreignKey' => 'series_index',
-		)
-	);
-
-/**
  * hasOne associations
  *
  * @var array
@@ -84,6 +72,13 @@ class Book extends AppModel {
 			'joinTable'             => 'books_ratings_link',
 			'foreignKey'            => 'book',
 			'associationForeignKey' => 'rating',
+			'unique'                => true
+		),
+		'Series' => array(
+			'className'             => 'Series',
+			'joinTable'             => 'books_series_link',
+			'foreignKey'            => 'book',
+			'associationForeignKey' => 'series',
 			'unique'                => true
 		),
 		'Tag' => array(
