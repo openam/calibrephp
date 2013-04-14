@@ -15,6 +15,13 @@
 				'stylesheets/responsive',
 			));
 			echo $this->fetch('css');
+
+			echo $this->Html->script(array(
+				'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+				'bootstrap-collapse',
+				'jquery.fancybox.pack',
+			));
+			echo $this->fetch('script');
 		?>
 	</head>
 	<body>
@@ -32,11 +39,6 @@
 			<?php echo $this->element('Layout/footer'); ?>
 		</div>
 		<?php
-			echo $this->Html->script(array(
-				'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-				'bootstrap-collapse',
-			));
-			echo $this->fetch('script');
 		?>
 	</body>
 </html>

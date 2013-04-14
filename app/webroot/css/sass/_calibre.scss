@@ -1,3 +1,7 @@
+$baseline: 20px;
+$labelWidth: 60px;
+$coverWidth: 70px;
+
 body {
 	padding-top: 60px;
 }
@@ -6,12 +10,96 @@ body {
 	width: 210px;
 }
 
-//
-// Hero unit
-// --------------------------------------------------
-
+// Hero unit  --------------------------------------------------
 .hero-unit {
 	background-color: $wellBackground;
 	border: 1px solid darken($wellBackground, 7%);
 	@include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+}
+
+.paginator-footer {
+	text-align: center;
+	margin: $baseline/4 0 $baseline/2;
+
+	.left {
+		float: left;
+	}
+	.right {
+		float: right;
+	}
+	@media (max-width: 767px) {
+		.left {
+			display: block;
+			float: none;
+			clear: left;
+			margin: 5px 0;
+		}
+		.center {
+			display: block;
+			clear: left;
+		}
+		.right {
+			display: block;
+			float: none;
+			clear: left;
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	#footer{
+		text-align: center;
+	}
+
+}
+
+.book-row {
+	@extend .row-fluid;
+
+	margin-bottom: $baseline;
+
+	.btn {
+		width: 60px;
+	}
+
+	.cover {
+		width: $coverWidth;
+		height: $coverWidth * 10 / 7;
+		margin-right: 10px;
+		border: 1px solid darken($wellBackground, 7%);
+		@include box-shadow(5px 5px 5px rgba(0,0,0,0.25));
+		&:hover {
+			@include box-shadow(3px 3px 2px rgba(0,0,0,0.25));
+		}
+	}
+
+	dl {
+		margin: 0;
+	}
+
+	h5{
+		margin: 0;
+	}
+
+	.definition {
+		display: inline-block;
+		font-weight: bold;
+		margin-right: 5px;
+		width: $labelWidth;
+		&:after {
+			content: ":";
+		}
+	}
+
+	span.img-rounded {
+		background-color: $wellBackground;
+		border: 1px solid darken($wellBackground, 7%);
+		@include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+		line-height: $coverWidth * 10 / 7;
+		text-align: center;
+	}
+}
+
+.btn-group-vertical > .btn:first-child:last-child{
+  @include border-radius($baseBorderRadius);
 }

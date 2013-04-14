@@ -8,17 +8,6 @@ if (!class_exists('TextHelper')) {
 class TxtHelper extends TextHelper {
 
 /**
- * Helpers used by this helper
- *
- * @var array
- */
-	public $helpers = array(
-		'Form',
-		'Html',
-		'Text'
-	);
-
-/**
  * activeIndex method
  *
  * @param string $value the controller that you want to check
@@ -35,5 +24,51 @@ class TxtHelper extends TextHelper {
 			return '';
 		}
 	}
+
+	/**
+	 * Generates the overview information
+	 *
+	 * @param  array $options label, text, alternateText, before, after
+	 * @return string
+	 */
+		public function definition($options = array()) {
+			$defaultOptions = array(
+				'label'          => '',
+				'text'           => '',
+				'alternateText'  => '',
+				'before'         => '',
+				'after'          => '',
+				'htmlAttributes' => array()
+			);
+
+			if (count($options) == 1) {
+				$temp    = $options;
+				$options = array();
+				foreach ($temp as $key => $value) {
+					$options['label'] = $key;
+					$options['text']  = $value;
+				}
+			}
+
+			$options = array_merge($defaultOptions, $options);
+
+			$htmlAttributes = '';
+			foreach ($options['htmlAttributes'] as $key => $value) {
+				$htmlAttributes .= ' ' . $key . '="' . $value . '"' ;
+			}
+
+			if (!empty($options['text']) && !empty($options['label'])) {
+				if (!empty($options['alternateText'])) {
+					$options['text'] = $options['alternateText'];
+				}
+
+				$text = "<div><span class='definition'$htmlAttributes>" . $options['label'] . "</span><span$htmlAttributes>";
+				$text .= $options['before'] . $options['text'] . $options['after'] . '</span></div>';
+
+				return $text;
+			} else {
+				return false;
+			}
+		}
 
 }

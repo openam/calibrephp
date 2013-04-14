@@ -23,7 +23,11 @@
  * @param array $opts  (w(pixels), h(pixels), crop(boolean), scale(boolean), thumbnail(boolean), maxOnly(boolean), canvas-color(#abcabc), output-filename(string), cache_http_minutes(int))
  * @return new URL for resized image.
  */
-function resize($imagePath,$opts=null){
+function resize($imagePath,$opts=array()){
+	if (!$opts || empty($opts)) {
+		return($imagePath);
+	}
+
 	$imagePath = urldecode($imagePath);
 
 	// start configuration........
