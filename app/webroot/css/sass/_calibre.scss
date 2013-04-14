@@ -1,5 +1,5 @@
 $baseline: 20px;
-$labelWidth: 60px;
+$labelWidth: 70px;
 $coverWidth: 70px;
 
 body {
@@ -53,6 +53,12 @@ body {
 
 }
 
+.cover {
+	margin-right: 10px;
+	border: 1px solid darken($wellBackground, 7%);
+	@include box-shadow(5px 5px 5px rgba(0,0,0,0.25));
+}
+
 .book-row {
 	@extend .row-fluid;
 
@@ -65,9 +71,6 @@ body {
 	.cover {
 		width: $coverWidth;
 		height: $coverWidth * 10 / 7;
-		margin-right: 10px;
-		border: 1px solid darken($wellBackground, 7%);
-		@include box-shadow(5px 5px 5px rgba(0,0,0,0.25));
 		&:hover {
 			@include box-shadow(3px 3px 2px rgba(0,0,0,0.25));
 		}

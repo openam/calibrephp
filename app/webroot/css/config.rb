@@ -8,7 +8,7 @@ http_images_path           = "../images"
 http_generated_images_path = "../images"
 javascripts_dir            = "javascripts"
 
-# output_style = :compressed
+output_style = :compressed
 
 # To enable relative paths to assets via compass helper functions. Uncomment:
 # relative_assets = true
