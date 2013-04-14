@@ -28,8 +28,25 @@ class AuthorsController extends AppController {
 		if (!$this->Author->exists($id)) {
 			throw new NotFoundException(__('Invalid author'));
 		}
-		$options = array('conditions' => array('Author.' . $this->Author->primaryKey => $id));
-		$this->set('author', $this->Author->find('first', $options));
+		$options = array(
+			'conditions' => array(
+				'Author.' . $this->Author->primaryKey => $id
+			),
+			'recursive' => 2
+		);
+
+		$author = $this->Author->find('first', $options);
+
+		$relatedSeries = array();
+		foreach ($author['Book'] as $key => $book) {
+			foreach ($book['Series'] as $key => $series) {
+				$relatedSeries[$series['sort']] = $series['id'];
+			}
+		}
+		ksort($relatedSeries);
+		$series = $relatedSeries;
+
+		$this->set(compact('author', 'series'));
 	}
 
 }

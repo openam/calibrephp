@@ -1,91 +1,53 @@
 <div class="authors view">
-<h2><?php  echo __('Author'); ?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($author['Author']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($author['Author']['name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Sort'); ?></dt>
-		<dd>
-			<?php echo h($author['Author']['sort']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Link'); ?></dt>
-		<dd>
-			<?php echo h($author['Author']['link']); ?>
-			&nbsp;
-		</dd>
-	</dl>
+	<h2><?php  echo h($author['Author']['name']); ?></h2>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Author'), array('action' => 'edit', $author['Author']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Author'), array('action' => 'delete', $author['Author']['id']), null, __('Are you sure you want to delete # %s?', $author['Author']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Authors'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Author'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Books'), array('controller' => 'books', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Book'), array('controller' => 'books', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Books'); ?></h3>
-	<?php if (!empty($author['Book'])): ?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Title'); ?></th>
-		<th><?php echo __('Sort'); ?></th>
-		<th><?php echo __('Timestamp'); ?></th>
-		<th><?php echo __('Pubdate'); ?></th>
-		<th><?php echo __('Series Index'); ?></th>
-		<th><?php echo __('Author Sort'); ?></th>
-		<th><?php echo __('Isbn'); ?></th>
-		<th><?php echo __('Lccn'); ?></th>
-		<th><?php echo __('Path'); ?></th>
-		<th><?php echo __('Flags'); ?></th>
-		<th><?php echo __('Uuid'); ?></th>
-		<th><?php echo __('Has Cover'); ?></th>
-		<th><?php echo __('Last Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($author['Book'] as $book): ?>
-		<tr>
-			<td><?php echo $book['id']; ?></td>
-			<td><?php echo $book['title']; ?></td>
-			<td><?php echo $book['sort']; ?></td>
-			<td><?php echo $book['timestamp']; ?></td>
-			<td><?php echo $book['pubdate']; ?></td>
-			<td><?php echo $book['series_index']; ?></td>
-			<td><?php echo $book['author_sort']; ?></td>
-			<td><?php echo $book['isbn']; ?></td>
-			<td><?php echo $book['lccn']; ?></td>
-			<td><?php echo $book['path']; ?></td>
-			<td><?php echo $book['flags']; ?></td>
-			<td><?php echo $book['uuid']; ?></td>
-			<td><?php echo $book['has_cover']; ?></td>
-			<td><?php echo $book['last_modified']; ?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'books', 'action' => 'view', $book['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'books', 'action' => 'edit', $book['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'books', 'action' => 'delete', $book['id']), null, __('Are you sure you want to delete # %s?', $book['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Book'), array('controller' => 'books', 'action' => 'add')); ?> </li>
-		</ul>
+<h3>Related Series</h3>
+<?php
+	if (!empty($series)) {
+		foreach ($series as $key => $value) {
+			echo $this->Html->link($key, array('controller' => 'series', 'action' => 'view', $value));
+		}
+	} else {
+		echo "No series";
+	}
+?>
+
+<h3>Related Books</h3>
+<?php foreach ($author['Book'] as $key => $book): ?>
+	<div class="book-row">
+		<?php if ($book['has_cover']): ?>
+			<a class="fancybox" href="<?php echo $this->Image->resizeUrl($book['path'], $this->Image->resizeSettings['fancybox']); ?>" data-fancybox-group="gallery" title="<?php echo $book['sort']; ?>">
+				<?php echo $this->Image->thumbnail($book['path'], 'index'); ?>
+			</a>
+		<?php else: ?>
+			<span class="img-rounded pull-left cover">No Cover</span>
+		<?php endif; ?>
+		<div class="btn-group btn-group-vertical pull-right">
+			<?php foreach ($book['Datum'] as $file): ?>
+				<button type="button" class="btn"><?php echo $this->Html->link($file['format'], $this->Html->url(DS . 'calibre-library' . DS . $book['path'] . DS . $file['name'] . '.' . strtolower($file['format']), true)); ?></button>
+			<?php endforeach; ?>
+		</div>
+		<div>
+			<h5><?php echo $this->Html->link($book['sort'], array('controller'=>'books', 'action'=>'view', $book['id'])); ?></h5>
+		</div>
+		<?php
+			echo $this->Txt->definition(array(__('Series') => $this->Txt->habtmLinks($book['Series'], 'series')));
+			echo $this->Txt->definition(array(__('Year') => $this->Time->format('Y', $book['pubdate'])));
+			echo $this->Txt->definition(array(__('Rating') => $this->Txt->rating($book['Rating'])));
+			echo $this->Txt->definition(array(__('Publisher') => $this->Txt->habtmLinks($book['Publisher'], 'publishers')));
+			echo $this->Txt->definition(array(__('Tags') => $this->Txt->habtmLinks($book['Tag'], 'tags')));
+		?>
 	</div>
-</div>
+<?php endforeach; ?>
+
+<script type="text/javascript">
+	console.log('variable');
+	$(document).ready(function() {
+		$(".fancybox").fancybox({
+			helpers: {
+				title : null
+			}
+		});
+	});
+</script>
