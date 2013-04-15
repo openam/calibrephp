@@ -8,4 +8,9 @@
 		<li<?php echo $this->Txt->activeIndex('series'); ?>><?php echo $this->Html->link('Series', array('controller' => 'series', 'action' => 'index')); ?></li>
 		<li<?php echo $this->Txt->activeIndex('tags'); ?>><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index')); ?></li>
 	</ul>
+	<ul class="nav nav-list">
+		<li class="nav-header">Books</li>
+		<li><?php echo $this->Html->link('Newest', array('controller' => 'books', 'action' => 'newest')); ?></li>
+		<li><?php echo $this->Html->link('Random', array('controller' => 'books', 'action' => 'random')); ?></li>
+	</ul>
 </div>

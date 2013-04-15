@@ -32,4 +32,22 @@ class BooksController extends AppController {
 		$this->set('book', $this->Book->find('first', $options));
 	}
 
+/**
+ * newest method
+ *
+ * @return void
+ */
+	public function newest() {
+		throw new NotImplementedException(__('BooksController::newest not yet implemented'));
+	}
+
+/**
+ * random method
+ *
+ * @return void
+ */
+	public function random() {
+		throw new NotImplementedException(__('BooksController::random not yet implemented'));
+	}
+
 }
