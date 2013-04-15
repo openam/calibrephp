@@ -96,18 +96,34 @@ class TxtHelper extends TextHelper {
 /**
  * rating
  *
- * @param array $values the controller that you want to check
+ * @param mixed $values or a single value
  * @return string a string with the links to all the HABTM items
  */
-	public function rating($values = array()) {
+	public function rating($values = array(), $zero = false) {
 		$links     = '';
-		foreach ($values as $key => $value) {
-			if ($value['rating'] != 0) {
-				$displayName = $value['rating'] / 2;
-				$links .= $this->Html->link($displayName, array('controller' => 'ratings', 'action' => 'view', $value['id']));
+		if (is_array($values)) {
+			foreach ($values as $key => $value) {
+				if ($value['rating'] != 0 || $zero) {
+					$displayName = $this->stars($value['rating'] / 2);
+					$links .= $this->Html->link($displayName, array('controller' => 'ratings', 'action' => 'view', $value['id']), array('escape' => false));
+				}
 			}
+		} else {
+			$links = $this->Html->link($this->stars($values / 2), array('controller' => 'ratings', 'action' => 'view', $value['id']), array('escape' => false));
 		}
 		return $links;
+	}
+
+/**
+ * stars
+ * @param integer $value
+ * @param integer $possible stars available
+ * @return string
+ */
+	public function stars($value, $possible = 5) {
+		$stars = str_repeat('&#9733;', $value);
+		$stars .= str_repeat('&#9734;', $possible - $value);
+		return $stars;
 	}
 
 }
