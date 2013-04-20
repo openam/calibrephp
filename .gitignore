@@ -19,6 +19,7 @@ Thumbs.db
 /tags
 
 /app/Config/database.php
+/app/Config/settings.php
 /app/Config/core.php
 
 /app/webroot/css/.sass-cache

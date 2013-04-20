@@ -1,0 +1,9 @@
+<?php
+$config = array(
+	'Settings' => array(
+		'Default' => array(
+			// This should match the path in the database.php file
+			'Database' => '',
+		),
+	),
+);

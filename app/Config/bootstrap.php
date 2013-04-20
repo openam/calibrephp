@@ -130,3 +130,8 @@ CakeLog::config('error', array(
 ));
 
 App::import('Vendor', 'ImageResize', array('file' => 'image.resize.php'));
+
+/**
+ * Custom Configurations
+ */
+	Configure::load('settings');
