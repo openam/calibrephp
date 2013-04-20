@@ -24,8 +24,28 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 
-// Setup a 'default' cache configuration for use in the application.
-Cache::config('default', array('engine' => 'File'));
+/**
+ * Setup the cache configurations for use in the application
+ */
+	$engine = 'File';
+	if (extension_loaded('apc') && (php_sapi_name() !== 'cli' || ini_get('apc.enable_cli'))) {
+		$engine = 'Apc';
+	}
+
+	$duration = '+999 days';
+	if (Configure::read('debug') >= 1) {
+		$duration = '+10 seconds';
+	}
+
+	$prefix = 'calibre_';
+	$path   = CACHE . 'calibre' . DS;
+
+	Cache::config('default', array(
+		'engine'   => $engine,
+		'prefix'   => $prefix,
+		'path'     => $path,
+		'duration' => $duration
+	));
 
 /**
  * The settings below can be used to set additional paths to models, views and controllers.
