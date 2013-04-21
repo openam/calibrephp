@@ -66,12 +66,17 @@ class BooksController extends AppController {
 			throw new NotFoundException(__('Invalid file name or extension'));
 		}
 
+		$ebookMimeTypes = Configure::read('Settings.ebooks.mimeTypes');
+
 		$this->viewClass = 'Media';
 		$params = array(
 			'id'        => $fileName . '.' .$extension,
 			'name'      => $fileName,
-			'download'  => true,
 			'extension' => $extension,
+			'download'  => true,
+			'mimeType'  => array(
+				$extension => $ebookMimeTypes[$extension]
+			),
 			'path'      => Configure::read('Settings.Default.CalibrePath') . $book['Book']['path'] . DS
 		);
 		$this->set($params);

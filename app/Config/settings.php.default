@@ -6,5 +6,33 @@ $config = array(
 			'Database'    => '/path/to/calibre_library/metadata.db',
 			'CalibrePath' => '/path/to/calibre_library/',
 		),
+		'ebooks' => array(
+			'mimeTypes' => array(
+				'azw'   => 'application/x-mobipocket-ebook',
+				'azw3'  => 'application/x-mobipocket-ebook',
+				'cbr'   => 'application/x-cbr',
+				'cbz'   => 'application/x-cbz',
+				'doc'   => 'application/msword',
+				'epub'  => 'application/epub+zip',
+				'fb2'   => 'text/fb2+xml',
+				'kobo'  => 'application/x-koboreader-ebook',
+				'lit'   => 'application/x-ms-reader',
+				'lrf'   => 'application/x-sony-bbeb',
+				'lrs'   => 'text/x-sony-bbeb+xml',
+				'lrx'   => 'application/x-sony-bbeb',
+				'mobi'  => 'application/x-mobipocket-ebook',
+				'ncx'   => 'application/x-dtbncx+xml',
+				'opf'   => 'application/oebps-package+xml',
+				'otf'   => 'application/x-font-opentype',
+				'pdb'   => 'application/vnd.palm',
+				'pdf'   => 'application/pdf',
+				'prc'   => 'application/x-mobipocket-ebook',
+				'rtf'   => 'application/rtf',
+				'ttf'   => 'application/x-font-truetype',
+				'xhtml' => 'application/xhtml+xml',
+				'xpgt'  => 'application/adobe-page-template+xml',
+				'zip'   => 'application/zip'
+			)
+		),
 	),
 );

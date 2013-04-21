@@ -15,23 +15,6 @@ class OpdsHelper extends AppHelper {
 	);
 
 /**
- * fileTypes
- *
- * @var array
- */
-	public $fileTypes = array(
-		'epub' => 'application/epub+zip',
-		'lit'  => 'application/x-ms-reader',
-		'lrf'  => 'application/x-sony-bbeb',
-		'mobi' => 'application/x-mobiepocket-ebook',
-		'pdb'  => 'application/vnd.palm',
-		'pdf'  => 'application/pdf',
-		'prc'  => 'application/x-mobipocket-ebook',
-		'rtf'  => 'application/rtf',
-		'zip'  => 'application/zip',
-	);
-
-/**
  * Default Calibre path used
  *
  * @todo I need to change this somehow so that the calibre-library doesn't need to be symlinked into the webroot/ directory
@@ -58,6 +41,14 @@ class OpdsHelper extends AppHelper {
 				'entry' => array(),
 			)
 		);
+
+/**
+ * getMimeTypes method
+ * @return array of ebook mimeTypes as defined in Settings.ebooks.mimeTypes
+ */
+	public function getMimeTypes() {
+		return Configure::read('Settings.ebooks.mimeTypes');
+	}
 
 /**
  * getDefaultXmlArray method
@@ -159,14 +150,15 @@ class OpdsHelper extends AppHelper {
 				case 'download':
 					foreach ($value['downloads'] as $file) {
 						$link = array(
-							'@href'  => str_replace(' ', '%20', $this->Html->url('/' . $this->Image->calibrePath . $value['bookpath'] . '/' . $file['name'] . '.' . strtolower($file['format']), true)),
+							'@href'  => $this->Html->url(array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format']))),
 							'@type'  => '',
 							'@rel'   => 'http://opds-spec.org/acquisition',
 							'@title' => 'download',
 						);
 
-						if (array_key_exists(strtolower($file['format']), $this->fileTypes)) {
-							$link['@type'] = $this->fileTypes[strtolower($file['format'])];
+						$ebookMimeTypes = $this->getMimeTypes();
+						if (array_key_exists(strtolower($file['format']), $ebookMimeTypes)) {
+							$link['@type'] = $ebookMimeTypes[strtolower($file['format'])];
 							array_push($entry['link'], $link);
 						}
 					}
