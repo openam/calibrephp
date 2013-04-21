@@ -122,6 +122,9 @@ class TxtHelper extends TextHelper {
  * @return string
  */
 	public function stars($value, $possible = 5) {
+		if ($value > $possible) {
+			throw new CakeException("Invalid use of TxtHelper::stars()");
+		}
 		$stars = str_repeat('&#9733;', $value);
 		$stars .= str_repeat('&#9734;', $possible - $value);
 		return $stars;
