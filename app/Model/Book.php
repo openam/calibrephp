@@ -193,6 +193,30 @@ class Book extends AppModel {
 						$info['publishers']['count'][$key]['count'] += 1;
 					}
 				/**
+				 * ratings
+				 */
+					if (!empty($book['Rating'])) {
+						$key = $book['Rating'][0]['rating'];
+
+						if (strtotime($modified) > strtotime($info['ratings']['updated'])) {
+							$info['ratings']['updated'] = $modified;
+						}
+
+						if (!isset($info['ratings']['count'][$key])) {
+							$info['ratings']['count'][$key] = array(
+								'name'    => $book['Rating'][0]['rating'] / 2,
+								'id'      => $book['Rating'][0]['id'],
+								'count'   => 0,
+								'updated' => date(DATE_ATOM, mktime(0, 0, 0, 1, 1, 1900))
+							);
+						}
+
+						if (strtotime($modified) > strtotime($info['ratings']['count'][$key]['updated'])) {
+							$info['ratings']['count'][$key]['updated'] = $modified;
+						}
+						$info['ratings']['count'][$key]['count'] += 1;
+					}
+				/**
 				 * series
 				 */
 					if (!empty($book['Series'])) {

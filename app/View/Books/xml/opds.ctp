@@ -27,6 +27,14 @@
 	));
 
 	$feed = $this->Opds->addEntry($feed, array(
+		'link'    => $this->Html->url(array('controller'=>'ratings', 'action'=>'index.xml'), false),
+		'title'   => 'By Rating',
+		'updated' => $info['ratings']['updated'],
+		'id'      => 'calbire:ratings',
+		'content' => 'books grouped by ' . $this->Txt->numberToWords(count($info['ratings']['count']), true) . ' ratings',
+	));
+
+	$feed = $this->Opds->addEntry($feed, array(
 		'link'    => $this->Html->url(array('controller'=>'series', 'action'=>'index.xml'), false),
 		'title'   => 'By series',
 		'updated' => $info['series']['updated'],
