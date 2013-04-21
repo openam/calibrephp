@@ -33,6 +33,16 @@ class BooksController extends AppController {
 	}
 
 /**
+ * opds method
+ *
+ * @return void
+ */
+	public function opds() {
+		$info = $this->Book->getSummaryInfo();
+		$this->set(compact('info'));
+	}
+
+/**
  * newest method
  *
  * @return void

@@ -29,6 +29,11 @@ class ImageHelper extends AppHelper {
 			'h'     => 165,
 			'scale' => true
 		),
+		'opds' => array(
+			'w'     => 210,
+			'h'     => 300,
+			'scale' => true
+		),
 		'fancybox' => array(
 			'w'     => 500,
 			'h'     => 500,

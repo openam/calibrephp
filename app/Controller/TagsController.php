@@ -14,7 +14,9 @@ class TagsController extends AppController {
  */
 	public function index() {
 		$this->Tag->recursive = 0;
-		$this->set('tags', $this->paginate());
+		$tags = $this->paginate();
+		$info = $this->Tag->Book->getSummaryInfo();
+		$this->set(compact('tags', 'info'));
 	}
 
 /**
@@ -34,7 +36,10 @@ class TagsController extends AppController {
 			),
 			'recursive' => 2
 		);
-		$this->set('tag', $this->Tag->find('first', $options));
+
+		$tag  = $this->Tag->find('first', $options);
+		$info = $this->Tag->Book->getSummaryInfo();
+		$this->set(compact('tag', 'info'));
 	}
 
 }

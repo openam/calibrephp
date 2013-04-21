@@ -14,7 +14,9 @@ class PublishersController extends AppController {
  */
 	public function index() {
 		$this->Publisher->recursive = 0;
-		$this->set('publishers', $this->paginate());
+		$publishers = $this->paginate();
+		$info       = $this->Publisher->Book->getSummaryInfo();
+		$this->set(compact('publishers', 'info'));
 	}
 
 /**
@@ -28,12 +30,17 @@ class PublishersController extends AppController {
 		if (!$this->Publisher->exists($id)) {
 			throw new NotFoundException(__('Invalid publisher'));
 		}
+
 		$options = array(
 			'conditions' => array(
 				'Publisher.' . $this->Publisher->primaryKey => $id
 			),
 			'recursive' => 2
 		);
-		$this->set('publisher', $this->Publisher->find('first', $options));
+
+		$publisher = $this->Publisher->find('first', $options);
+		$info      = $this->Publisher->Book->getSummaryInfo();
+		$this->set(compact('publisher', 'info'));
 	}
+
 }

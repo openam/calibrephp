@@ -14,7 +14,9 @@ class SeriesController extends AppController {
  */
 	public function index() {
 		$this->Series->recursive = 0;
-		$this->set('series', $this->paginate());
+		$series = $this->paginate();
+		$info   = $this->Series->Book->getSummaryInfo();
+		$this->set(compact('series', 'info'));
 	}
 
 /**
@@ -28,13 +30,17 @@ class SeriesController extends AppController {
 		if (!$this->Series->exists($id)) {
 			throw new NotFoundException(__('Invalid series'));
 		}
+
 		$options = array(
 			'conditions' => array(
 				'Series.' . $this->Series->primaryKey => $id
 			),
 			'recursive' => 2
 		);
-		$this->set('series', $this->Series->find('first', $options));
+
+		$series = $this->Series->find('first', $options);
+		$info   = $this->Series->Book->getSummaryInfo();
+		$this->set(compact('series', 'info'));
 	}
 
 }
