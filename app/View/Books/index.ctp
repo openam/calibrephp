@@ -20,7 +20,7 @@
 			<?php else: ?>
 				<span class="img-rounded pull-left cover">No Cover</span>
 			<?php endif; ?>
-			<?php echo $this->Image->ebookLinks($book['Book']['path'], $book['Datum'], 'btn-group btn-group-vertical pull-right'); ?>
+			<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group btn-group-vertical pull-right'); ?>
 			<div>
 				<h5><?php echo $this->Html->link($book['Book']['sort'], array('controller'=>'books', 'action'=>'view', $book['Book']['id'])); ?></h5>
 			</div>

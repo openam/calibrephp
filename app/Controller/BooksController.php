@@ -33,6 +33,51 @@ class BooksController extends AppController {
 	}
 
 /**
+ * download method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @param string $extension
+ * @return void
+ */
+	public function download($id = null, $extension = null) {
+		if (!$this->Book->exists($id)) {
+			throw new NotFoundException(__('Invalid book'));
+		}
+		if (!$extension) {
+			throw new NotFoundException(__('Invalid extension'));
+		}
+		$extension = strtolower($extension);
+
+		$options = array(
+			'conditions' => array('Book.' . $this->Book->primaryKey => $id),
+			'recursive'  => 1,
+		);
+
+		$book = $this->Book->find('first', $options);
+
+		$fileName = '';
+		foreach ($book['Datum'] as $file) {
+			if ($file['format'] == strtoupper($extension)) {
+				$fileName = $file['name'];
+			}
+		}
+		if (!$fileName) {
+			throw new NotFoundException(__('Invalid file name or extension'));
+		}
+
+		$this->viewClass = 'Media';
+		$params = array(
+			'id'        => $fileName . '.' .$extension,
+			'name'      => $fileName,
+			'download'  => true,
+			'extension' => $extension,
+			'path'      => Configure::read('Settings.Default.CalibrePath') . $book['Book']['path'] . DS
+		);
+		$this->set($params);
+	}
+
+/**
  * opds method
  *
  * @return void

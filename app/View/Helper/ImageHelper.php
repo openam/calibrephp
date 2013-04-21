@@ -87,14 +87,13 @@ class ImageHelper extends AppHelper {
 /**
  * ebookLinks
  *
- * @param string $bookPath path for the book relative to the calibre library/
- * @param array $files the controller that you want to check
+ * @param array $files to provide links for
  * @return string a string with the links to all the book formats items
  */
-	public function ebookLinks($bookPath = "", $files = array(), $divClass = 'btn-group') {
+	public function ebookLinks($files = array(), $divClass = 'btn-group') {
 		$links = '<div class="' . $divClass . '">';
 		foreach ($files as $key => $file) {
-			$links .= '<button type="button" class="btn">' . $this->Html->link($file['format'], $this->Html->url('/' . $this->calibrePath . $bookPath . '/' . $file['name'] . '.' . strtolower($file['format']), true)) . '</button>';
+			$links .= '<button type="button" class="btn">' . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format']))) . '</button>';
 		}
 		$links .= '</div>';
 		return $links;
