@@ -32,4 +32,29 @@ App::uses('Model', 'Model');
  * @package       app.Model
  */
 class AppModel extends Model {
+
+/**
+ * getCalibrePath method
+ * @return string with path to calibre location
+ */
+	public function getCalibrePath() {
+		return Configure::read('Settings.Default.CalibrePath');
+	}
+
+/**
+ * getCalibreDatabasePath method
+ * @return string with path to database
+ */
+	public function getCalibreDatabasePath() {
+		return $this->getCalibrePath() . 'metadata.db';
+	}
+
+/**
+ * getDatabaseModifiedTime method
+ * @return string with unix time stamp of when the database was last modified
+ */
+	public function getDatabaseModifiedTime() {
+		return filemtime($this->getCalibreDatabasePath());
+	}
+
 }

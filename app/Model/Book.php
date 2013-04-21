@@ -96,11 +96,11 @@ class Book extends AppModel {
  * @return array
  */
 	public function getSummaryInfo() {
+		$cacheName        = $this->alias.'List';
+		$info             = Cache::read($cacheName, 'default');
+		$databaseModified = $this->getDatabaseModifiedTime();
 
-		$cacheName = $this->alias.'List';
-		$info      = Cache::read($cacheName, 'default');
-
-		if (!$info || filemtime(Configure::read('Settings.Default.Database')) > $info['books']['databaseModified']) {
+		if (!$info || $databaseModified > $info['books']['databaseModified']) {
 			Cache::clear();
 			$books = $this->find('all', array());
 
@@ -108,7 +108,7 @@ class Book extends AppModel {
 				'books' => array(
 					'updated'          => date(DATE_ATOM, mktime(0, 0, 0, 1, 1, 1900)),
 					'count'            => 0,
-					'databaseModified' => filemtime(Configure::read('Settings.Default.Database')),
+					'databaseModified' => $databaseModified,
 				),
 				'authors' => array(
 					'updated' => date(DATE_ATOM, mktime(0, 0, 0, 1, 1, 1900)),

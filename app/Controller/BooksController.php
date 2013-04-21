@@ -77,7 +77,7 @@ class BooksController extends AppController {
 			'mimeType'  => array(
 				$extension => $ebookMimeTypes[$extension]
 			),
-			'path'      => Configure::read('Settings.Default.CalibrePath') . $book['Book']['path'] . DS
+			'path'      => $this->Book->getCalibrePath() . $book['Book']['path'] . DS
 		);
 		$this->set($params);
 	}

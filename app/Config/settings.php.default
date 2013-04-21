@@ -2,8 +2,7 @@
 $config = array(
 	'Settings' => array(
 		'Default' => array(
-			// This should match the path in the database.php file
-			'Database'    => '/path/to/calibre_library/metadata.db',
+			// This should reflect path in the database.php file
 			'CalibrePath' => '/path/to/calibre_library/',
 		),
 		'ebooks' => array(
