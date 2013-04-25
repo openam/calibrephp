@@ -1,7 +1,8 @@
 <div class="books view">
-	<div>
-		<?php echo $this->Image->thumbnail($book['Book']['path'], 'view'); ?>
-	</div>
+	<?php
+		echo $this->Image->fancybox($book['Book'], array('thumbnail' => 'view'));
+	?>
+
 	<div class="book-row">
 		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group btn-group-vertical pull-right hidden-phone'); ?>
 		<h3><?php  echo h($book['Book']['sort']); ?></h3>
@@ -26,3 +27,5 @@
 		<hr />
 	<?php endif; ?>
 </div>
+
+<?php echo $this->Image->fancyboxJs(); ?>

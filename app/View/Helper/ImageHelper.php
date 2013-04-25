@@ -61,6 +61,10 @@ class ImageHelper extends AppHelper {
 			throw new NotFoundException(__('Invalid path'));
 		}
 
+		if (is_string($resizeSettings)) {
+			$resizeSettings = $this->resizeSettings[$resizeSettings];
+		}
+
 		return $this->Html->url('/' . resize($this->calibrePath . $bookPath . '/cover.jpg', $resizeSettings), $fullUrl);
 	}
 
@@ -68,17 +72,12 @@ class ImageHelper extends AppHelper {
  * thumbnail
  *
  * @param string $bookPath the controller that you want to check
- * @param mixed $resizeInfo array settings for the resizer, or string for preset settings
+ * @param mixed $resizeSettings array settings for the resizer, or string for preset settings
  * @return string $resizedUrl the url of the cached and resized image
  */
-	public function thumbnail($bookPath, $resizeInfo = array()) {
+	public function thumbnail($bookPath, $resizeSettings = array()) {
 		if (empty($bookPath)) {
 			throw new NotFoundException(__('Invalid path'));
-		}
-		if (is_string($resizeInfo)) {
-			$resizeSettings = $this->resizeSettings[$resizeInfo];
-		} else {
-			$resizeSettings = $resizeInfo;
 		}
 
 		return '<img class="img-rounded pull-left cover" src="'. $this->resizeUrl($bookPath, $resizeSettings) . '">';
@@ -99,4 +98,52 @@ class ImageHelper extends AppHelper {
 		return $links;
 	}
 
+/**
+ * fancybox
+ *
+ * @param array $book an array with the book information in it, specifically 'path' and 'has_cover' are required
+ * @param array $options array('thumbnail' => 'index', 'large' => 'fancybox', 'class' => 'fancybox', 'group' => 'gallery')
+ * @return string with the thumbnail and the link to the large image.
+ */
+	public function fancybox($book = array(), $options = array()) {
+		$defaultOptions = array(
+			'thumbnail' => 'index',
+			'large'     => 'fancybox',
+			'class'     => 'fancybox',
+			'group'     => 'gallery'
+		);
+		$options = array_merge($defaultOptions, $options);
+
+		$string = '';
+
+		if ($book['has_cover']) {
+			$string .= '<a class="' . $options['class'] . '" href="' . $this->resizeUrl($book['path'], $options['large']) . '" data-fancybox-group="' . $options['group'] . '" title="' . $book['sort'] . '">';
+			$string .= $this->thumbnail($book['path'], $options['thumbnail']);
+			$string .= '</a>';
+		} else {
+			$string .= '<span class="img-rounded pull-left cover">No Cover</span>';
+		}
+
+		return $string;
+	}
+
+/**
+ * fancyboxJs
+ *
+ * @param array $class the name of the class to apply fancybox to
+ * @param array $helpers array('title' => null) an array of helpers
+ * @return string with javastript
+ */
+	public function fancyboxJs($class = 'fancybox', $helpers = array('title' => null)) {
+
+		$string = '<script type="text/javascript">' . "\r\n";
+		$string .= '	$(document).ready(function() {' . "\r\n";
+		$string .= '		$(".' . $class .'").fancybox({' . "\r\n";
+		$string .= '			helpers:' . json_encode($helpers) . "\r\n";
+		$string .= '		});' . "\r\n";
+		$string .= '	});' . "\r\n";
+		$string .= '</script>' . "\r\n";
+
+		return $string;
+	}
 }

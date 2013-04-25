@@ -5,14 +5,10 @@
 <h3>Related Books</h3>
 <?php foreach ($publisher['Book'] as $key => $book): ?>
 	<div class="book-row">
-		<?php if ($book['has_cover']): ?>
-			<a class="fancybox" href="<?php echo $this->Image->resizeUrl($book['path'], $this->Image->resizeSettings['fancybox']); ?>" data-fancybox-group="gallery" title="<?php echo $book['sort']; ?>">
-				<?php echo $this->Image->thumbnail($book['path'], 'index'); ?>
-			</a>
-		<?php else: ?>
-			<span class="img-rounded pull-left cover">No Cover</span>
-		<?php endif; ?>
-		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group btn-group-vertical pull-right'); ?>
+		<?php
+			echo $this->Image->fancybox($book);
+			echo $this->Image->ebookLinks($book['Datum'], 'btn-group btn-group-vertical pull-right');
+		?>
 		<div>
 			<h5><?php echo $this->Html->link($book['sort'], array('controller'=>'books', 'action'=>'view', $book['id'])); ?></h5>
 		</div>
@@ -26,13 +22,4 @@
 	</div>
 <?php endforeach; ?>
 
-<script type="text/javascript">
-	console.log('variable');
-	$(document).ready(function() {
-		$(".fancybox").fancybox({
-			helpers: {
-				title : null
-			}
-		});
-	});
-</script>
+<?php echo $this->Image->fancyboxJs(); ?>
