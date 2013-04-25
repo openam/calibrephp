@@ -42,12 +42,12 @@ class ImageHelper extends AppHelper {
 	);
 
 /**
- * Default Calibre path used
- *
- * @todo I need to change this somehow so that the calibre-library doesn't need to be symlinked into the webroot/ directory
- * @var array
+ * getCalibrePath method
+ * @return string with path to calibre location
  */
-	public $calibrePath = 'calibre-library/';
+	public function getCalibrePath() {
+		return Configure::read('Settings.Default.CalibrePath');
+	}
 
 /**
  * resizeUrl method
@@ -65,7 +65,7 @@ class ImageHelper extends AppHelper {
 			$resizeSettings = $this->resizeSettings[$resizeSettings];
 		}
 
-		return $this->Html->url('/' . resize($this->calibrePath . $bookPath . '/cover.jpg', $resizeSettings), $fullUrl);
+		return $this->Html->url('/' . resize($this->getCalibrePath() . $bookPath . '/cover.jpg', $resizeSettings), $fullUrl);
 	}
 
 /**

@@ -17,7 +17,6 @@ class OpdsHelper extends AppHelper {
 /**
  * Default Calibre path used
  *
- * @todo I need to change this somehow so that the calibre-library doesn't need to be symlinked into the webroot/ directory
  * @var array
  */
 	private $__defaultXmlArray  = array(
