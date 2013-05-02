@@ -15,7 +15,7 @@ class SeriesController extends AppController {
 	public function index() {
 		$this->Series->recursive = 0;
 		$series = $this->paginate();
-		$info   = $this->Series->Book->getSummaryInfo();
+		$info   = $this->Series->getInfo();
 		$this->set(compact('series', 'info'));
 	}
 
@@ -39,7 +39,7 @@ class SeriesController extends AppController {
 		);
 
 		$series = $this->Series->find('first', $options);
-		$info   = $this->Series->Book->getSummaryInfo();
+		$info   = $this->Series->getInfo();
 		$this->set(compact('series', 'info'));
 	}
 

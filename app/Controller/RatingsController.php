@@ -15,7 +15,7 @@ class RatingsController extends AppController {
 	public function index() {
 		$this->Rating->recursive = 0;
 		$ratings = $this->paginate();
-		$info    = $this->Rating->Book->getSummaryInfo();
+		$info    = $this->Rating->getInfo();
 		$this->set(compact('ratings', 'info'));
 	}
 
@@ -38,7 +38,7 @@ class RatingsController extends AppController {
 		);
 
 		$rating = $this->Rating->find('first', $options);
-		$info   = $this->Rating->Book->getSummaryInfo();
+		$info   = $this->Rating->getInfo();
 		$this->set(compact('rating', 'info'));
 	}
 

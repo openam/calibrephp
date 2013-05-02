@@ -15,7 +15,7 @@ class PublishersController extends AppController {
 	public function index() {
 		$this->Publisher->recursive = 0;
 		$publishers = $this->paginate();
-		$info       = $this->Publisher->Book->getSummaryInfo();
+		$info       = $this->Publisher->getInfo();
 		$this->set(compact('publishers', 'info'));
 	}
 
@@ -39,7 +39,7 @@ class PublishersController extends AppController {
 		);
 
 		$publisher = $this->Publisher->find('first', $options);
-		$info      = $this->Publisher->Book->getSummaryInfo();
+		$info      = $this->Publisher->getInfo();
 		$this->set(compact('publisher', 'info'));
 	}
 

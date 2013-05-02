@@ -1,9 +1,9 @@
 <?php
 	$key = $rating['Rating']['rating'];
 	$feed = $this->Opds->getDefaultXmlArray(array(
-		'title'   => $this->Txt->stars($rating['Rating']['rating']/2),
+		'title'   => $this->Txt->stars($rating['Rating']['rating'] / 2),
 		'id'      => array('calibre:rating:' . $rating['Rating']['id']),
-		'updated' => $info['ratings']['count'][$key]['updated'],
+		'updated' => $info['summary']['updated'],
 	));
 
 	$feed = $this->Opds->addLink($feed, array(

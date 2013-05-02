@@ -2,7 +2,7 @@
 	$feed = $this->Opds->getDefaultXmlArray(array(
 		'title'   => 'Calibre Ratings',
 		'id'      => array('calibre:ratings'),
-		'updated' => $info['ratings']['updated'],
+		'updated' => $info['summary']['updated'],
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
@@ -16,10 +16,10 @@
 		'rel'  => 'self',
 	));
 
-	foreach ($info['ratings']['count'] as $rating) {
+	foreach ($info['Rating'] as $rating) {
 		$feed = $this->Opds->addEntry($feed, array(
 			'link'    => $this->Html->url(array('controller'=>'ratings', 'action'=>'view', $rating['id']. '.xml'), false),
-			'title'   => $this->Txt->stars($rating['name']),
+			'title'   => $this->Txt->stars($rating['name'] / 2),
 			'updated' => $rating['updated'],
 			'id'      => 'calbire:rating:' . $rating['id'],
 			'content' => $this->Txt->numberToWords($rating['count'], true) . ' books sorted by title',

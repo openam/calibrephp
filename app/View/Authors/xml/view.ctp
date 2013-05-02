@@ -3,7 +3,7 @@
 	$feed = $this->Opds->getDefaultXmlArray(array(
 		'title'   => $author['Author']['sort'],
 		'id'      => array('calibre:publisher:' . $author['Author']['id']),
-		'updated' => $info['authors']['count'][$key]['updated'],
+		'updated' => $info['summary']['updated'],
 	));
 
 	$feed = $this->Opds->addLink($feed, array(

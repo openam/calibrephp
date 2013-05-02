@@ -3,7 +3,7 @@
 	$feed = $this->Opds->getDefaultXmlArray(array(
 		'title'   => $tag['Tag']['name'],
 		'id'      => array('calibre:tag:' . $tag['Tag']['id']),
-		'updated' => $info['tags']['count'][$key]['updated'],
+		'updated' => $info['summary']['updated'],
 	));
 
 	$feed = $this->Opds->addLink($feed, array(

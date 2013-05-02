@@ -3,7 +3,7 @@
 	$feed = $this->Opds->getDefaultXmlArray(array(
 		'title'   => $series['Series']['sort'],
 		'id'      => array('calibre:series:' . $series['Series']['id']),
-		'updated' => $info['series']['count'][$key]['updated'],
+		'updated' => $info['summary']['updated'],
 	));
 
 	$feed = $this->Opds->addLink($feed, array(

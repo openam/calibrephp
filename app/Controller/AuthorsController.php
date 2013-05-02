@@ -15,7 +15,7 @@ class AuthorsController extends AppController {
 	public function index() {
 		$this->Author->recursive = 0;
 		$authors = $this->paginate();
-		$info    = $this->Author->Book->getSummaryInfo();
+		$info    = $this->Author->getInfo();
 		$this->set(compact('authors', 'info'));
 	}
 
@@ -38,7 +38,7 @@ class AuthorsController extends AppController {
 		);
 
 		$author = $this->Author->find('first', $options);
-		$info   = $this->Author->Book->getSummaryInfo();
+		$info   = $this->Author->getInfo();
 
 		$relatedSeries = array();
 		foreach ($author['Book'] as $key => $book) {

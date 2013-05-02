@@ -2,7 +2,7 @@
 	$feed = $this->Opds->getDefaultXmlArray(array(
 		'title'   => 'Calibre Authors',
 		'id'      => array('calibre:authors'),
-		'updated' => $info['authors']['updated'],
+		'updated' => $info['summary']['updated'],
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
@@ -16,7 +16,7 @@
 		'rel'  => 'self',
 	));
 
-	foreach ($info['authors']['count'] as $author) {
+	foreach ($info['Author'] as $author) {
 		$feed = $this->Opds->addEntry($feed, array(
 			'link'    => $this->Html->url(array('controller'=>'authors', 'action'=>'view', $author['id']. '.xml'), false),
 			'title'   => $author['name'],
