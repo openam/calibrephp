@@ -17,7 +17,7 @@
 			<h5><?php echo $this->Html->link($book['sort'], array('controller'=>'books', 'action'=>'view', $book['id'])); ?></h5>
 		</div>
 		<?php
-			echo $this->Txt->definition(array(__('Author') => $this->Txt->habtmLinks($book['Author'])));
+			echo $this->Txt->definition(array(__('Author') => $this->Txt->habtmLinks($book['Author'], 'authors')));
 			echo $this->Txt->definition(array(__('Series') => $this->Txt->habtmLinks($book['Series'], 'series')));
 			echo $this->Txt->definition(array(__('Year') => $this->Time->format('Y', $book['pubdate'])));
 			echo $this->Txt->definition(array(__('Publisher') => $this->Txt->habtmLinks($book['Publisher'], 'publishers')));
