@@ -1,39 +1,31 @@
-CakePHP
-=======
+# CalibrePHP
 
-[![CakePHP](http://cakephp.org/img/cake-logo.png)](http://www.cakephp.org)
+CalibrePHP provides a simple web interface to access a database created by the [Calibre](http://calibre-ebook.com) application. CalibrePHP was written using [CakePHP](http://cakephp.org).
 
-CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.
-Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+## Requirements
 
-Some Handy Links
-----------------
+The master branch has the following requirements:
 
-[CakePHP](http://www.cakephp.org) - The rapid development PHP framework
+* HTTP Server. For example: Apache. mod_rewrite is preferred, but by no means required.
+* PHP 5.3.0 or greater.
+* PHP Sqlite 3 support.
 
-[Cookbook](http://book.cakephp.org) - THE Cake user documentation; start learning here!
+## Installation
 
-[Plugins](http://plugins.cakephp.org/) - A repository of extensions to the framework
+* Copy/Clone the repository to your webserver.
+* Copy/Rename `app/Config/database.php.default` to `app/Config/database.php`.
+	* change `$default['database']` to match the location of your calibre database.
+* Copy/Rename `app/Config/settings.php.default` to `app/Config/settings.php`.
+	* change `$config['Settings']['Default']['CalibrePath']` to match the location of your calibre database.
+* Copy/Rename `app/Config/core.php.default` to `app/Config/core.php`.
+	* change `Security.salt` from the default.
+	* change `Security.cipherSeed` from the default.
+	* change `debug` to the desired level.
 
-[The Bakery](http://bakery.cakephp.org) - Tips, tutorials and articles
+## Reporting issues
 
-[API](http://api.cakephp.org) - A reference to Cake's classes
+If you have an issues with CalibrePHP please open an issue on github https://github.com/openam/calibrephp/issues.
 
-[CakePHP TV](http://tv.cakephp.org) - Screen casts from events and video tutorials
+## Contributing
 
-[The Cake Software Foundation](http://cakefoundation.org/) - promoting development related to CakePHP
-
-Get Support!
-------------
-
-[Our Google Group](http://groups.google.com/group/cake-php) - community mailing list and forum
-
-[#cakephp](http://webchat.freenode.net/?channels=#cakephp) on irc.freenode.net - Come chat with us, we have cake.
-
-[Q & A](http://ask.cakephp.org/) - Ask questions here, all questions welcome
-
-[Lighthouse](http://cakephp.lighthouseapp.com/) - Got issues? Please tell us!
-
-[![Bake Status](https://secure.travis-ci.org/cakephp/cakephp.png?branch=master)](http://travis-ci.org/cakephp/cakephp)
-
-![Cake Power](https://raw.github.com/cakephp/cakephp/master/lib/Cake/Console/Templates/skel/webroot/img/cake.power.gif)
+If you'd like to contribute to CalibrePHP, review the [Roadmap](https://github.com/openam/calibrephp/wiki/Roadmap) for planned features.  You can fork the project add features and send pull requests, or open issues on github.
