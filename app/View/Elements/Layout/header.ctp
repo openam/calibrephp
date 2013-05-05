@@ -6,7 +6,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<?php echo $this->Html->link("Calibre Server", '/', array('class' => 'brand')); ?>
+			<?php echo $this->Html->link("CalibrePHP", '/', array('class' => 'brand')); ?>
 			<div class="nav-collapse collapse hidden-desktop">
 				<ul class="nav">
 					<li<?php echo $this->Txt->activeIndex('authors'); ?>><?php echo $this->Html->link('Authors', array('controller' => 'authors', 'action' => 'index')); ?></li>
