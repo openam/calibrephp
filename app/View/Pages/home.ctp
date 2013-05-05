@@ -1,6 +1,6 @@
 <div class="hero-unit">
-	<h1>Calibre Server</h1>
-	<p>This is a light weight web server for <?php echo $this->Html->link("Calibre", 'http://calibre-ebook.com/'); ?>. Using this simple <?php echo $this->Html->link("CakePHP", 'http://cakephp.org'); ?> based server will require less services than the built in calibre web server.</p>
+	<h1>CalibrePHP</h1>
+	<p>This is a simple web server to access a database created by the <?php echo $this->Html->link("Calibre", 'http://calibre-ebook.com/'); ?> application. CalibrePHP was written using <?php echo $this->Html->link("CakePHP", 'http://cakephp.org'); ?> in an effort to use less resources than the built in calibre web server.</p>
 </div>
 <div class="row-fluid">
 	<div class="span4">
