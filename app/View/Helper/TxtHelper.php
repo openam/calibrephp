@@ -130,6 +130,35 @@ class TxtHelper extends TextHelper {
 		return $stars;
 	}
 
+/**
+ * identifiers
+ * currently this only shows identifiers for Google, and ISBN
+ *
+ * @param array $identifiers
+ * @return string
+ */
+	public function identifiers($identifiers = array()) {
+		$data = '';
+		foreach ($identifiers as $identifier) {
+			$type  = strtolower($identifier['type']);
+			$value = $identifier['val'];
+			switch ($type) {
+				case 'google':
+					$type = Inflector::humanize($type);
+					break;
+
+				case 'isbn':
+					$type = strtoupper($type);
+					break;
+
+				default:
+					$value = '';
+					break;
+			}
+			$data .= $this->definition(array(__($type) => $value));
+		}
+		return $data;
+	}
 
 /**
  * numberToWords method

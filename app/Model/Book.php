@@ -44,6 +44,12 @@ class Book extends AppModel {
 			'foreignKey' => 'book',
 			'dependent'  => true,
 			'order'      => 'Datum.format ASC',
+		),
+		'Identifier' => array(
+			'className'  => 'Identifier',
+			'foreignKey' => 'book',
+			'dependent'  => true,
+			'order'      => 'Identifier.type ASC',
 		)
 	);
 
