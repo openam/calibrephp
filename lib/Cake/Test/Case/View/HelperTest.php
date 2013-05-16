@@ -605,6 +605,10 @@ class HelperTest extends CakeTestCase {
 
 		Configure::write('Asset.timestamp', true);
 		Configure::write('debug', 0);
+
+		$result = $this->Helper->assetTimestamp('/%3Cb%3E/cake.generic.css');
+		$this->assertEquals('/%3Cb%3E/cake.generic.css', $result);
+
 		$result = $this->Helper->assetTimestamp(CSS_URL . 'cake.generic.css');
 		$this->assertEquals(CSS_URL . 'cake.generic.css', $result);
 
@@ -656,6 +660,21 @@ class HelperTest extends CakeTestCase {
 
 		$result = $this->Helper->assetUrl('foo.jpg?one=two&three=four');
 		$this->assertEquals('foo.jpg?one=two&amp;three=four', $result);
+	}
+
+/**
+ * Test assetUrl with no rewriting.
+ *
+ * @return void
+ */
+	public function testAssetUrlNoRewrite() {
+		$this->Helper->request->addPaths(array(
+			'base' => '/cake_dev/index.php',
+			'webroot' => '/cake_dev/app/webroot/',
+			'here' => '/cake_dev/index.php/tasks',
+		));
+		$result = $this->Helper->assetUrl('img/cake.icon.png', array('fullBase' => true));
+		$this->assertEquals('http://localhost/cake_dev/app/webroot/img/cake.icon.png', $result);
 	}
 
 /**
