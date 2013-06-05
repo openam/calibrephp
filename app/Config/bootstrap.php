@@ -38,12 +38,10 @@
 	}
 
 	$prefix = 'calibre_';
-	$path   = CACHE . 'calibre' . DS;
 
 	Cache::config('default', array(
 		'engine'   => $engine,
 		'prefix'   => $prefix,
-		'path'     => $path,
 		'duration' => $duration
 	));
 
