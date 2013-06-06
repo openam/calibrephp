@@ -11,6 +11,7 @@ class ImageHelper extends AppHelper {
  */
 	public $helpers = array(
 		'Html',
+		'Number',
 	);
 
 /**
@@ -92,7 +93,7 @@ class ImageHelper extends AppHelper {
 	public function ebookLinks($files = array(), $divClass = 'btn-group') {
 		$links = '<div class="' . $divClass . '">';
 		foreach ($files as $key => $file) {
-			$links .= '<button type="button" class="btn">' . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format']))) . '</button>';
+			$links .= '<button type="button" class="btn">' . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format'])), array('title' => $this->Number->toReadableSize($file['uncompressed_size']))) . '</button>';
 		}
 		$links .= '</div>';
 		return $links;
