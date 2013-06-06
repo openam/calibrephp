@@ -15,9 +15,9 @@
 		<?php
 			echo $this->Txt->definition(array(__('Author') => $this->Txt->habtmLinks($book['Author'], 'authors')));
 			echo $this->Txt->definition(array(__('Series') => $this->Txt->habtmLinks($book['Series'], 'series')));
-			echo $this->Txt->definition(array(__('Year') => $this->Time->format('Y', $book['pubdate'])));
+			echo $this->Txt->definition(array(__('Year')   => $this->Time->format('Y', $book['pubdate'])));
 			echo $this->Txt->definition(array(__('Rating') => $this->Txt->rating($book['Rating'])));
-			echo $this->Txt->definition(array(__('Tags') => $this->Txt->habtmLinks($book['Tag'], 'tags')));
+			echo $this->Txt->definition(array(__('Tags')   => $this->Txt->habtmLinks($book['Tag'], 'tags')));
 			echo $this->Txt->definition(array(__('Format') => $this->Txt->fileTypes($book['Datum'])));
 		?>
 	</div>
