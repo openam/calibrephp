@@ -8,6 +8,16 @@ if (!class_exists('TextHelper')) {
 class TxtHelper extends TextHelper {
 
 /**
+ * Helpers used by this helper
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Html',
+		'Number',
+	);
+
+/**
  * activeIndex method
  *
  * @param string $value the controller that you want to check
@@ -158,6 +168,24 @@ class TxtHelper extends TextHelper {
 			$data .= $this->definition(array(__($type) => $value));
 		}
 		return $data;
+	}
+
+/**
+ * fileTypes
+ *
+ * @param array $files to provide links for
+ * @return string a string with the links to all the book formats items
+ */
+	public function fileTypes($files = array()) {
+		$links     = '';
+		$separator = '';
+
+		foreach ($files as $key => $file) {
+			$links .= $separator . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format']))) . ' <small>(' . $this->Number->toReadableSize($file['uncompressed_size']) . ')</small>';
+			$separator = ', ';
+		}
+
+		return $links;
 	}
 
 /**
