@@ -9,6 +9,7 @@ The master branch has the following requirements:
 * HTTP Server. For example: Apache. mod_rewrite is preferred, but by no means required.
 * PHP 5.3.0 or greater.
 * PHP Sqlite 3 support.
+* ImageMagick.
 
 ## Installation
 

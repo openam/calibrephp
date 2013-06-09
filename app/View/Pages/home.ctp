@@ -153,6 +153,31 @@
 		}
 
 	/**
+	 * Imagemagick
+	 */
+		function alist ($array) {  //This function prints a text array as an html list.
+		  $alist = "<ul>";
+		  for ($i = 0; $i < sizeof($array); $i++) {
+		    $alist .= "<li>$array[$i]";
+		  }
+		  $alist .= "</ul>";
+		  return $alist;
+		}
+
+		exec("convert -version", $out, $rcode); //Try to get ImageMagick "convert" program version number.
+
+		if ($rcode == 0) {
+			echo '<div class="alert alert-success">';
+				echo __d('cake_dev', 'Imagemagick is installed.<br/>' . $this->Text->autoLinkUrls($out[0]));
+			echo '</div>';
+		} else {
+			echo '<div class="alert">';
+				echo __d('cake_dev', 'Imagemagick is not installed. You need to install it to get image conversion to work. On a debian based system use <em>`sudo apt-get install imagemagick`</em>.');
+			echo '</div>';
+
+		}
+
+	/**
 	 * DebugKit
 	 */
 		if (CakePlugin::loaded('DebugKit')):
