@@ -1,0 +1,24 @@
+$footerHeight: 30px;
+
+html, body {
+	height: 100%;
+}
+
+.wrapper {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto $footerHeight*-1;
+
+	div.first-row {
+		padding-top: 60px;
+	}
+}
+
+.footer, .push {
+	height: $footerHeight;
+}
+
+.footer-content {
+	padding-top: 10px;
+}

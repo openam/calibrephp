@@ -25,20 +25,22 @@
 		?>
 	</head>
 	<body>
-		<?php echo $this->element('Layout/header'); ?>
-		<div class="container container-fluid">
-			<div class="row-fluid">
-				<div class="span3 visible-desktop">
-					<?php echo $this->element('Layout/well'); ?>
-				</div>
-				<div class="span9">
-					<?php echo $this->element('Layout/content'); ?>
+		<div class="wrapper">
+			<?php echo $this->element('Layout/header'); ?>
+			<div class="container container-fluid">
+				<div class="row-fluid first-row">
+					<div class="span3 visible-desktop">
+						<?php echo $this->element('Layout/well'); ?>
+					</div>
+					<div class="span9">
+						<?php echo $this->element('Layout/content'); ?>
+					</div>
 				</div>
 			</div>
-			<hr>
+			<div class="push"></div>
+		</div>
+		<div class="container container-fluid">
 			<?php echo $this->element('Layout/footer'); ?>
 		</div>
-		<?php
-		?>
 	</body>
 </html>
