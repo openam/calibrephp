@@ -47,7 +47,7 @@ class ImageHelper extends AppHelper {
  * @return string with path to calibre location
  */
 	public function getCalibrePath() {
-		return Configure::read('Settings.Default.CalibrePath');
+		return Configure::read('Settings.Default.CalibrePath') . "/";
 	}
 
 /**
@@ -66,7 +66,17 @@ class ImageHelper extends AppHelper {
 			$resizeSettings = $this->resizeSettings[$resizeSettings];
 		}
 
-		return $this->Html->url('/' . resize($this->getCalibrePath() . $bookPath . '/cover.jpg', $resizeSettings), $fullUrl);
+        $imagePath = $this->getCalibrePath() . $bookPath . '/cover.jpg';
+        $resizePath = resize($imagePath, $resizeSettings);
+
+        if($resizePath && $resizePath != "image not found")
+        {
+            return $this->Html->url('/' . resize($imagePath, $resizeSettings), $fullUrl);
+        }
+        else
+        {
+            return null;
+        }
 	}
 
 /**
@@ -90,14 +100,85 @@ class ImageHelper extends AppHelper {
  * @param array $files to provide links for
  * @return string a string with the links to all the book formats items
  */
-	public function ebookLinks($files = array(), $divClass = 'btn-group') {
-		$links = '<div class="' . $divClass . '">';
-		foreach ($files as $key => $file) {
-			$links .= '<button type="button" class="btn">' . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format'])), array('title' => $this->Number->toReadableSize($file['uncompressed_size']))) . '</button>';
-		}
-		$links .= '</div>';
-		return $links;
+	public function ebookLinks($files = array(), $divClass = 'btn-toolbar') {
+		$links = '';
+
+        // Downloads links
+        $downloadLinks = array();
+        foreach($files as $key => $file) {
+            $downloadLinks[] = '<li>' . $this->Html->link($file['format'], array(
+                'controller' => 'books',
+                'action' => 'download',
+                $file['book'],
+                strtolower($file['format']),
+            ), array(
+                'title' => $this->Number->toReadableSize($file['uncompressed_size']),
+            )) . '</li>';
+        }
+        if(count($downloadLinks) > 0)
+        {
+            $links .= '<div class="btn-group">';
+            $links .= '<button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-download"></i> ' . __("Download") . ' <span class="caret"></span></button>';
+            $links .= '<ul class="dropdown-menu">' . implode("", $downloadLinks) . '</ul>';
+            $links .= '</div> ';
+        }
+
+        // E-Mail / Share
+        $formats = array();
+        foreach($files as $file)
+        {
+            $formats[$file['format']] = $file['format'];
+        }
+        $emailTargets = array();
+        foreach($this->getShareConfig() as $email => $emailFormats)
+        {
+            $emailFormats = (array)explode(",", strtoupper($emailFormats));
+            foreach($emailFormats as $format)
+            {
+                if(isset($formats[$format]))
+                {
+                    $emailTargets[$email] = $format;
+                    continue 2;
+                }
+            }
+        }
+        $shareLinks = array();
+        foreach($emailTargets as $email => $format)
+        {
+            $url = $this->Html->url(array(
+                'controller' => 'books',
+                'action' => 'share',
+                $files[0]['book'],
+                $email,
+                $format));
+            $shareLinks[] = '<li><a href="#" class="calibre-share" data-share-url="' . $url . '">' . $email . '</a></li>';
+        }
+        if($shareLinks > 0)
+        {
+            $links .= '<div class="btn-group">';
+            $links .= '<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope icon-white"></i> ' . __("Share") . ' <span class="caret"></span></button>';
+            $links .= '<ul class="dropdown-menu">' . implode("", $shareLinks) . '</ul>';
+            $links .= '</div>';
+        }
+
+        if($links)
+        {
+            return '<div class="' . $divClass . '">' . $links . '</div>';
+        }
+        else
+        {
+            return '';
+        }
 	}
+
+/**
+ * Reads all e-mail targets from share-config.
+ *
+ * @return array
+ */
+    public function getShareConfig() {
+        return (array)Configure::read('Settings.share');
+    }
 
 /**
  * fancybox
@@ -118,9 +199,15 @@ class ImageHelper extends AppHelper {
 		$string = '';
 
 		if ($book['has_cover']) {
-			$string .= '<a class="' . $options['class'] . '" href="' . $this->resizeUrl($book['path'], $options['large']) . '" data-fancybox-group="' . $options['group'] . '" title="' . $book['sort'] . '">';
-			$string .= $this->thumbnail($book['path'], $options['thumbnail']);
-			$string .= '</a>';
+            $resizeUrl = $this->resizeUrl($book['path'], $options['large']);
+
+            if($resizeUrl) {
+                $string .= '<a class="' . $options['class'] . '" href="' . $resizeUrl . '" data-fancybox-group="' . $options['group'] . '" title="' . $book['sort'] . '">';
+                $string .= $this->thumbnail($book['path'], $options['thumbnail']);
+                $string .= '</a>';
+            } else {
+                $string .= '<span class="img-rounded pull-left cover">No Cover</span>';
+            }
 		} else {
 			$string .= '<span class="img-rounded pull-left cover">No Cover</span>';
 		}
