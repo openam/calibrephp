@@ -151,7 +151,7 @@ class ImageHelper extends AppHelper {
                 $files[0]['book'],
                 $email,
                 $format));
-            $shareLinks[] = '<li><a href="javascript:calibrephp_share(this, \'' . $url . '\'); return false;">' . $email . '</a></li>';
+            $shareLinks[] = '<li><a href="#" class="calibre-share" data-share-url="' . $url . '">' . $email . '</a></li>';
         }
         if($shareLinks > 0)
         {

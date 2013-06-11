@@ -117,15 +117,16 @@ class BooksController extends AppController {
         }
 
         // We got the file, so send it by e-mail to $email
-        var_dump($book['Book']['path']);
-        echo $this->Book->getCalibrePath() . $book['Book']['path'] . DS . $fileName . '.' . $extension;
         $mail = new CakeEmail();
         $mail->config('default');
         $mail->to($email);
         $mail->attachments($this->Book->getCalibrePath() . $book['Book']['path'] . DS . $fileName . '.' . $extension);
         $mail->send();
 
-        $this->layout = 'ajax';
+        $this->autoRender = false;
+        return json_encode(array(
+            "result" => true,
+        ));
     }
 
 /**
