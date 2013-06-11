@@ -4,7 +4,7 @@
 	?>
 
 	<div class="book-row">
-		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group btn-group-vertical pull-right hidden-phone'); ?>
+		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group pull-right hidden-phone'); ?>
 		<h3><?php  echo h($book['Book']['sort']); ?></h3>
 		<?php
 			echo $this->Txt->definition(array(__('Author')    => $this->Txt->habtmLinks($book['Author'], 'authors')));

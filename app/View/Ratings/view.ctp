@@ -11,7 +11,7 @@
 	<div class="book-row">
 		<?php
 			echo $this->Image->fancybox($book);
-			echo $this->Image->ebookLinks($book['Datum'], 'btn-group btn-group-vertical pull-right');
+			echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right');
 		?>
 		<div>
 			<h5><?php echo $this->Html->link($book['sort'], array('controller'=>'books', 'action'=>'view', $book['id'])); ?></h5>
