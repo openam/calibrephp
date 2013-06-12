@@ -1,0 +1,38 @@
+i.icon-rotating {
+    animation-name: spinner;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: spinner;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    -moz-animation-name: spinner;
+    -moz-animation-duration: 2s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -o-animation-name: spinner;
+    -o-animation-duration: 2s;
+    -o-animation-iteration-count: infinite;
+    -o-animation-timing-function: linear;
+}
+
+@keyframes spinner {
+    from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
+}
+
+@-webkit-keyframes spinner {
+    from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
+}
+
+@-moz-keyframes spinner {
+    from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
+}
+
+@-o-keyframes spinner {
+    from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
+}

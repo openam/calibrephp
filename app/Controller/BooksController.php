@@ -1,5 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 /**
  * Books Controller
  *
@@ -80,6 +81,52 @@ class BooksController extends AppController {
 			'path'      => $this->Book->getCalibrePath() . $book['Book']['path'] . DS
 		);
 		$this->set($params);
+	}
+
+/**
+ * Share by e-mail method
+ *
+ * @param string $id
+ * @param string $email
+ * @param string $extension
+ */
+	public function share($id, $email, $extension) {
+		if (!$this->Book->exists($id)) {
+			throw new NotFoundException(__('Invalid book'));
+		}
+		if (!$extension) {
+			throw new NotFoundException(__('Invalid extension'));
+		}
+		$extension = strtolower($extension);
+
+		$options = array(
+			'conditions' => array('Book.' . $this->Book->primaryKey => $id),
+			'recursive'  => 1,
+		);
+
+		$book = $this->Book->find('first', $options);
+
+		$fileName = '';
+		foreach ($book['Datum'] as $file) {
+			if ($file['format'] == strtoupper($extension)) {
+				$fileName = $file['name'];
+			}
+		}
+		if (!$fileName) {
+			throw new NotFoundException(__('Invalid file name or extension'));
+		}
+
+		// We got the file, so send it by e-mail to $email
+		$mail = new CakeEmail();
+		$mail->config('default');
+		$mail->to($email);
+		$mail->attachments($this->Book->getCalibrePath() . $book['Book']['path'] . DS . $fileName . '.' . $extension);
+		$mail->send();
+
+		$this->autoRender = false;
+		return json_encode(array(
+			"result" => true,
+		));
 	}
 
 /**

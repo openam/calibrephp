@@ -13,13 +13,16 @@
 			echo $this->Html->css(array(
 				'stylesheets/bootstrap',
 				'stylesheets/responsive',
+				'stylesheets/rotate',
 			));
 			echo $this->fetch('css');
 
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
 				'bootstrap-collapse',
+				'bootstrap-dropdown',
 				'jquery.fancybox.pack',
+				'share',
 			));
 			echo $this->fetch('script');
 		?>
