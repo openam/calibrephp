@@ -153,7 +153,7 @@ class ImageHelper extends AppHelper {
                 $format));
             $shareLinks[] = '<li><a href="#" class="calibre-share" data-share-url="' . $url . '">' . $email . '</a></li>';
         }
-        if($shareLinks > 0)
+        if(!empty($shareLinks))
         {
             $links .= '<div class="btn-group">';
             $links .= '<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope icon-white"></i> ' . __("Share") . ' <span class="caret"></span></button>';
