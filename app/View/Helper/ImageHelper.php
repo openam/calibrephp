@@ -106,12 +106,13 @@ class ImageHelper extends AppHelper {
 		// Downloads links
 		$downloadLinks = array();
 		foreach($files as $key => $file) {
-			$downloadLinks[] = '<li>' . $this->Html->link($file['format'], array(
+			$downloadLinks[] = '<li>' . $this->Html->link($file['format']. ' <small>(' . $this->Number->toReadableSize($file['uncompressed_size']) . ')</small>', array(
 				'controller' => 'books',
 				'action' => 'download',
 				$file['book'],
 				strtolower($file['format']),
 			), array(
+				'escape' => false,
 				'title' => $this->Number->toReadableSize($file['uncompressed_size']),
 			)) . '</li>';
 		}
