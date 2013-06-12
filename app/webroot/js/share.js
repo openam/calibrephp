@@ -1,26 +1,26 @@
 $(function() {
 
-    $(".calibre-share").click(function(e) {
+	$(".calibre-share").click(function(e) {
 
-        var obj = $(this);
-        var shareUrl = obj.data("share-url");
+		var obj = $(this);
+		var shareUrl = obj.data("share-url");
 
-        // Prevent default (do not follow link)
-        e.preventDefault();
+		// Prevent default (do not follow link)
+		e.preventDefault();
 
-        // Find share button
-        var shareButton = obj.closest(".btn-group").children(".btn");
-        var shareButtonIcon = shareButton.children("i");
+		// Find share button
+		var shareButton = obj.closest(".btn-group").children(".btn");
+		var shareButtonIcon = shareButton.children("i");
 
-        // Change icon to rotating refresh-icon
-        shareButtonIcon.removeClass("icon-envelope").addClass("icon-refresh icon-rotating");
+		// Change icon to rotating refresh-icon
+		shareButtonIcon.removeClass("icon-envelope").addClass("icon-refresh icon-rotating");
 
-        // Do AJAX request
-        $.post(shareUrl, function(result)
-        {
-            // Change icon to check + stop rotating
-            shareButtonIcon.removeClass("icon-refresh icon-rotating").addClass("icon-ok");
-        });
-    });
+		// Do AJAX request
+		$.post(shareUrl, function(result)
+		{
+			// Change icon to check + stop rotating
+			shareButtonIcon.removeClass("icon-refresh icon-rotating").addClass("icon-ok");
+		});
+	});
 
 });

@@ -1,5 +1,4 @@
-i.icon-rotating
-{
+i.icon-rotating {
     animation-name: spinner;
     animation-duration: 2s;
     animation-iteration-count: infinite;
@@ -18,23 +17,22 @@ i.icon-rotating
     -o-animation-timing-function: linear;
 }
 
-@keyframes spinner
-{
+@keyframes spinner {
     from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
     to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
 }
-@-webkit-keyframes spinner
-{
+
+@-webkit-keyframes spinner {
     from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
     to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
 }
-@-moz-keyframes spinner
-{
+
+@-moz-keyframes spinner {
     from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
     to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
 }
-@-o-keyframes spinner
-{
+
+@-o-keyframes spinner {
     from { -webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); -o-transform:rotate(0deg); }
     to { -webkit-transform: rotate(360deg); -moz-transform: rotate(360deg); -o-transform:rotate(360deg); }
 }
