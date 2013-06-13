@@ -13,7 +13,6 @@
 			echo $this->Html->css(array(
 				'stylesheets/bootstrap',
 				'stylesheets/responsive',
-				'stylesheets/rotate',
 			));
 			echo $this->fetch('css');
 
