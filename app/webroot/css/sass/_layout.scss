@@ -22,3 +22,12 @@ html, body {
 .footer-content {
 	padding-top: 10px;
 }
+
+@media (max-width: 767px) {
+	.hero-unit{
+		padding: 30px;
+		h1{
+			font-size: 40px;
+		}
+	}
+}
