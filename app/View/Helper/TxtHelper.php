@@ -181,7 +181,7 @@ class TxtHelper extends TextHelper {
 		$separator = '';
 
 		foreach ($files as $key => $file) {
-			$links .= $separator . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format']))) . ' <small>(' . $this->Number->toReadableSize($file['uncompressed_size']) . ')</small>';
+			$links .= $separator . $this->Html->link($file['format'], array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format'])));
 			$separator = ', ';
 		}
 
