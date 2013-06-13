@@ -14,7 +14,8 @@
 			echo $this->Txt->identifiers($book['Identifier']);
 			echo $this->Txt->definition(array(__('Publisher') => $this->Txt->habtmLinks($book['Publisher'], 'publishers')));
 			echo $this->Txt->definition(array(__('Tags')      => $this->Txt->habtmLinks($book['Tag'], 'tags')));
-			echo $this->Txt->definition(array(__('Format')    => $this->Txt->fileTypes($book['Datum'])));
+			$plural = count($book['Datum']) > 1 ? 's' : '';
+			echo $this->Txt->definition(array(__('Format' . $plural)    => $this->Txt->fileTypes($book['Datum'])));
 		?>
 	</div>
 	<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group visible-phone'); ?>
