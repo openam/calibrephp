@@ -120,6 +120,7 @@ class BooksController extends AppController {
 		$mail = new CakeEmail();
 		$mail->config('default');
 		$mail->to($email);
+		$mail->subject($book['Book']['title']);
 		$mail->attachments($this->Book->getCalibrePath() . $book['Book']['path'] . DS . $fileName . '.' . $extension);
 		$mail->send();
 
