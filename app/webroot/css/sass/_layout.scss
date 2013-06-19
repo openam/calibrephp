@@ -31,3 +31,11 @@ html, body {
 		}
 	}
 }
+
+@media (max-width: 980px) {
+	.wrapper {
+		div.first-row {
+			padding-top: 0px;
+		}
+	}
+}
