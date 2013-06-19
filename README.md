@@ -23,9 +23,14 @@ The master branch has the following requirements:
 	* change `Security.cipherSeed` from the default.
 	* change `debug` to the desired level.
 
-## Screenshot
+## Screenshots
 
 ![CalibrePHP](https://raw.github.com/openam/calibrephp/gh-pages/images/screenshot.png)
+
+## Mobile Screenshots
+
+![mobile-screen-1](https://raw.github.com/openam/calibrephp/gh-pages/images/phone-1.png)
+![mobile-screen-2](https://raw.github.com/openam/calibrephp/gh-pages/images/phone-2.png)
 
 ## Reporting issues
 
