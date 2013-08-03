@@ -164,7 +164,7 @@ class ImageHelper extends AppHelper {
 
 		if($links)
 		{
-			return '<div class="' . $divClass . '">' . $links . '</div>';
+			return '<div class="definition ' . $divClass . '">' . $links . '</div>';
 		}
 		else
 		{

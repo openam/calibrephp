@@ -56,6 +56,12 @@ $coverWidth: 70px;
 	@include box-shadow(5px 5px 5px rgba(0,0,0,0.25));
 }
 
+.books.view * {
+	div.definition {
+		margin-left: 140px;
+	}
+}
+
 .book-row {
 	@extend .row-fluid;
 
@@ -75,6 +81,15 @@ $coverWidth: 70px;
 
 	h5{
 		margin: 0;
+	}
+
+
+	div.definition.btn-toolbar.hidden-phone {
+		margin-left: 5px;
+	}
+
+	div.definition {
+		margin-left: 85px;
 	}
 
 	span.definition {

@@ -9,7 +9,7 @@
 		echo $this->Image->fancybox($bookClass);
 		echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-phone');
 	?>
-	<div>
+	<div class="definition">
 		<h5><?php echo $this->Html->link($bookClass['sort'], array('controller'=>'books', 'action'=>'view', $bookClass['id'])); ?></h5>
 	</div>
 	<?php

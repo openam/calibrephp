@@ -34,7 +34,7 @@
 					<div class="span3 visible-desktop">
 						<?php echo $this->element('Layout/well'); ?>
 					</div>
-					<div class="span9">
+					<div class="span9 full-width-non-desktop">
 						<?php echo $this->element('Layout/content'); ?>
 					</div>
 				</div>

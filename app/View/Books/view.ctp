@@ -4,8 +4,10 @@
 	?>
 
 	<div class="book-row">
-		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group pull-right hidden-phone'); ?>
-		<h3><?php  echo h($book['Book']['sort']); ?></h3>
+		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-phone'); ?>
+		<div class="definition">
+			<h3><?php  echo h($book['Book']['sort']); ?></h3>
+		</div>
 		<?php
 			echo $this->Txt->definition(array(__('Author')    => $this->Txt->habtmLinks($book['Author'], 'authors')));
 			echo $this->Txt->definition(array(__('Series')    => $this->Txt->habtmLinks($book['Series'], 'series')));
@@ -16,9 +18,10 @@
 			echo $this->Txt->definition(array(__('Tags')      => $this->Txt->habtmLinks($book['Tag'], 'tags')));
 			$plural = count($book['Datum']) > 1 ? 's' : '';
 			echo $this->Txt->definition(array(__('Format' . $plural)    => $this->Txt->fileTypes($book['Datum'])));
+
+			echo $this->Image->ebookLinks($book['Datum'], 'btn-group visible-phone');
 		?>
 	</div>
-	<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-group visible-phone'); ?>
 </div>
 <div>
 	<?php if (!empty($book['Comment']['text'])): ?>

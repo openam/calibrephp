@@ -72,7 +72,7 @@ class TxtHelper extends TextHelper {
 				$options['text'] = $options['alternateText'];
 			}
 
-			$text = "<div><span class='definition'$htmlAttributes>" . $options['label'] . "</span><span$htmlAttributes>";
+			$text = "<div class='definition'><span class='definition'$htmlAttributes>" . $options['label'] . "</span><span$htmlAttributes>";
 			$text .= $options['before'] . $options['text'] . $options['after'] . '</span></div>';
 
 			return $text;
