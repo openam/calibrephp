@@ -1,27 +1,29 @@
 <?php
 /**
- * DebugKit ToolbarAccess Controller
- *
- * Allows retrieval of information from the debugKit internals.
- *
- * PHP versions 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.controllers
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       DebugKit.Controller
  * @since         DebugKit 1.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- **/
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
 App::uses('Security', 'Utility');
 App::uses('DebugKitAppController', 'DebugKit.Controller');
 
+/**
+ * DebugKit ToolbarAccess Controller
+ *
+ * Allows retrieval of information from the debugKit internals.
+ *
+ * @package       DebugKit.Controller
+ * @since         DebugKit 1.1
+ */
 class ToolbarAccessController extends DebugKitAppController {
 
 /**
@@ -67,11 +69,18 @@ class ToolbarAccessController extends DebugKitAppController {
 		}
 		$this->helpers['DebugKit.Toolbar']['cacheKey'] = $this->Toolbar->cacheKey;
 		$this->helpers['DebugKit.Toolbar']['cacheConfig'] = 'debug_kit';
+
+		if (isset($this->Auth) && method_exists($this->Auth, 'mapActions')) {
+			$this->Auth->mapActions(array(
+				'read' => array('history_state', 'sql_explain')
+			));
+		}
 	}
 
 /**
  * Get a stored history state from the toolbar cache.
  *
+ * @param null $key
  * @return void
  */
 	public function history_state($key = null) {
@@ -85,8 +94,8 @@ class ToolbarAccessController extends DebugKitAppController {
 
 /**
  * Run SQL explain/profiling on queries. Checks the hash + the hashed queries,
- * if there is mismatch a 404 will be rendered.  If debug == 0 a 404 will also be
- * rendered.  No explain will be run if a 404 is made.
+ * if there is mismatch a 404 will be rendered. If debug == 0 a 404 will also be
+ * rendered. No explain will be run if a 404 is made.
  *
  * @throws BadRequestException
  * @return void

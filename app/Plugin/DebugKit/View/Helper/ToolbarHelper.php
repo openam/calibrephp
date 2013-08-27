@@ -1,31 +1,33 @@
 <?php
 /**
- * Abstract Toolbar helper.  Provides Base methods for content
- * specific debug toolbar helpers.  Acts as a facade for other toolbars helpers as well.
- *
- * PHP versions 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.views.helpers
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       DebugKit.View.Helper
  * @since         DebugKit 0.1
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- **/
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
 App::uses('DebugKitDebugger', 'DebugKit.Lib');
 App::uses('AppHelper', 'View/Helper');
 App::uses('ConnectionManager', 'Model');
 
+/**
+ * Provides Base methods for content specific debug toolbar helpers.
+ * Acts as a facade for other toolbars helpers as well.
+ *
+ * @package       DebugKit.View.Helper
+ * @since         DebugKit 0.1
+ */
 class ToolbarHelper extends AppHelper {
 
 /**
- * settings property to be overloaded.  Subclasses should specify a format
+ * settings property to be overloaded. Subclasses should specify a format
  *
  * @var array
  */
@@ -41,8 +43,9 @@ class ToolbarHelper extends AppHelper {
 /**
  * Construct the helper and make the backend helper.
  *
- * @param string $options
- * @return void
+ * @param $View
+ * @param array|string $options
+ * @return \ToolbarHelper
  */
 	public function __construct($View, $options = array()) {
 		$this->_myName = strtolower(get_class($this));
@@ -100,7 +103,7 @@ class ToolbarHelper extends AppHelper {
  *
  * @param string $method
  * @param mixed $params
- * @return void
+ * @return mixed|void
  */
 	public function __call($method, $params) {
 		if (method_exists($this->{$this->_backEndClassName}, $method)) {
@@ -111,12 +114,12 @@ class ToolbarHelper extends AppHelper {
 /**
  * Allows for writing to panel cache from view.
  * Some panels generate all variables in the view by
- * necessity ie. Timer.  Using this method, will allow you to replace in full
+ * necessity ie. Timer. Using this method, will allow you to replace in full
  * the content for a panel.
  *
  * @param string $name Name of the panel you are replacing.
  * @param string $content Content to write to the panel.
- * @return boolean Sucess of write.
+ * @return boolean Success of write.
  */
 	public function writeCache($name, $content) {
 		if (!$this->_cacheEnabled) {
@@ -131,6 +134,7 @@ class ToolbarHelper extends AppHelper {
  * Read the toolbar
  *
  * @param string $name Name of the panel you want cached data for
+ * @param int $index
  * @return mixed Boolean false on failure, array of data otherwise.
  */
 	public function readCache($name, $index = 0) {
@@ -194,6 +198,20 @@ class ToolbarHelper extends AppHelper {
 			}
 			if ($isHtml) {
 				$query['query'] = h($query['query']);
+				if (!empty($query['params']) && is_array($query['params'])) {
+					$bindParam = $bindType = null;
+					if (preg_match('/.+ :.+/', $query['query'])) {
+						$bindType = true;
+					}
+					foreach ($query['params'] as $bindKey => $bindVal) {
+						if ($bindType === true) {
+							$bindParam .= h($bindKey) ." => " . h($bindVal) . ", ";
+						} else {
+							$bindParam .= h($bindVal) . ", ";
+						}
+					}
+					$query['query'] .= " [ " . rtrim($bindParam, ', ') . " ]";
+				}
 			}
 			unset($query['params']);
 			$out['queries'][] = $query;
@@ -205,4 +223,5 @@ class ToolbarHelper extends AppHelper {
 		}
 		return $out;
 	}
+
 }

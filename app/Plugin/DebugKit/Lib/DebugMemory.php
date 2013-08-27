@@ -2,23 +2,29 @@
 /**
  * Contains methods for Profiling memory usage.
  *
- * PHP versions 5
+ * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org
- * @package       debug_kit
- * @subpackage    debug_kit.Lib
+ * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link          http://cakephp.org CakePHP(tm) Project
+ * @package       DebugKit.Lib
  * @since         DebugKit 2.0
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+
 App::uses('Debugger', 'Utility');
 
+/**
+ * Class DebugMemory
+ *
+ * @package       DebugKit.Lib
+ * @since         DebugKit 2.0
+ */
 class DebugMemory {
 
 /**
@@ -40,7 +46,7 @@ class DebugMemory {
 /**
  * Get peak memory use
  *
- * @return integer peak memory use (in bytes).  Returns 0 if memory_get_peak_usage() is not available
+ * @return integer peak memory use (in bytes). Returns 0 if memory_get_peak_usage() is not available
  */
 	public static function getPeak() {
 		return memory_get_peak_usage();
@@ -49,7 +55,7 @@ class DebugMemory {
 /**
  * Stores a memory point in the internal tracker.
  * Takes a optional message name which can be used to identify the memory point.
- * If no message is supplied a debug_backtrace will be done to identifty the memory point.
+ * If no message is supplied a debug_backtrace will be done to identify the memory point.
  *
  * @param string $message Message to identify this memory point.
  * @return boolean
@@ -86,6 +92,7 @@ class DebugMemory {
 		}
 		return $marks;
 	}
+
 /**
  * Clear out any existing memory points
  *
