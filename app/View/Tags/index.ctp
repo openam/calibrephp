@@ -1,18 +1,19 @@
 <div class="tags index">
 	<h2><?php echo __('Tags'); ?></h2>
-	<table class="table">
-		<tr>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-		</tr>
+	<div>
+		<ul class="nav nav-pills">
+			<li class="disabled"><a href="#">Sort By:</a></li>
+			<li><?php echo $this->Paginator->sort('name'); ?></li>
+		</ul>
+	</div>
+	<ul class="list-group">
 		<?php foreach ($tags as $tag): ?>
-			<tr>
-				<td><?php echo h($tag['Tag']['name']); ?>&nbsp;</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $tag['Tag']['id']), array('class' => 'btn btn-default')); ?>
-				</td>
-			</tr>
+			<li class="list-group-item">
+				<span class="badge"><?php echo $info['Tag'][$tag['Tag']['id']]['count']; ?></span>
+				<?php echo $this->Html->link($tag['Tag']['name'], array('action' => 'view', $tag['Tag']['id']), array()); ?>
+			</li>
 		<?php endforeach; ?>
-	</table>
+	</ul>
+
 	<?php echo $this->element('Paginator/footer'); ?>
 </div>

@@ -1,18 +1,19 @@
 <div class="ratings index">
 	<h2><?php echo __('Ratings'); ?></h2>
-	<table class="table">
-		<tr>
-			<th><?php echo $this->Paginator->sort('rating'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-		</tr>
+	<div>
+		<ul class="nav nav-pills">
+			<li class="disabled"><a href="#">Sort By:</a></li>
+			<li><?php echo $this->Paginator->sort('rating'); ?></li>
+		</ul>
+	</div>
+	<ul class="list-group">
 		<?php foreach ($ratings as $rating): ?>
-			<tr>
-				<td><?php echo $this->Txt->rating($rating, true); ?>&nbsp;</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $rating['Rating']['id']), array('class' => 'btn btn-default')); ?>
-				</td>
-			</tr>
+			<li class="list-group-item">
+				<span class="badge"><?php echo $info['Rating'][$rating['Rating']['id']]['count']; ?></span>
+				<?php echo $this->Html->link($this->Txt->rating($rating, true), array('action' => 'view', $rating['Rating']['id']), array('escape' => false)); ?>
+			</li>
 		<?php endforeach; ?>
-	</table>
+	</ul>
+
 	<?php echo $this->element('Paginator/footer'); ?>
 </div>

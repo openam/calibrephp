@@ -1,18 +1,19 @@
 <div class="series index">
 	<h2><?php echo __('Series'); ?></h2>
-	<table class="table">
-		<tr>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
-		</tr>
-		<?php foreach ($series as $series): ?>
-			<tr>
-				<td><?php echo h($series['Series']['name']); ?>&nbsp;</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $series['Series']['id']), array('class' => 'btn btn-default')); ?>
-				</td>
-			</tr>
+	<div>
+		<ul class="nav nav-pills">
+			<li class="disabled"><a href="#">Sort By:</a></li>
+			<li><?php echo $this->Paginator->sort('name'); ?></li>
+		</ul>
+	</div>
+	<ul class="list-group">
+		<?php foreach ($series as $serie): ?>
+			<li class="list-group-item">
+				<span class="badge"><?php echo $info['Series'][$serie['Series']['id']]['count']; ?></span>
+				<?php echo $this->Html->link($serie['Series']['name'], array('action' => 'view', $serie['Series']['id']), array()); ?>
+			</li>
 		<?php endforeach; ?>
-	</table>
+	</ul>
+
 	<?php echo $this->element('Paginator/footer'); ?>
 </div>

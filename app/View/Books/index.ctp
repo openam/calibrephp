@@ -1,7 +1,7 @@
 <div class="books index">
 	<h2><?php echo __('Books'); ?></h2>
 	<div>
-		<ul class="nav nav-pills nav-justified">
+		<ul class="nav nav-pills">
 			<li class="disabled"><a href="#">Sort By:</a></li>
 			<li><?php echo $this->Paginator->sort('sort', 'Title'); ?></li>
 			<li><?php echo $this->Paginator->sort('author_sort', 'Author'); ?></li>
