@@ -68,6 +68,14 @@ $baseBorderRadius : 5px;
 	}
 }
 
+.center {
+	text-align: center;
+	* .cover {
+		display: inline-block;
+		float: none;
+	}
+}
+
 @media (max-width: 768px) {
 	.view * dl {
 		clear: left;
@@ -87,7 +95,7 @@ $baseBorderRadius : 5px;
 		height: $coverWidth * 10 / 7;
 	}
 
-	h4{
+	h3, h4{
 		margin: 0;
 	}
 

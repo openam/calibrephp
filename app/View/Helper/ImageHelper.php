@@ -26,8 +26,8 @@ class ImageHelper extends AppHelper {
 			'scale' => true
 		),
 		'view' => array(
-			'w'     => 115,
-			'h'     => 165,
+			'w'     => 300,
+			'h'     => 300,
 			'scale' => true
 		),
 		'opds' => array(

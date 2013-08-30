@@ -1,7 +1,7 @@
 <div class="books view">
-	<?php
-		echo $this->Image->fancybox($book['Book'], array('thumbnail' => 'view'));
-	?>
+	<div class="center">
+		<?php echo $this->Image->fancybox($book['Book'], array('thumbnail' => 'view')); ?>
+	</div>
 
 	<div class="book-row">
 		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-xs'); ?>
