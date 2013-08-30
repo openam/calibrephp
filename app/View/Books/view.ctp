@@ -4,11 +4,13 @@
 	?>
 
 	<div class="book-row">
-		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-phone'); ?>
-		<div class="definition">
+		<?php echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-xs'); ?>
+		<div>
 			<h3><?php  echo h($book['Book']['sort']); ?></h3>
 		</div>
 		<?php
+			echo $this->Txt->definitionStart();
+
 			echo $this->Txt->definition(array(__('Author')    => $this->Txt->habtmLinks($book['Author'], 'authors')));
 			echo $this->Txt->definition(array(__('Series')    => $this->Txt->habtmLinks($book['Series'], 'series')));
 			echo $this->Txt->definition(array(__('Year')      => $this->Time->format('Y', $book['Book']['pubdate'])));
@@ -18,8 +20,10 @@
 			echo $this->Txt->definition(array(__('Tags')      => $this->Txt->habtmLinks($book['Tag'], 'tags')));
 			$plural = count($book['Datum']) > 1 ? 's' : '';
 			echo $this->Txt->definition(array(__('Format' . $plural)    => $this->Txt->fileTypes($book['Datum'])));
+			echo $this->Image->ebookLinks($book['Datum'], 'visible-xs');
 
-			echo $this->Image->ebookLinks($book['Datum'], 'btn-group visible-phone');
+			echo $this->Txt->definitionEnd();
+
 		?>
 	</div>
 </div>

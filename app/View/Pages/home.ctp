@@ -1,39 +1,39 @@
-<div class="hero-unit">
+<div class="jumbotron">
 	<h1>CalibrePHP</h1>
 	<p>This is a simple web server to access a database created by the <?php echo $this->Html->link("Calibre", 'http://calibre-ebook.com/'); ?> application. CalibrePHP was written using <?php echo $this->Html->link("CakePHP", 'http://cakephp.org'); ?> in an effort to use less resources than the built in calibre web server.</p>
 </div>
-<div class="row-fluid">
-	<div class="span4">
+<div class="row">
+	<div class="col col-lg-4">
 		<h2>Authors</h2>
 		<p>View an alphabetical list of the Authors in the serve database. It's sorted by the sort field set in calibre.</p>
-		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'authors', 'action'=>'index'), array('class' => 'btn', 'escape' => false)); ?></p>
+		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'authors', 'action'=>'index'), array('class' => 'btn btn-default', 'escape' => false)); ?></p>
 	</div><!--/span-->
-	<div class="span4">
+	<div class="col col-lg-4">
 		<h2>Books</h2>
 		<p>View an alphabetical list of the Books in the serve database. The list is initally arranged by the sort field as set in calibre.</p>
-		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'books', 'action'=>'index'), array('class' => 'btn', 'escape' => false)); ?></p>
+		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'books', 'action'=>'index'), array('class' => 'btn btn-default', 'escape' => false)); ?></p>
 	</div><!--/span-->
-	<div class="span4">
+	<div class="col col-lg-4">
 		<h2>Publishers</h2>
 		<p>View a list of the Publishers. The list is arranged alphabetically by default.</p>
-		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'publishers', 'action'=>'index'), array('class' => 'btn', 'escape' => false)); ?></p>
+		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'publishers', 'action'=>'index'), array('class' => 'btn btn-default', 'escape' => false)); ?></p>
 	</div><!--/span-->
 </div><!--/row-->
-<div class="row-fluid">
-	<div class="span4">
+<div class="row">
+	<div class="col col-lg-4">
 		<h2>Ratings</h2>
 		<p>View a list of the available Ratings. Hopefully this will one day just provide a list of all the books arranged by rating.</p>
-		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'ratings', 'action'=>'index'), array('class' => 'btn', 'escape' => false)); ?></p>
+		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'ratings', 'action'=>'index'), array('class' => 'btn btn-default', 'escape' => false)); ?></p>
 	</div><!--/span-->
-	<div class="span4">
+	<div class="col col-lg-4">
 		<h2>Series</h2>
 		<p>View a list of all the Series in the database. The list is arranged alphabetically by default.</p>
-		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'series', 'action'=>'index'), array('class' => 'btn', 'escape' => false)); ?></p>
+		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'series', 'action'=>'index'), array('class' => 'btn btn-default', 'escape' => false)); ?></p>
 	</div><!--/span-->
-	<div class="span4">
+	<div class="col col-lg-4">
 		<h2>Tags</h2>
 		<p>View a list of all the Tags in the database. These are all the a tags that have been assigned to the books in Calibre. By default the list is arranged alphabetically.</p>
-		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'tags', 'action'=>'index'), array('class' => 'btn', 'escape' => false)); ?></p>
+		<p><?php echo $this->Html->link("View Index &raquo;", array('controller'=>'tags', 'action'=>'index'), array('class' => 'btn btn-default', 'escape' => false)); ?></p>
 	</div><!--/span-->
 </div><!--/row-->
 

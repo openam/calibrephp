@@ -7,12 +7,13 @@
 		$bookClass = isset($book['Book']) ? $book['Book'] : $book ;
 
 		echo $this->Image->fancybox($bookClass);
-		echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-phone');
+		echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar pull-right hidden-xs');
 	?>
-	<div class="definition">
-		<h5><?php echo $this->Html->link($bookClass['sort'], array('controller'=>'books', 'action'=>'view', $bookClass['id'])); ?></h5>
+	<div>
+		<h4><?php echo $this->Html->link($bookClass['sort'], array('controller'=>'books', 'action'=>'view', $bookClass['id'])); ?></h4>
 	</div>
 	<?php
+		echo $this->Txt->definitionStart();
 
 		if (!in_array('Author', $exclude)) {
 			echo $this->Txt->definition(array(__('Author')    => $this->Txt->habtmLinks($book['Author'], 'authors')));
@@ -43,6 +44,8 @@
 			echo $this->Txt->definition(array(__('Format' . $plural)    => $this->Txt->fileTypes($book['Datum'])));
 		}
 
-		echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar visible-phone clearfix');
+		echo $this->Image->ebookLinks($book['Datum'], 'btn-toolbar visible-xs clearfix');
+
+		echo $this->Txt->definitionEnd();
 	?>
 </div>

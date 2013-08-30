@@ -4,39 +4,23 @@ html, body {
 	height: 100%;
 }
 
+body {
+	padding-top: 70px;
+}
+
 .wrapper {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
 	margin: 0 auto $footerHeight*-1;
-
-	div.first-row {
-		padding-top: 60px;
-	}
 }
 
 .footer, .push {
 	height: $footerHeight;
 }
 
-@media (max-width: 767px) {
-	.hero-unit{
-		padding: 30px;
-		h1{
-			font-size: 40px;
-		}
-	}
-}
-
-@media (max-width: 980px) {
-	.wrapper {
-		div.first-row {
-			padding-top: 0px;
-		}
-	}
-
-	.full-width-non-desktop {
-		margin: 0 !important;
-		width: 100% !important;
+@media (min-width: 1200px) {
+	.container {
+		max-width: 970px;
 	}
 }

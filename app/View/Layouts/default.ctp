@@ -12,14 +12,14 @@
 
 			echo $this->Html->css(array(
 				'stylesheets/bootstrap',
-				'stylesheets/responsive',
+				// '//bootswatch.com/readable/bootstrap.min.css',
+				// '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css',
 			));
 			echo $this->fetch('css');
 
 			echo $this->Html->script(array(
 				'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-				'bootstrap-collapse',
-				'bootstrap-dropdown',
+				'//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js',
 				'jquery.fancybox.pack',
 				'share',
 			));
@@ -29,19 +29,16 @@
 	<body>
 		<div class="wrapper">
 			<?php echo $this->element('Layout/header'); ?>
-			<div class="container container-fluid">
-				<div class="row-fluid first-row">
-					<div class="span3 visible-desktop">
-						<?php echo $this->element('Layout/well'); ?>
-					</div>
-					<div class="span9 full-width-non-desktop">
+			<div class="container">
+				<!-- <div class="row"> -->
+					<!-- <div class="col col-lg-12"> -->
 						<?php echo $this->element('Layout/content'); ?>
-					</div>
-				</div>
+					<!-- </div> -->
+				<!-- </div> -->
 			</div>
 			<div class="push"></div>
 		</div>
-		<div class="container container-fluid">
+		<div class="container">
 			<?php echo $this->element('Layout/footer'); ?>
 		</div>
 	</body>

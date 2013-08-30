@@ -11,7 +11,7 @@
 				<td><?php echo h($author['Author']['name']); ?></td>
 				<td><?php echo h($author['Author']['sort']); ?></td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $author['Author']['id']), array('class' => 'btn')); ?>
+					<?php echo $this->Html->link(__('View'), array('action' => 'view', $author['Author']['id']), array('class' => 'btn btn-default')); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

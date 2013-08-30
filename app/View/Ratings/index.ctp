@@ -9,7 +9,7 @@
 			<tr>
 				<td><?php echo $this->Txt->rating($rating, true); ?>&nbsp;</td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $rating['Rating']['id']), array('class' => 'btn')); ?>
+					<?php echo $this->Html->link(__('View'), array('action' => 'view', $rating['Rating']['id']), array('class' => 'btn btn-default')); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

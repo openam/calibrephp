@@ -21,8 +21,8 @@ class ImageHelper extends AppHelper {
  */
 	public $resizeSettings = array(
 		'index' => array(
-			'w'     => 70,
-			'h'     => 100,
+			'w'     => 100,
+			'h'     => 143,
 			'scale' => true
 		),
 		'view' => array(
@@ -91,7 +91,7 @@ class ImageHelper extends AppHelper {
 			throw new NotFoundException(__('Invalid path'));
 		}
 
-		return '<img class="img-rounded pull-left cover" src="'. $this->resizeUrl($bookPath, $resizeSettings) . '">';
+		return '<div class="cover"><img src="'. $this->resizeUrl($bookPath, $resizeSettings) . '"></div>';
 	}
 
 /**
@@ -119,8 +119,8 @@ class ImageHelper extends AppHelper {
 		if(count($downloadLinks) > 0)
 		{
 			$links .= '<div class="btn-group">';
-			$links .= '<button class="btn dropdown-toggle" data-toggle="dropdown"><i class="icon-download"></i> ' . __("Download") . ' <span class="caret"></span></button>';
-			$links .= '<ul class="dropdown-menu">' . implode("", $downloadLinks) . '</ul>';
+			$links .= '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-download"></i> ' . __("Download") . ' <span class="caret"></span></button>';
+			$links .= '<ul class="dropdown-menu pull-right">' . implode("", $downloadLinks) . '</ul>';
 			$links .= '</div> ';
 		}
 
@@ -158,13 +158,13 @@ class ImageHelper extends AppHelper {
 		{
 			$links .= '<div class="btn-group">';
 			$links .= '<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope icon-white"></i> ' . __("Share") . ' <span class="caret"></span></button>';
-			$links .= '<ul class="dropdown-menu">' . implode("", $shareLinks) . '</ul>';
+			$links .= '<ul class="dropdown-menu pull-right">' . implode("", $shareLinks) . '</ul>';
 			$links .= '</div>';
 		}
 
 		if($links)
 		{
-			return '<div class="definition ' . $divClass . '">' . $links . '</div>';
+			return '<div class="' . $divClass . '">' . $links . '</div>';
 		}
 		else
 		{

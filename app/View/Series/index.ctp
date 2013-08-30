@@ -9,7 +9,7 @@
 			<tr>
 				<td><?php echo h($series['Series']['name']); ?>&nbsp;</td>
 				<td class="actions">
-					<?php echo $this->Html->link(__('View'), array('action' => 'view', $series['Series']['id']), array('class' => 'btn')); ?>
+					<?php echo $this->Html->link(__('View'), array('action' => 'view', $series['Series']['id']), array('class' => 'btn btn-default')); ?>
 				</td>
 			</tr>
 		<?php endforeach; ?>

@@ -72,13 +72,32 @@ class TxtHelper extends TextHelper {
 				$options['text'] = $options['alternateText'];
 			}
 
-			$text = "<div class='definition'><span class='definition'$htmlAttributes>" . $options['label'] . "</span><span$htmlAttributes>";
-			$text .= $options['before'] . $options['text'] . $options['after'] . '</span></div>';
+			$text = "<dt>" . $options['label'] . '</dt>';
+			$text .= "<dd>" . $options['before'] . $options['text'] . $options['after'] . '</dd>';
 
 			return $text;
 		} else {
 			return false;
 		}
+	}
+
+
+/**
+ * Generates the overview information
+ *
+ * @return string
+ */
+	public function definitionStart($class = 'dl-horizontal') {
+		return "<dl class='$class'>";
+	}
+
+/**
+ * Generates the overview information
+ *
+ * @return string
+ */
+	public function definitionEnd() {
+		return "</dl>";
 	}
 
 /**
