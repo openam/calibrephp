@@ -20,7 +20,7 @@
 			echo $this->Txt->definition(array(__('Tags')      => $this->Txt->habtmLinks($book['Tag'], 'tags')));
 			$plural = count($book['Datum']) > 1 ? 's' : '';
 			echo $this->Txt->definition(array(__('Format' . $plural)    => $this->Txt->fileTypes($book['Datum'])));
-			echo $this->Image->ebookLinks($book['Datum'], 'visible-xs');
+			echo $this->Image->ebookLinks($book['Datum'], 'visible-xs', 'pull-left');
 
 			echo $this->Txt->definitionEnd();
 

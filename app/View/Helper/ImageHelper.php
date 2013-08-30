@@ -100,7 +100,7 @@ class ImageHelper extends AppHelper {
  * @param array $files to provide links for
  * @return string a string with the links to all the book formats items
  */
-	public function ebookLinks($files = array(), $divClass = 'btn-toolbar') {
+	public function ebookLinks($files = array(), $divClass = 'btn-toolbar', $positionClass = 'pull-right') {
 		$links = '';
 
 		// Downloads links
@@ -116,36 +116,31 @@ class ImageHelper extends AppHelper {
 				'title' => $this->Number->toReadableSize($file['uncompressed_size']),
 			)) . '</li>';
 		}
-		if(count($downloadLinks) > 0)
-		{
+
+		if (count($downloadLinks) > 0) {
 			$links .= '<div class="btn-group">';
 			$links .= '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-download"></i> ' . __("Download") . ' <span class="caret"></span></button>';
-			$links .= '<ul class="dropdown-menu pull-right">' . implode("", $downloadLinks) . '</ul>';
+			$links .= '<ul class="dropdown-menu ' . $positionClass . '">' . implode("", $downloadLinks) . '</ul>';
 			$links .= '</div> ';
 		}
 
 		// E-Mail / Share
 		$formats = array();
-		foreach($files as $file)
-		{
+		foreach($files as $file) {
 			$formats[$file['format']] = $file['format'];
 		}
 		$emailTargets = array();
-		foreach($this->getShareConfig() as $email => $emailFormats)
-		{
+		foreach($this->getShareConfig() as $email => $emailFormats) {
 			$emailFormats = (array)explode(",", strtoupper($emailFormats));
-			foreach($emailFormats as $format)
-			{
-				if(isset($formats[$format]))
-				{
+			foreach($emailFormats as $format) {
+				if(isset($formats[$format])) {
 					$emailTargets[$email] = $format;
 					continue 2;
 				}
 			}
 		}
 		$shareLinks = array();
-		foreach($emailTargets as $email => $format)
-		{
+		foreach($emailTargets as $email => $format) {
 			$url = $this->Html->url(array(
 				'controller' => 'books',
 				'action' => 'share',
@@ -154,20 +149,17 @@ class ImageHelper extends AppHelper {
 				$format));
 			$shareLinks[] = '<li><a href="#" class="calibre-share" data-share-url="' . $url . '">' . $email . '</a></li>';
 		}
-		if(!empty($shareLinks))
-		{
+
+		if(!empty($shareLinks)) {
 			$links .= '<div class="btn-group">';
 			$links .= '<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="icon-envelope icon-white"></i> ' . __("Share") . ' <span class="caret"></span></button>';
-			$links .= '<ul class="dropdown-menu pull-right">' . implode("", $shareLinks) . '</ul>';
+			$links .= '<ul class="dropdown-menu ' . $positionClass . '">' . implode("", $shareLinks) . '</ul>';
 			$links .= '</div>';
 		}
 
-		if($links)
-		{
+		if($links) {
 			return '<div class="' . $divClass . '">' . $links . '</div>';
-		}
-		else
-		{
+		} else {
 			return '';
 		}
 	}
