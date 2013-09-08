@@ -12,8 +12,7 @@
 
 			echo $this->Html->css(array(
 				'stylesheets/bootstrap',
-				// '//bootswatch.com/readable/bootstrap.min.css',
-				// '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css',
+				'//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css',
 			));
 			echo $this->fetch('css');
 

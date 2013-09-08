@@ -154,8 +154,14 @@ class TxtHelper extends TextHelper {
 		if ($value > $possible) {
 			throw new CakeException("Invalid use of TxtHelper::stars()");
 		}
-		$stars = str_repeat('&#9733;', $value);
-		$stars .= str_repeat('&#9734;', $possible - $value);
+
+		$whole    = floor($value);
+		$fraction = ceil($value - $whole);
+
+		$stars = str_repeat('<i class="icon-star"></i> ', $whole);
+		$stars .= str_repeat('<i class="icon-star-half-empty"></i> ', $fraction);
+		$stars .= str_repeat('<i class="icon-star-empty"></i> ', $possible - $whole - $fraction);
+
 		return $stars;
 	}
 
