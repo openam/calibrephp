@@ -13,4 +13,16 @@ class Datum extends AppModel {
  */
 	public $displayField = 'format';
 
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Book' => array(
+			'className'  => 'Book',
+			'foreignKey' => 'book',
+		)
+	);
+
 }
