@@ -35,6 +35,11 @@
  * connect /opds to books/opds
  */
 	Router::connect('/opds', array('controller' => 'books', 'action' => 'opds'));
+/**
+ * connect /formats to /data
+ */
+	Router::connect('/formats', array('controller' => 'data'));
+	Router::connect('/formats/:action/*', array('controller' => 'data'));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
