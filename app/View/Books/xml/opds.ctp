@@ -6,7 +6,13 @@
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
-		'href' => $this->Html->url(array('controller'=>'books', 'action'=>'opds'), false),
+		'href'  => $this->Html->url(array('controller'=>'books', 'action'=>'opds.xml'), false),
+		'rel'   => 'start',
+		'title' => 'Home',
+	));
+
+	$feed = $this->Opds->addLink($feed, array(
+		'href' => $this->Html->url(array('controller'=>'books', 'action'=>'opds.xml'), false),
 		'rel'  => 'self'
 	));
 
