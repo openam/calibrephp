@@ -182,6 +182,11 @@ class TxtHelper extends TextHelper {
 					$type = Inflector::humanize($type);
 					break;
 
+				case 'goodreads':
+					$type  = Inflector::humanize($type);
+					$value = $this->Html->link($value, 'http://www.goodreads.com/book/show/' . $value);
+					break;
+
 				case 'isbn':
 					$type = strtoupper($type);
 					break;
