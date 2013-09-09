@@ -15,6 +15,7 @@ class TxtHelper extends TextHelper {
 	public $helpers = array(
 		'Html',
 		'Number',
+		'Paginator',
 	);
 
 /**
@@ -163,6 +164,36 @@ class TxtHelper extends TextHelper {
 		$stars .= str_repeat('<i class="icon-star-empty"></i> ', $possible - $whole - $fraction);
 
 		return $stars;
+	}
+
+/**
+ * paginateSort
+ *
+ * @param integer $field
+ * @param integer $title optional display title
+ * @return string
+ */
+	public function paginateSort($field, $title = null) {
+		$active = '';
+		$icon   = '';
+
+		if (empty($title)) {
+			$title = Inflector::humanize($field);
+		}
+
+		if (!empty($this->params['named'])) {
+			if (!empty($this->params['named']['sort']) && $this->params['named']['sort'] == $field) {
+				$active = ' class="active"';
+
+				if (strtolower($this->params['named']['direction']) == 'asc') {
+					$icon = '<i class="icon-chevron-sign-up"></i> ';
+				} else {
+					$icon = '<i class="icon-chevron-sign-down"></i> ';
+				}
+			}
+		}
+
+		return "<li$active>" . $this->Paginator->sort($field, $icon . $title, array('escape' => false)) . "</li>";
 	}
 
 /**

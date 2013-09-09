@@ -3,9 +3,12 @@
 	<div>
 		<ul class="nav nav-pills">
 			<li class="disabled"><a href="#">Sort By:</a></li>
-			<li><?php echo $this->Paginator->sort('rating'); ?></li>
+			<?php
+				echo $this->Txt->paginateSort('rating');
+			?>
 		</ul>
 	</div>
+
 	<ul class="list-group">
 		<?php foreach ($ratings as $rating): ?>
 			<li class="list-group-item">

@@ -3,13 +3,14 @@
 	<div>
 		<ul class="nav nav-pills">
 			<li class="disabled"><a href="#">Sort By:</a></li>
-			<li><?php echo $this->Paginator->sort('sort', 'Title'); ?></li>
-			<li><?php echo $this->Paginator->sort('author_sort', 'Author'); ?></li>
-			<li><?php echo $this->Paginator->sort('series_index'); ?></li>
+			<?php
+				echo $this->Txt->paginateSort('timestamp', 'Date Added');
+				echo $this->Txt->paginateSort('author_sort', 'Author');
+				echo $this->Txt->paginateSort('sort', 'Title');
+				echo $this->Txt->paginateSort('series_index');
+			?>
 		</ul>
 	</div>
-
-	<div class="clearfix"><br /></div>
 
 	<?php
 		foreach ($books as $key => $book) {

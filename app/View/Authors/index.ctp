@@ -3,10 +3,13 @@
 	<div>
 		<ul class="nav nav-pills">
 			<li class="disabled"><a href="#">Sort By:</a></li>
-			<li><?php echo $this->Paginator->sort('name'); ?></li>
-			<li><?php echo $this->Paginator->sort('sort', 'Last Name'); ?></li>
+			<?php
+				echo $this->Txt->paginateSort('name');
+				echo $this->Txt->paginateSort('sort', 'Last Name');
+			?>
 		</ul>
 	</div>
+
 	<ul class="list-group">
 		<?php foreach ($authors as $author): ?>
 			<li class="list-group-item">
