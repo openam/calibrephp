@@ -2,16 +2,17 @@
 	<h2><?php  echo h($author['Author']['name']); ?></h2>
 </div>
 
-<h3>Related Series</h3>
-<?php
-	if (!empty($series)) {
-		foreach ($series as $key => $value) {
-			echo $this->Html->link($key, array('controller' => 'series', 'action' => 'view', $value));
-		}
-	} else {
-		echo "No series";
-	}
-?>
+<?php if (!empty($series)): ?>
+	<h3>Related Series</h3>
+	<ul class="list-group">
+			<?php foreach ($series as $key => $value): ?>
+				<li class="list-group-item">
+					<!-- <span class="badge"><?php echo $info['Tag'][$tag['Tag']['id']]['count']; ?></span> -->
+					<?php echo $this->Html->link($key, array('controller' => 'series', 'action' => 'view', $value)); ?>
+				</li>
+			<?php endforeach; ?>
+	</ul>
+<?php endif; ?>
 
 <h3>Related Books</h3>
 
