@@ -60,7 +60,7 @@
 				echo __d('cake_dev', 'Your version of PHP is 5.2.8 or higher.');
 			echo '</div>';
 		else:
-			echo '<div class="alert alert-error">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'Your version of PHP is too low. You need PHP 5.2.8 or higher to use CakePHP.');
 			echo '</div>';
 		endif;
@@ -73,7 +73,7 @@
 				echo __d('cake_dev', 'Your tmp directory is writable.');
 			echo '</div>';
 		else:
-			echo '<div class="alert alert-error">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'Your tmp directory is NOT writable.');
 			echo '</div>';
 		endif;
@@ -87,7 +87,7 @@
 				echo __d('cake_dev', 'The %s is being used for core caching. To change the config edit APP/Config/core.php ', '<em>'. $settings['engine'] . 'Engine</em>');
 			echo '</div>';
 		else:
-			echo '<div class="alert alert-error">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'Your cache is NOT working. Please check the settings in APP/Config/core.php');
 			echo '</div>';
 		endif;
@@ -102,7 +102,7 @@
 				$filePresent = true;
 			echo '</div>';
 		else:
-			echo '<div class="alert alert-error">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'Your database configuration file is NOT present.');
 				echo '<br/>';
 				echo __d('cake_dev', 'Rename APP/Config/database.php.default to APP/Config/database.php');
@@ -132,7 +132,7 @@
 		 			echo __d('cake_dev', 'Cake is able to connect to the database.');
 				echo '</div>';
 			else:
-				echo '<div class="alert alert-error">';
+				echo '<div class="alert alert-danger">';
 					echo __d('cake_dev', 'Cake is NOT able to connect to the database.');
 					echo '<br /><br />';
 					echo $errorMsg;
