@@ -13,13 +13,13 @@ $(function() {
 		var shareButtonIcon = shareButton.children("i");
 
 		// Change icon to rotating refresh-icon
-		shareButtonIcon.removeClass("icon-envelope").addClass("icon-refresh icon-rotating");
+		shareButtonIcon.removeClass("icon-envelope").addClass("icon-refresh icon-spin");
 
 		// Do AJAX request
 		$.post(shareUrl, function(result)
 		{
 			// Change icon to check + stop rotating
-			shareButtonIcon.removeClass("icon-refresh icon-rotating").addClass("icon-ok");
+			shareButtonIcon.removeClass("icon-refresh icon-spin").addClass("icon-ok");
 		});
 	});
 
