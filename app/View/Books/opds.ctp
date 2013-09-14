@@ -1,6 +1,6 @@
 <div class="jumbotron">
 	<h1>CalibrePHP</h1>
-	<p>This is a simple web server to access a database created by the <?php echo $this->Html->link("Calibre", 'http://calibre-ebook.com/'); ?> application. CalibrePHP was written using <?php echo $this->Html->link("CakePHP", 'http://cakephp.org'); ?> in an effort to use less resources than the built in calibre web server.</p>
+	<p>This is a simple <?php echo $this->Html->link('HTML', 'http://en.wikipedia.org/wiki/HTML'); ?> and <?php echo $this->Html->link('OPDS', 'http://en.wikipedia.org/wiki/OPDS'); ?> web server to access a database created by the <?php echo $this->Html->link("Calibre", 'http://calibre-ebook.com/'); ?> application. CalibrePHP was written using <?php echo $this->Html->link("CakePHP", 'http://cakephp.org'); ?>.</p>
 </div>
 <div class="row">
 	<div class="col col-lg-4">

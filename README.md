@@ -1,6 +1,6 @@
 # CalibrePHP
 
-CalibrePHP provides a simple web interface to access a database created by the [Calibre](http://calibre-ebook.com) application. CalibrePHP was written using [CakePHP](http://cakephp.org).
+This is a simple [HTML](http://en.wikipedia.org/wiki/HTML) and [OPDS](http://en.wikipedia.org/wiki/OPDS) web server to access a database created by the [Calibre](http://calibre-ebook.com) application. CalibrePHP was written using [CakePHP](http://cakephp.org).
 
 ## Docs and Demo
 
