@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<?php echo $this->Html->link("CalibrePHP", '/', array('class' => 'navbar-brand')); ?>
-			<?php echo $this->Html->link('Books', array('controller' => 'books', 'action' => 'index'), array('class' => 'btn btn-default navbar-btn pull-left', 'tag' => 'button')); ?>
+			<?php echo $this->Html->link('<i class="icon-book"></i> Books', array('controller' => 'books', 'action' => 'index'), array('class' => 'btn btn-default navbar-btn pull-left', 'tag' => 'button', 'escape' => false)); ?>
 		</div>
 		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 			<ul class="nav navbar-nav">
