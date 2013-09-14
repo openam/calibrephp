@@ -12,11 +12,14 @@
 		</div>
 		<nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
 			<ul class="nav navbar-nav">
-		<li<?php echo $this->Txt->activeIndex('authors'); ?>><?php echo $this->Html->link('Authors', array('controller' => 'authors', 'action' => 'index')); ?></li>
-		<li<?php echo $this->Txt->activeIndex('publishers'); ?>><?php echo $this->Html->link('Publishers', array('controller' => 'publishers', 'action' => 'index')); ?></li>
-		<li<?php echo $this->Txt->activeIndex('ratings'); ?>><?php echo $this->Html->link('Ratings', array('controller' => 'ratings', 'action' => 'index')); ?></li>
-		<li<?php echo $this->Txt->activeIndex('series'); ?>><?php echo $this->Html->link('Series', array('controller' => 'series', 'action' => 'index')); ?></li>
-		<li<?php echo $this->Txt->activeIndex('tags'); ?>><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index')); ?></li>
+				<li<?php echo $this->Txt->activeIndex('authors'); ?>><?php echo $this->Html->link('Authors', array('controller' => 'authors', 'action' => 'index')); ?></li>
+				<li<?php echo $this->Txt->activeIndex('publishers'); ?>><?php echo $this->Html->link('Publishers', array('controller' => 'publishers', 'action' => 'index')); ?></li>
+				<li<?php echo $this->Txt->activeIndex('ratings'); ?>><?php echo $this->Html->link('Ratings', array('controller' => 'ratings', 'action' => 'index')); ?></li>
+				<li<?php echo $this->Txt->activeIndex('series'); ?>><?php echo $this->Html->link('Series', array('controller' => 'series', 'action' => 'index')); ?></li>
+				<li<?php echo $this->Txt->activeIndex('tags'); ?>><?php echo $this->Html->link('Tags', array('controller' => 'tags', 'action' => 'index')); ?></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><?php echo $this->Html->link('<i class="icon-rss-sign"></i> Feed', '/opds.xml', array('escape' => false)); ?></li>
 			</ul>
 		</nav>
 	</div>
