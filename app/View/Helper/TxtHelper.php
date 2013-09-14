@@ -29,7 +29,7 @@ class TxtHelper extends TextHelper {
 		$action     = (isset($this->request->params['action']) ? $this->request->params['action'] : '');
 		$firstPass  = (isset($this->request->params['pass']['0']) ? $this->request->params['pass']['0'] : '');
 
-		if ($controller == $value && ($action == 'index' || $action == '')) {
+		if ($controller == $value && ($action == 'index' || $action == '' || $action == 'search')) {
 			return ' class="active"';
 		} else {
 			return '';
@@ -248,6 +248,33 @@ class TxtHelper extends TextHelper {
 
 		return $links;
 	}
+
+/**
+ * searchByModels
+ *
+ * @param array $models to provide links for
+ * @return string a string with the links for the different search options
+ */
+	public function searchByModels($models = array('Book', 'Author', 'Publisher', 'Series', 'Tag')) {
+		sort($models);
+		$links = '<ul class="nav nav-pills">';
+		$links .= '	<li class="disabled"><a href="#">Search:</a></li>';
+
+		foreach ($models as $model) {
+			$links .= '<li' . $this->activeIndex(Inflector::tableize($model)) . '>' . $this->Html->link($model,
+				array_merge(
+					array('controller' => Inflector::tableize($model), 'action' => 'search'),
+					$this->request->params['named']
+				)
+			) . '</li>';
+		}
+
+		$links .= '</ul>';
+
+		return $links;
+	}
+
+
 
 /**
  * numberToWords method

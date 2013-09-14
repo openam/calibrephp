@@ -10,4 +10,6 @@
 	echo $this->Form->input('search', array('type' => 'text'));
 	echo $this->Form->submit(__('Search'), array('div' => false, 'class' => 'btn btn-primary'));
 	echo $this->Form->end();
+
+	echo $this->Txt->searchByModels();
 ?>
