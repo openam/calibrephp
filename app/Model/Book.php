@@ -14,6 +14,15 @@ class Book extends AppModel {
 	public $displayField = 'title';
 
 /**
+ * Behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'Search.Searchable',
+	);
+
+/**
  * Default order
  *
  * @var string
@@ -123,5 +132,14 @@ class Book extends AppModel {
 
 		return $info;
 	}
+
+/**
+ * filterArgs for Search
+ *
+ * @var array
+ */
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('Book.title', 'Book.sort'), 'connectorAnd' => '+', 'connectorOr' => '|'),
+	);
 
 }

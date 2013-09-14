@@ -9,6 +9,12 @@ App::uses('CakeEmail', 'Network/Email');
 class BooksController extends AppController {
 
 /**
+ * CakeDC Search
+ */
+	public $components = array('Search.Prg');
+	public $presetVars = true;
+
+/**
  * index method
  *
  * @return void
@@ -81,6 +87,17 @@ class BooksController extends AppController {
 			'path'      => $this->Book->getCalibrePath() . $book['Book']['path'] . DS
 		);
 		$this->set($params);
+	}
+
+/**
+ * search method
+ *
+ * @return void
+ */
+	public function search() {
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Book->parseCriteria($this->Prg->parsedParams());
+		$this->set('books', $this->paginate());
 	}
 
 /**
