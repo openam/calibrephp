@@ -1,108 +1,125 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv="X-UA-Compatible" content="chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
 
-    <title>CalibrePHP by openam</title>
-  </head>
+		<title>CalibrePHP by openam</title>
+	</head>
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>CalibrePHP</h1>
-        <h2>Calibre web server based on CakePHP</h2>
-        <a href="https://github.com/openam/calibrephp" class="button"><small>View project on</small>GitHub</a>
-      </div>
-    </header>
+	<body>
+		<header>
+			<div class="inner">
+				<h1>CalibrePHP</h1>
+				<h2>Calibre HTML and OPDS web server</h2>
+				<a href="https://github.com/openam/calibrephp" class="button"><small>View project on</small>GitHub</a>
+			</div>
+		</header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1>
-<a name="calibrephp" class="anchor" href="#calibrephp"><span class="octicon octicon-link"></span></a>CalibrePHP</h1>
+		<div id="content-wrapper">
+			<div class="inner clearfix">
+				<section id="main-content">
+					<h1>
+						<a name="calibrephp" class="anchor" href="#calibrephp"><span class="octicon octicon-link"></span></a>
+						CalibrePHP
+					</h1>
 
-<p>CalibrePHP provides a simple web interface to access a database created by the <a href="http://calibre-ebook.com">Calibre</a> application. CalibrePHP was written using <a href="http://cakephp.org">CakePHP</a>.</p>
+					<p>This is a simple <a href="http://en.wikipedia.org/wiki/HTML">HTML</a> and <a href="http://en.wikipedia.org/wiki/OPDS">OPDS</a> web server to access a database created by the <a href="http://calibre-ebook.com">Calibre</a> application. CalibrePHP was written using <a href="http://cakephp.org">CakePHP</a>.</p>
 
-<h2>
-<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+					<h2>
+						<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>
+						Requirements
+					</h2>
 
-<p>The master branch has the following requirements:</p>
+					<p>The master branch has the following requirements:</p>
 
-<ul>
-<li>HTTP Server. For example: Apache. mod_rewrite is preferred, but by no means required.</li>
-<li>PHP 5.3.0 or greater.</li>
-<li>PHP Sqlite 3 support.</li>
-<li>ImageMagick.</li>
-</ul><h2>
-<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+					<ul>
+						<li>HTTP Server. For example: Apache. mod_rewrite is preferred, but by no means required.</li>
+						<li>PHP 5.3.0 or greater.</li>
+						<li>PHP Sqlite 3 support.</li>
+						<li>ImageMagick.</li>
+					</ul>
 
-<ul>
-<li>Copy/Clone the repository to your webserver.</li>
-<li>Copy/Rename <code>app/Config/database.php.default</code> to <code>app/Config/database.php</code>.
+					<h2>
+						<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>
+						Installation
+					</h2>
 
-<ul>
-<li>change <code>$default['database']</code> to match the location of your calibre database.</li>
-</ul>
-</li>
-<li>Copy/Rename <code>app/Config/settings.php.default</code> to <code>app/Config/settings.php</code>.
+					<ul>
+						<li>Copy/Clone the repository to your webserver.</li>
+						<li>Copy/Rename <code>app/Config/database.php.default</code> to <code>app/Config/database.php</code>.
+							<ul>
+								<li>change <code>$default['database']</code> to match the location of your calibre database.</li>
+							</ul>
+						</li>
+						<li>Copy/Rename <code>app/Config/settings.php.default</code> to <code>app/Config/settings.php</code>.
+							<ul>
+								<li>change <code>$config['Settings']['Default']['CalibrePath']</code> to match the location of your calibre database.</li>
+							</ul>
+						</li>
+						<li>Copy/Rename <code>app/Config/core.php.default</code> to <code>app/Config/core.php</code>.
+							<ul>
+								<li>change <code>Security.salt</code> from the default.</li>
+								<li>change <code>Security.cipherSeed</code> from the default.</li>
+								<li>change <code>debug</code> to the desired level.</li>
+							</ul>
+						</li>
+					</ul>
 
-<ul>
-<li>change <code>$config['Settings']['Default']['CalibrePath']</code> to match the location of your calibre database.</li>
-</ul>
-</li>
-<li>Copy/Rename <code>app/Config/core.php.default</code> to <code>app/Config/core.php</code>.
+					<h2>
+						<a name="screenshot" class="anchor" href="#screenshot"><span class="octicon octicon-link"></span></a>
+						Screenshot
+					</h2>
+					<img src="images/screenshot.png">
 
-<ul>
-<li>change <code>Security.salt</code> from the default.</li>
-<li>change <code>Security.cipherSeed</code> from the default.</li>
-<li>change <code>debug</code> to the desired level.</li>
-</ul>
-</li>
-</ul>
-<h2><a name="screenshot" class="anchor" href="#screenshot"><span class="octicon octicon-link"></span></a>Screenshot</h2>
-<img src="images/screenshot.png">
-<h3><a name="screenshot-mobile" class="anchor" href="#screenshot-mobile"><span class="octicon octicon-link"></span></a>Mobile Screenshots</h3>
-<img src="images/phone-1.png">
-<img src="images/phone-2.png">
+					<h3>
+						<a name="screenshot-mobile" class="anchor" href="#screenshot-mobile"><span class="octicon octicon-link"></span></a>
+						Mobile Screenshots
+					</h3>
+					<img src="images/phone-1.png">
+					<img src="images/phone-2.png">
 
-<h2>
-<a name="reporting-issues" class="anchor" href="#reporting-issues"><span class="octicon octicon-link"></span></a>Reporting issues</h2>
+					<h2>
+						<a name="reporting-issues" class="anchor" href="#reporting-issues"><span class="octicon octicon-link"></span></a>
+						Reporting issues
+					</h2>
 
-<p>If you have an issues with CalibrePHP please open an issue on github <a href="https://github.com/openam/calibrephp/issues">https://github.com/openam/calibrephp/issues</a>.</p>
+					<p>If you have an issues with CalibrePHP please open an issue on github <a href="https://github.com/openam/calibrephp/issues">https://github.com/openam/calibrephp/issues</a>.</p>
 
-<h2>
-<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+					<h2>
+						<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>
+						Contributing
+					</h2>
 
-<p>If you'd like to contribute to CalibrePHP, review the <a href="https://github.com/openam/calibrephp/wiki/Roadmap">Roadmap</a> for planned features.  You can fork the project add features and send pull requests, or open issues on github.</p>
-        </section>
+					<p>If you'd like to contribute to CalibrePHP, review the <a href="https://github.com/openam/calibrephp/wiki/Roadmap">Roadmap</a> for planned features.  You can fork the project add features and send pull requests, or open issues on github.</p>
+				</section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/openam/calibrephp/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/openam/calibrephp/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+				<aside id="sidebar">
+					<a href="https://github.com/openam/calibrephp/zipball/master" class="button">
+						<small>Download</small>
+						.zip file
+					</a>
+					<a href="https://github.com/openam/calibrephp/tarball/master" class="button">
+						<small>Download</small>
+						.tar.gz file
+					</a>
 
-          <p class="repo-owner"><a href="https://github.com/openam/calibrephp"></a>CalibrePHP is maintained by <a href="https://github.com/openam">openam</a>.</p>
+					<p class="repo-owner"><a href="https://github.com/openam/calibrephp"></a>CalibrePHP is maintained by <a href="https://github.com/openam">openam</a>.</p>
 
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+					<p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
+				</aside>
+			</div>
+		</div>
 
 
-  </body>
+	</body>
 </html>
