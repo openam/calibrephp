@@ -8,6 +8,12 @@ App::uses('AppController', 'Controller');
 class TagsController extends AppController {
 
 /**
+ * CakeDC Search
+ */
+	public $components = array('Search.Prg');
+	public $presetVars = true;
+
+/**
  * index method
  *
  * @return void
@@ -40,6 +46,19 @@ class TagsController extends AppController {
 		$tag  = $this->Tag->find('first', $options);
 		$info = $this->Tag->getInfo();
 		$this->set(compact('tag', 'info'));
+	}
+
+/**
+ * search method
+ *
+ * @return void
+ */
+	public function search() {
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Tag->parseCriteria($this->Prg->parsedParams());
+		$tags                         = $this->paginate();
+		$info                         = $this->Tag->getInfo();
+		$this->set(compact('tags', 'info'));
 	}
 
 }
