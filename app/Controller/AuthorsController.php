@@ -8,6 +8,12 @@ App::uses('AppController', 'Controller');
 class AuthorsController extends AppController {
 
 /**
+ * CakeDC Search
+ */
+	public $components = array('Search.Prg');
+	public $presetVars = true;
+
+/**
  * index method
  *
  * @return void
@@ -50,6 +56,19 @@ class AuthorsController extends AppController {
 		$series = $relatedSeries;
 
 		$this->set(compact('author', 'info', 'series'));
+	}
+
+/**
+ * search method
+ *
+ * @return void
+ */
+	public function search() {
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Author->parseCriteria($this->Prg->parsedParams());
+		$authors                      = $this->paginate();
+		$info                         = $this->Author->getInfo();
+		$this->set(compact('authors', 'info'));
 	}
 
 }

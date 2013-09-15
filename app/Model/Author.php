@@ -14,6 +14,15 @@ class Author extends AppModel {
 	public $displayField = 'name';
 
 /**
+ * Behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'Search.Searchable',
+	);
+
+/**
  * Default order
  *
  * @var string
@@ -33,6 +42,15 @@ class Author extends AppModel {
 			'associationForeignKey' => 'book',
 			'unique'                => true
 		)
+	);
+
+/**
+ * filterArgs for Search
+ *
+ * @var array
+ */
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('Author.name', 'Author.sort'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
 }
