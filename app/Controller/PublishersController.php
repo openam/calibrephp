@@ -8,6 +8,12 @@ App::uses('AppController', 'Controller');
 class PublishersController extends AppController {
 
 /**
+ * CakeDC Search
+ */
+	public $components = array('Search.Prg');
+	public $presetVars = true;
+
+/**
  * index method
  *
  * @return void
@@ -41,6 +47,19 @@ class PublishersController extends AppController {
 		$publisher = $this->Publisher->find('first', $options);
 		$info      = $this->Publisher->getInfo();
 		$this->set(compact('publisher', 'info'));
+	}
+
+/**
+ * search method
+ *
+ * @return void
+ */
+	public function search() {
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Publisher->parseCriteria($this->Prg->parsedParams());
+		$publishers                   = $this->paginate();
+		$info                         = $this->Publisher->getInfo();
+		$this->set(compact('publishers', 'info'));
 	}
 
 }
