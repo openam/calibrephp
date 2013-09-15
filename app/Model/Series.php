@@ -14,6 +14,15 @@ class Series extends AppModel {
 	public $displayField = 'name';
 
 /**
+ * Behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'Search.Searchable',
+	);
+
+/**
  * Default order
  *
  * @var string
@@ -34,6 +43,15 @@ class Series extends AppModel {
 			'unique'                => true,
 			'order'                 => array('Book.series_index' => 'ASC')
 		)
+	);
+
+/**
+ * filterArgs for Search
+ *
+ * @var array
+ */
+	public $filterArgs = array(
+		'search' => array('type' => 'like', 'field' => array('Series.name', 'Series.sort'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
 }

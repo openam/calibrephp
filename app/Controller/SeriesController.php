@@ -8,6 +8,12 @@ App::uses('AppController', 'Controller');
 class SeriesController extends AppController {
 
 /**
+ * CakeDC Search
+ */
+	public $components = array('Search.Prg');
+	public $presetVars = true;
+
+/**
  * index method
  *
  * @return void
@@ -40,6 +46,19 @@ class SeriesController extends AppController {
 
 		$series = $this->Series->find('first', $options);
 		$info   = $this->Series->getInfo();
+		$this->set(compact('series', 'info'));
+	}
+
+/**
+ * search method
+ *
+ * @return void
+ */
+	public function search() {
+		$this->Prg->commonProcess();
+		$this->paginate['conditions'] = $this->Series->parseCriteria($this->Prg->parsedParams());
+		$series                       = $this->paginate();
+		$info                         = $this->Series->getInfo();
 		$this->set(compact('series', 'info'));
 	}
 
