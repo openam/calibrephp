@@ -1,10 +1,6 @@
 <?php
 $config = array(
 	'Settings' => array(
-		'Default' => array(
-			// This should reflect path in the database.php file
-			'CalibrePath' => '/path/to/calibre_library/',
-		),
 		'share' => array(
 			'example@kindle.com'  => 'awz,mobi,epub',
 			'example2@kindle.com' => 'awz,mobi',

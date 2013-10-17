@@ -43,11 +43,29 @@ class ImageHelper extends AppHelper {
 	);
 
 /**
+ * CalibrePath
+ *
+ * @var string
+ */
+	private $calibrePath = '';
+
+/**
+ * __construct method
+ */
+	public function __construct(View $view, $settings = array()) {
+		parent::__construct($view, $settings);
+
+		App::import("Model", 'Book');
+		$Book = new Book();
+		$this->calibrePath = $Book->getCalibrePath();
+	}
+
+/**
  * getCalibrePath method
  * @return string with path to calibre location
  */
 	public function getCalibrePath() {
-		return Configure::read('Settings.Default.CalibrePath') . "/";
+		return $this->calibrePath;
 	}
 
 /**

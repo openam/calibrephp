@@ -38,7 +38,8 @@ class AppModel extends Model {
  * @return string with path to calibre location
  */
 	public function getCalibrePath() {
-		return Configure::read('Settings.Default.CalibrePath');
+		$databasePath = $this->getCalibreDatabasePath();
+		return preg_replace('/metadata.db/', '', $databasePath);
 	}
 
 /**
@@ -46,7 +47,7 @@ class AppModel extends Model {
  * @return string with path to database
  */
 	public function getCalibreDatabasePath() {
-		return $this->getCalibrePath() . 'metadata.db';
+		return $this->getDataSource('Default')->config['database'];
 	}
 
 /**
