@@ -165,7 +165,7 @@
 				echo __d('cake_dev', 'Imagemagick is installed.<br/>' . $this->Text->autoLinkUrls($out[0]));
 			echo '</div>';
 		} else {
-			echo '<div class="alert">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'Imagemagick is not installed. You need to install it to get image conversion to work. On a debian based system use <em>`sudo apt-get install imagemagick`</em>.');
 			echo '</div>';
 
