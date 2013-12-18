@@ -1,185 +1,295 @@
 <?php
 /**
- * function by Wes Edling .. http://joedesigns.com
- * feel free to use this in any project, i just ask for a credit in the source code.
- * a link back to my site would be nice too.
+ * Resize Class
  *
- * Changes:
- * 2012/01/30 - David Goodwin - call escapeshellarg on parameters going into the shell
- * 2012/07/12 - Whizzzkid - Added support for encoded image urls and images on ssl secured servers [https://]
- * 2012/07/12 - Whizzzkid - Code Cleaning...
- * 2012/07/28 - Whizzzkid - Added Compression Support upto 97% file size reduction achieved. Lots of code cleaned!
+ * mainly from http://net.tutsplus.com/tutorials/php/image-resizing-made-easy-with-php/
  */
+Class resize {
+
 /**
- * SECURITY:
- * It's a bad idea to allow user supplied data to become the path for the image you wish to retrieve, as this allows them
- * to download nearly anything to your server. If you must do this, it's strongly advised that you put a .htaccess file
- * in the cache directory containing something like the following :
- * <code>php_flag engine off</code>
- * to at least stop arbitrary code execution. You can deal with any copyright infringement issues yourself :)
+ * class variables
  */
+	private $image;
+    private $width;
+    private $height;
+	private $imageResized;
+
 /**
- * @param string $imagePath - either a local absolute/relative path, or a remote URL (e.g. http://...flickr.com/.../ ). See SECURITY note above.
- * @param array $opts  (w(pixels), h(pixels), crop(boolean), scale(boolean), thumbnail(boolean), maxOnly(boolean), canvas-color(#abcabc), output-filename(string), cache_http_minutes(int))
- * @return new URL for resized image.
+ * __construct method
+ *
+ * @param string $fileName
  */
-function resize($imagePath,$opts=array()){
-	if (!$opts || empty($opts)) {
-		return($imagePath);
+	function __construct($fileName) {
+		$this->image = $this->openImage($fileName);
+
+	    $this->width        = imagesx($this->image);
+	    $this->height       = imagesy($this->image);
+	    $this->originalPath = $fileName;
+	    $this->baseOutName  = md5_file($fileName);
 	}
 
-	$imagePath = urldecode($imagePath);
+/**
+ * openImage
+ *
+ * @param string $file path to the file
+ * @return image object
+ */
+	private function openImage($file) {
+		// *** Get extension
+		$extension = strtolower(strrchr($file, '.'));
 
-	// start configuration........
-	$cacheFolder = 'cache/';							//path to your cache folder, must be writeable by web server
-	$remoteFolder = $cacheFolder.'remote/';				//path to the folder you wish to download remote images into
+		switch($extension)
+		{
+			case '.jpg':
+			case '.jpeg':
+				$img = @imagecreatefromjpeg($file);
+				break;
+			case '.gif':
+				$img = @imagecreatefromgif($file);
+				break;
+			case '.png':
+				$img = @imagecreatefrompng($file);
+				break;
+			default:
+				$img = false;
+				break;
+		}
+		return $img;
+	}
 
-	//setting script defaults
-	$defaults['crop']				= false;
-	$defaults['scale']				= false;
-	$defaults['thumbnail']			= false;
-	$defaults['maxOnly']			= false;
-	$defaults['canvas-color']		= 'transparent';
-	$defaults['output-filename']	= false;
-	$defaults['cacheFolder']		= $cacheFolder;
-	$defaults['remoteFolder']		= $remoteFolder;
-	$defaults['quality'] 			= 80;
-	$defaults['cache_http_minutes']	= 1;
-	$defaults['compress']			= false;			//will convert to lossy jpeg for conversion...
-	$defaults['compression']		= 40;				//[1-99]higher the value, better the compression, more the time, lower the quality (lossy)
+/**
+ * resizeImage
+ *
+ * @param array $options
+ * @return string new path
+ */
+	public function resizeImage($options = array()) {
 
-	$opts = array_merge($defaults, $opts);
-	$path_to_convert = 'convert';						//this could be something like /usr/bin/convert or /opt/local/share/bin/convert
-	// configuration ends...
+		$defaults = array(
+			'h'       => '',
+			'w'       => '',
+			'quality' => 80,
+			'type'    => 'auto'
+		);
 
-	//processing begins
-	$cacheFolder = $opts['cacheFolder'];
-	$remoteFolder = $opts['remoteFolder'];
-	$purl = parse_url($imagePath);
-	$finfo = pathinfo($imagePath);
-	$ext = $finfo['extension'];
-	// check for remote image..
-	if(isset($purl['scheme']) && ($purl['scheme'] == 'http' || $purl['scheme'] == 'https')){
-	// grab the image, and cache it so we have something to work with..
-		list($filename) = explode('?',$finfo['basename']);
-		$local_filepath = $remoteFolder.$filename;
-		$download_image = true;
-		if(file_exists($local_filepath)){
-			if(filemtime($local_filepath) < strtotime('+'.$opts['cache_http_minutes'].' minutes')){
-				$download_image = false;
+		$options = array_merge($defaults, $options);
+
+		// *** Get optimal width and height - based on $option
+		$this->getDimensions($options['w'], $options['h'], $options['type']);
+
+		$this->newWebPath  = 'cache' . DS . $this->baseOutName . "_w{$options['w']}_h{$options['h']}_sc.jpg";
+		$this->newFullPath = WWW_ROOT . $this->newWebPath;
+
+		$create = true;
+		if (file_exists($this->newFullPath)) {
+			$create       = false;
+			$origFileTime = date("YmdHis",filemtime($this->originalPath));
+			$newFileTime  = date("YmdHis",filemtime($this->newFullPath));
+
+			if ($newFileTime < $origFileTime) {
+				$create = true;
 			}
 		}
-		if($download_image){
-			file_put_contents($local_filepath,file_get_contents($imagePath));
+
+		if ($create) {
+			// create image of size x, y
+			$this->imageResized = imagecreatetruecolor($this->optimalWidth, $this->optimalHeight);
+			imagecopyresampled($this->imageResized, $this->image, 0, 0, 0, 0, $this->optimalWidth, $this->optimalHeight, $this->width, $this->height);
+
+			$this->saveImage($this->newFullPath, 100);
 		}
-		$imagePath = $local_filepath;
+
+		return $this->newWebPath;
 	}
-	if(!file_exists($imagePath)){
-		$imagePath = $_SERVER['DOCUMENT_ROOT'].$imagePath;
-		if(!file_exists($imagePath)){
-			return 'image not found';
+
+/**
+ * getDimensions
+ *
+ * @param integer $newWidth
+ * @param integer $newHeight
+ * @param string $option resize type, e.g. exact, portrait, landscape, auto, crop
+ * @return void
+ */
+	private function getDimensions($newWidth, $newHeight, $option) {
+
+	   switch ($option) {
+			case 'exact':
+				$optimalWidth  = $newWidth;
+				$optimalHeight = $newHeight;
+				break;
+			case 'portrait':
+				$optimalWidth  = $this->getSizeByFixedHeight($newHeight);
+				$optimalHeight = $newHeight;
+				break;
+			case 'landscape':
+				$optimalWidth  = $newWidth;
+				$optimalHeight = $this->getSizeByFixedWidth($newWidth);
+				break;
+			case 'auto':
+				$optionArray   = $this->getSizeByAuto($newWidth, $newHeight);
+				$optimalWidth  = $optionArray['optimalWidth'];
+				$optimalHeight = $optionArray['optimalHeight'];
+				break;
+			case 'crop':
+				$optionArray   = $this->getOptimalCrop($newWidth, $newHeight);
+				$optimalWidth  = $optionArray['optimalWidth'];
+				$optimalHeight = $optionArray['optimalHeight'];
+				break;
 		}
+
+		$this->optimalWidth  = round($optimalWidth);
+		$this->optimalHeight = round($optimalHeight);
 	}
-	if(isset($opts['w'])){ $w = $opts['w']; };
-	if(isset($opts['h'])){ $h = $opts['h']; };
-	$filename = md5_file($imagePath);
-	// If the user has requested an explicit output-filename, do not use the cache directory.
-	if($opts['output-filename']){
-		$newPath = $opts['output-filename'];
-	}else{
-        if(!empty($w) and !empty($h)){
-            $newPath = $cacheFolder.$filename.'_w'.$w.'_h'.$h.($opts['crop'] == true ? "_cp" : "").($opts['scale'] == true ? "_sc" : "");
-        }else if(!empty($w)){
-            $newPath = $cacheFolder.$filename.'_w'.$w;
-        }else if(!empty($h)){
-            $newPath = $cacheFolder.$filename.'_h'.$h;
-        }else{
-            return false;
-        }
-		if($opts['compress']){
-			if($opts['compression'] == $defaults['compression']){
-				$newPath .= '_comp.'.$ext;
-			}else{
-				$newPath .= '_comp_'.$opts['compression'].'.'.$ext;
+
+
+/**
+ * getSizeByFixedHeight
+ *
+ * @param integer $newHeight
+ * @return integer
+ */
+	private function getSizeByFixedHeight($newHeight) {
+		$ratio    = $this->width / $this->height;
+		$newWidth = $newHeight * $ratio;
+		return $newWidth;
+	}
+
+/**
+ * getSizeByFixedWidth
+ *
+ * @param integer $newWidth
+ * @return integer
+ */
+	private function getSizeByFixedWidth($newWidth) {
+		$ratio     = $this->height / $this->width;
+		$newHeight = $newWidth * $ratio;
+		return $newHeight;
+	}
+
+/**
+ * getSizeByAuto
+ *
+ * @param integer $newWidth
+ * @param integer $newHeight
+ * @return array with 'optimalWidth' and 'optimalHeight'
+ */
+	private function getSizeByAuto($newWidth, $newHeight) {
+		if ($this->height < $this->width) {
+		// *** Image to be resized is wider (landscape)
+			$optimalWidth  = $newWidth;
+			$optimalHeight = $this->getSizeByFixedWidth($newWidth);
+		} elseif ($this->height > $this->width) {
+		// *** Image to be resized is taller (portrait)
+			$optimalWidth = $this->getSizeByFixedHeight($newHeight);
+			$optimalHeight= $newHeight;
+		} else {
+		// *** Image to be resizerd is a square
+			if ($newHeight < $newWidth) {
+				$optimalWidth  = $newWidth;
+				$optimalHeight = $this->getSizeByFixedWidth($newWidth);
+			} else if ($newHeight > $newWidth) {
+				$optimalWidth  = $this->getSizeByFixedHeight($newHeight);
+				$optimalHeight = $newHeight;
+			} else {
+				// *** Sqaure being resized to a square
+				$optimalWidth  = $newWidth;
+				$optimalHeight = $newHeight;
 			}
-		}else{
-			$newPath .= '.'.$ext;
 		}
+
+		return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
 	}
-	$create = true;
-    if(file_exists($newPath)){
-        $create = false;
-        $origFileTime = date("YmdHis",filemtime($imagePath));
-        $newFileTime = date("YmdHis",filemtime($newPath));
-        if($newFileTime < $origFileTime){					# Not using $opts['expire-time'] ??
-            $create = true;
-        }
-    }
-	if($create){
-		if(!empty($w) && !empty($h)){
-			list($width,$height) = getimagesize($imagePath);
-			$resize = $w;
-			if($width > $height){
-				$ww = $w;
-				$hh = round(($height/$width) * $ww);
-				$resize = $w;
-				if($opts['crop']){
-					$resize = "x".$h;
+
+/**
+ * getOptimalCrop
+ *
+ * @param integer $newWidth
+ * @param integer $newHeight
+ * @return array with 'optimalWidth' and 'optimalHeigh'
+ */
+	private function getOptimalCrop($newWidth, $newHeight) {
+
+		$heightRatio = $this->height / $newHeight;
+		$widthRatio  = $this->width /  $newWidth;
+
+		if ($heightRatio < $widthRatio) {
+			$optimalRatio = $heightRatio;
+		} else {
+			$optimalRatio = $widthRatio;
+		}
+
+		$optimalHeight = $this->height / $optimalRatio;
+		$optimalWidth  = $this->width  / $optimalRatio;
+
+		return array('optimalWidth' => $optimalWidth, 'optimalHeight' => $optimalHeight);
+	}
+
+/**
+ * crop
+ *
+ * @param integer $optimalWidth
+ * @param integer $optimalHeight
+ * @param integer $newWidth
+ * @param integer $newHeight
+ * @return void
+ */
+	private function crop($optimalWidth, $optimalHeight, $newWidth, $newHeight) {
+		// *** Find center - this will be used for the crop
+		$cropStartX = ( $optimalWidth / 2) - ( $newWidth /2 );
+		$cropStartY = ( $optimalHeight/ 2) - ( $newHeight/2 );
+
+		$crop = $this->imageResized;
+		//imagedestroy($this->imageResized);
+
+		// *** Now crop from center to exact requested size
+		$this->imageResized = imagecreatetruecolor($newWidth , $newHeight);
+		imagecopyresampled($this->imageResized, $crop , 0, 0, $cropStartX, $cropStartY, $newWidth, $newHeight , $newWidth, $newHeight);
+	}
+
+/**
+ * saveImage
+ *
+ * @param string $savePath
+ * @param string $imageQuality
+ * @return void
+ */
+	public function saveImage($savePath, $imageQuality="100") {
+		// *** Get extension
+		$extension = strrchr($savePath, '.');
+			$extension = strtolower($extension);
+
+		switch($extension) {
+			case '.jpg':
+			case '.jpeg':
+				if (imagetypes() & IMG_JPG) {
+					imagejpeg($this->imageResized, $savePath, $imageQuality);
 				}
-			}else{
-				$hh = $h;
-				$ww = round(($width/$height) * $hh);
-				$resize = "x".$h;
-				if($opts['crop']){
-					$resize = $w;
+				break;
+
+			case '.gif':
+				if (imagetypes() & IMG_GIF) {
+					imagegif($this->imageResized, $savePath);
 				}
-			}
-			if($opts['scale']){
-				$cmd = $path_to_convert." ".escapeshellarg($imagePath)." -resize ".escapeshellarg($resize)." -quality ". escapeshellarg($opts['quality'])." " .escapeshellarg($newPath);
-			}else if($opts['canvas-color'] == 'transparent' && !$opts['crop'] && !$opts['scale']){
-				$cmd = $path_to_convert." ".escapeshellarg($imagePath)." -resize ".escapeshellarg($resize)." -size ".escapeshellarg($ww ."x". $hh)." xc:". escapeshellarg($opts['canvas-color'])." +swap -gravity center -composite -quality ".escapeshellarg($opts['quality'])." ".escapeshellarg($newPath);
-			}else{
-				$cmd = $path_to_convert." ".escapeshellarg($imagePath)." -resize ".escapeshellarg($resize)." -size ".escapeshellarg($w ."x". $h)." xc:". escapeshellarg($opts['canvas-color'])." +swap -gravity center -composite -quality ".escapeshellarg($opts['quality'])." ".escapeshellarg($newPath);
-			}
-		}else{
-			$cmd = $path_to_convert." " . escapeshellarg($imagePath).
-			" -thumbnail ".(!empty($h) ? 'x':'').$w." ".($opts['maxOnly'] == true ? "\>" : "")." -quality ".escapeshellarg($opts['quality'])." ".escapeshellarg($newPath);
-		}
-		$c = exec($cmd, $output, $return_code);
-        if($return_code != 0) {
-            error_log("Tried to execute : $cmd, return code: $return_code, output: " . print_r($output, true));
-            return false;
-		}
-		if($opts['compress']){
-			$size = getimagesize($newPath);
-			$mime = $size['mime'];
-			if($mime == 'image/png' || $mime == 3){
-				$picture = imagecreatefrompng($newPath);
-			}else if($mime == 'image/jpeg' || $mime == 2){
-				$picture = imagecreatefromjpeg($newPath);
-			}else if($mime == 'image/gif' || $mime == 1){
-				$picture = imagecreatefromgif($newPath);
-			}else{
-				error_log("I do not support this format for now. Mime - $mime ", 0);
-			}
-			if(isset($picture)){
-				$newP_arr = explode(".",$newPath);
-				$newestPath = $newP_arr[0].".jpg";
-				$qc = 100 - $opts['compression'];
-				$status = imagejpeg($picture,"$newestPath",$qc);
-				if($status){
-					unlink($newPath);
-					$newPath = $newestPath;
-				}else{
-					@unlink($newestPath);
-					error_log("I failed to compress the image in jpeg format.", 0);
+				break;
+
+			case '.png':
+				// *** Scale quality from 0-100 to 0-9
+				$scaleQuality = round(($imageQuality/100) * 9);
+
+				// *** Invert quality setting as 0 is best, not 9
+				$invertScaleQuality = 9 - $scaleQuality;
+
+				if (imagetypes() & IMG_PNG) {
+					 imagepng($this->imageResized, $savePath, $invertScaleQuality);
 				}
-				imagedestroy($picture);
-			}else{
-				error_log("Failed To extract picture data", 0);
-			}
+				break;
+
+			default:
+				// *** No extension - No save.
+				break;
 		}
+
+		imagedestroy($this->imageResized);
 	}
-	// return cache file path
-	return str_replace($_SERVER['DOCUMENT_ROOT'],'',$newPath);
+
 }

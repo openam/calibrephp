@@ -147,28 +147,17 @@
 		}
 
 	/**
-	 * Imagemagick
+	 * GD image library
 	 */
-		function alist ($array) {  //This function prints a text array as an html list.
-		  $alist = "<ul>";
-		  for ($i = 0; $i < sizeof($array); $i++) {
-		    $alist .= "<li>$array[$i]";
-		  }
-		  $alist .= "</ul>";
-		  return $alist;
-		}
-
-		exec("convert -version", $out, $rcode); //Try to get ImageMagick "convert" program version number.
-
-		if ($rcode == 0) {
+		if (extension_loaded('gd') && function_exists('gd_info')) {
 			echo '<div class="alert alert-success">';
-				echo __d('cake_dev', 'Imagemagick is installed.<br/>' . $this->Text->autoLinkUrls($out[0]));
+				$info = gd_info();
+				echo __d('cake_dev', 'GD Version: ' . $info['GD Version'] . ' is installed.');
 			echo '</div>';
 		} else {
 			echo '<div class="alert">';
-				echo __d('cake_dev', 'Imagemagick is not installed. You need to install it to get image conversion to work. On a debian based system use <em>`sudo apt-get install imagemagick`</em>.');
+				echo __d('cake_dev', 'GD image library is not installed. You need to install it to get image conversion to work.');
 			echo '</div>';
-
 		}
 
 	/**

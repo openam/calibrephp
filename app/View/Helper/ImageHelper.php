@@ -21,24 +21,24 @@ class ImageHelper extends AppHelper {
  */
 	public $resizeSettings = array(
 		'index' => array(
-			'w'     => 100,
-			'h'     => 143,
-			'scale' => true
+			'w'    => 100,
+			'h'    => 143,
+			'type' => 'auto',
 		),
 		'view' => array(
-			'w'     => 300,
-			'h'     => 300,
-			'scale' => true
+			'w'    => 300,
+			'h'    => 300,
+			'type' => 'auto',
 		),
 		'opds' => array(
-			'w'     => 210,
-			'h'     => 300,
-			'scale' => true
+			'w'    => 210,
+			'h'    => 300,
+			'type' => 'auto',
 		),
 		'fancybox' => array(
-			'w'     => 500,
-			'h'     => 500,
-			'scale' => true
+			'w'    => 500,
+			'h'    => 500,
+			'type' => 'auto',
 		)
 	);
 
@@ -84,15 +84,13 @@ class ImageHelper extends AppHelper {
 			$resizeSettings = $this->resizeSettings[$resizeSettings];
 		}
 
-		$imagePath = $this->getCalibrePath() . $bookPath . '/cover.jpg';
-		$resizePath = resize($imagePath, $resizeSettings);
+		$imagePath  = $this->getCalibrePath() . $bookPath . '/cover.jpg';
+		$resizeImg  = new resize($imagePath);
+		$resizePath = $resizeImg->resizeImage($resizeSettings);
 
-		if($resizePath && $resizePath != "image not found")
-		{
-			return $this->Html->url('/' . resize($imagePath, $resizeSettings), $fullUrl);
-		}
-		else
-		{
+		if($resizePath && $resizePath != "image not found") {
+			return $this->Html->url('/' . $resizePath, $fullUrl);
+		} else {
 			return null;
 		}
 	}
