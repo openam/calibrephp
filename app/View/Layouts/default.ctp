@@ -32,6 +32,7 @@
 				<!-- <div class="row"> -->
 					<!-- <div class="col col-lg-12"> -->
 						<?php echo $this->element('Layout/content'); ?>
+						<?php echo $this->element('debug'); ?>
 					<!-- </div> -->
 				<!-- </div> -->
 			</div>
