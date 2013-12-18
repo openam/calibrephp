@@ -215,10 +215,10 @@ class ImageHelper extends AppHelper {
 				$string .= $this->thumbnail($book['path'], $options['thumbnail']);
 				$string .= '</a>';
 			} else {
-				$string .= '<span class="img-rounded pull-left cover">No Cover</span>';
+				$string .= '<span class="missing cover">No Cover</span>';
 			}
 		} else {
-			$string .= '<span class="img-rounded pull-left cover">No Cover</span>';
+			$string .= '<span class="missing cover">No Cover</span>';
 		}
 
 		return $string;

@@ -74,6 +74,9 @@ $baseBorderRadius : 5px;
 		display: inline-block;
 		float: none;
 	}
+	.missing {
+		display: none;
+	}
 }
 
 @media (max-width: 768px) {
@@ -114,14 +117,14 @@ $baseBorderRadius : 5px;
 		}
 	}
 
-	span.img-rounded {
+	span.missing.cover {
 		background-color: $wellBackground;
 		border: 1px solid darken($wellBackground, 7%);
 		@include box-shadow(inset 0 1px 1px rgba(0,0,0,.05));
+		width: $coverWidth;
 		line-height: $coverWidth * 10 / 7;
 		text-align: center;
 	}
-
 }
 
 .index {
