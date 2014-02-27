@@ -17,7 +17,7 @@
 			echo $this->fetch('css');
 
 			echo $this->Html->script(array(
-				'http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
+				'//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
 				'//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js',
 				'jquery.fancybox.pack',
 				'share',
