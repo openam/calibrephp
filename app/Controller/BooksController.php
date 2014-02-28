@@ -74,19 +74,19 @@ class BooksController extends AppController {
 		}
 
 		$ebookMimeTypes = Configure::read('Settings.ebooks.mimeTypes');
+		$this->response->header(array(
+			"Content-type: " . $ebookMimeTypes[$extension]
+		));
+		$this->response->file(
+			$this->Book->getCalibrePath() . $book['Book']['path'] . DS . $fileName . '.' . $extension,
+			array(
+				'download' => true,
+				'name' => "$fileName.$extension",
+			)
 
-		$this->viewClass = 'Media';
-		$params = array(
-			'id'        => $fileName . '.' .$extension,
-			'name'      => $fileName,
-			'extension' => $extension,
-			'download'  => true,
-			'mimeType'  => array(
-				$extension => $ebookMimeTypes[$extension]
-			),
-			'path'      => $this->Book->getCalibrePath() . $book['Book']['path'] . DS
 		);
-		$this->set($params);
+		// Return response object to prevent controller from trying to render a view
+		return $this->response;
 	}
 
 /**
