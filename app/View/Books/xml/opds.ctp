@@ -17,12 +17,21 @@
 	));
 
 	$feed = $this->Opds->addEntry($feed, array(
+		'link'    => $this->Html->url(array('controller'=>'books', 'action'=>'index.xml'), false),
+		'title'   => 'By Title',
+		'updated' => $info['books']['summary']['updated'],
+		'id'      => 'calbire:books',
+		'content' => 'books sorted by ' . $this->Txt->numberToWords($info['books']['summary']['count'], true) . ' titles',
+	));
+
+	$feed = $this->Opds->addEntry($feed, array(
 		'link'    => $this->Html->url(array('controller'=>'authors', 'action'=>'index.xml'), false),
 		'title'   => 'By Author',
 		'updated' => $info['authors']['summary']['updated'],
 		'id'      => 'calbire:authors',
 		'content' => 'books sorted by ' . $this->Txt->numberToWords($info['authors']['summary']['count'], true) . ' authors',
 	));
+
 
 	$feed = $this->Opds->addEntry($feed, array(
 		'link'    => $this->Html->url(array('controller'=>'publishers', 'action'=>'index.xml'), false),
