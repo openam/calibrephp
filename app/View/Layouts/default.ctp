@@ -7,18 +7,18 @@
 			echo $this->Html->meta('description', 'Calibre Web Server');
 			echo $this->Html->meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0'));
 			echo $this->Html->meta(array('name' => 'author', 'content' => 'Michael Tuttle'));
-			echo $this->Html->meta('favicon.ico', 'http://calibre-ebook.com/favicon.ico', array('type' => 'icon'));
+			echo $this->Html->meta('favicon.ico', '/favicon.ico', array('type' => 'icon'));
 			echo $this->fetch('meta');
 
 			echo $this->Html->css(array(
 				'stylesheets/bootstrap',
-				'//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css',
+				'font/font-awesome.css',
 			));
 			echo $this->fetch('css');
 
 			echo $this->Html->script(array(
-				'//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js',
-				'//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js',
+				'jquery.min.js',
+				'bootstrap.min.js',
 				'jquery.fancybox.pack',
 				'share',
 			));
