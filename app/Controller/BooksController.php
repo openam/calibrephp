@@ -89,6 +89,58 @@ class BooksController extends AppController {
 		return $this->response;
 	}
 
+    /**
+     * Read book method.
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @param string $extension
+     * @return void
+     */
+    public function read($id = null, $extension = null) {
+        if (!$this->Book->exists($id)) {
+            throw new NotFoundException(__('Invalid book'));
+        }
+        if (!$extension) {
+            throw new NotFoundException(__('Invalid extension'));
+        }
+        $extension = strtolower($extension);
+
+        $options = array(
+            'conditions' => array('Book.' . $this->Book->primaryKey => $id),
+            'recursive'  => 1,
+        );
+
+        $book = $this->Book->find('first', $options);
+
+        $fileName = '';
+        foreach ($book['Datum'] as $file) {
+            if ($file['format'] == strtoupper($extension)) {
+                $fileName = $file['name'];
+            }
+        }
+        if (!$fileName) {
+            throw new NotFoundException(__('Invalid file name or extension'));
+        }
+
+        $book['File'] = array(
+            'file_name' => $fileName,
+            'file_path' => $book['Book']['path'] . DS . $fileName . '.' . $extension,
+            'extension' => $extension
+        );
+
+        $bookReader = new BookReader\Reader($this->Book->getCalibrePath() . $book['File']['file_path']);
+
+        $this->autoRender = false;
+        $this->layout = false;
+        $this->set(array(
+            'book' => $book,
+            'reader' => $bookReader->read($this->request)
+        ));
+
+        $this->render('/Books/read');
+    }
+
 /**
  * search method
  *

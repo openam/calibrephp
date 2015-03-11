@@ -1,0 +1,197 @@
+/*===========================================================================
+
+This is a base-level Monocle stylesheet. It assumes no class-prefix has been
+given to the Reader during initialisation - if one has, you can copy and
+modify this stylesheet accordingly.
+
+---------------------------------------------------------------------------*/
+
+/* The reader object that holds pretty much everything.
+ * (A direct child of the element passed to reader initialisation). */
+
+div.monelem_container {
+  background-color: black;
+}
+
+
+/* The div that mimics a leaf of paper in a book. */
+div.monelem_page {
+  background: white;
+  top: 0;
+  left: 0;
+  bottom: 3px;
+  right: 5px;
+  border-right: 1px solid #999;
+}
+
+
+/* The div within the page that determines page margins. */
+div.monelem_sheaf {
+  top: 1em;
+  left: 1em;
+  bottom: 1em;
+  right: 1em;
+}
+
+
+/* The iframe within the page that loads the content of the book. */
+div.monelem_component {
+}
+
+
+/* A panel that sits above the entire reader object, holding controls. */
+div.monelem_overlay {
+}
+
+
+/* A full-size panel to display an announcement (iframe or div) */
+div.monelem_billboard_container {
+  background: #FFF;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 2000;
+  -webkit-transform: scale(0);
+  -moz-transform: scale(0);
+  transform: scale(0);
+  -webkit-transform-origin: -0 -0;
+  -moz-transform-origin: -0 -0;
+  transform-origin: -0 -0;
+}
+
+.monelem_billboard_inner {
+  height: 100%;
+  width: 100%;
+  border: none;
+  overflow: auto;
+  /*-webkit-overflow-scrolling: touch;*/ /* This is sexy, but crashy. */
+}
+
+div.monelem_billboard_inner {
+  min-width: 100%;
+  min-height: 100%;
+  text-align: center;
+  vertical-align: middle;
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -webkit-box-align: center;
+}
+
+
+div.monelem_billboard_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 30px;
+  color: white;
+  background: #C00;
+  cursor: pointer;
+  border-bottom-left-radius: 4px;
+  text-shadow: 1px 1px 1px #900;
+  font: 9pt Helvetica Neue, Helvetica, sans-serif;
+}
+
+div.monelem_billboard_close:after {
+  display: block;
+  content: 'Close';
+  width: 100%;
+  line-height: 30px;
+  text-align: center;
+}
+
+div.monelem_book_fatality {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+  margin: 0 auto;
+  max-width: 75%;
+}
+
+div.monelem_book_fatality p {
+  line-height: 1.4;
+}
+
+
+/*===========================================================================
+  PANELS
+---------------------------------------------------------------------------*/
+
+
+.monelem_panels_imode_panel {
+  background: rgba(255,255,255,0.7);
+  opacity: 0;
+}
+
+.monelem_panels_imode_backwardsPanel {
+  -webkit-box-shadow: 1px 1px 3px #777;
+  -moz-box-shadow: 1px 1px 3px #777;
+  box-shadow: 1px 1px 3px #777;
+}
+
+.monelem_panels_imode_forwardsPanel {
+  -webkit-box-shadow: -1px 1px 3px #777;
+  -moz-box-shadow: -1px 1px 3px #777;
+  box-shadow: -1px 1px 3px #777;
+}
+
+.monelem_panels_imode_centralPanel {
+}
+
+.monelem_panels_imode_toggleIcon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+/* If you modify this you could significantly change the way panels work. */
+div.monelem_controls_panel_expanded {
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 1001 !important;
+}
+
+/*===========================================================================
+  Flippers
+---------------------------------------------------------------------------*/
+
+div.monelem_flippers_slider_wait {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 92px;
+  height: 112px;
+  background-repeat: no-repeat;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  background-size: 100%;
+  background-image: -webkit-linear-gradient(22deg, transparent 66%, rgba(0,0,0,0.04) 69%, rgba(0,0,0,0.09) 78%, rgba(0,0,0,0.06) 80%, transparent 87%);
+  background-image: -moz-linear-gradient(22deg, transparent 66%, rgba(0,0,0,0.04) 69%, rgba(0,0,0,0.09) 78%, rgba(0,0,0,0.06) 80%, transparent 87%);
+  background-image: linear-gradient(-292deg, transparent 66%, rgba(0,0,0,0.04) 69%, rgba(0,0,0,0.09) 78%, rgba(0,0,0,0.06) 80%, transparent 87%);
+  -webkit-transition: opacity 100ms linear;
+  -moz-transition: opacity 100ms linear;
+  transition: opacity 100ms linear;
+}
+
+@media screen and (max-width: 640px) {
+  div.monelem_flippers_slider_wait {
+    width: 61px;
+    height: 75px;
+  }
+}
+
+
+/*===========================================================================
+  DATA URIs
+
+  These are data-uri packed images, inlined for loading speed and simplicity.
+  Placed at the end of this file because they're visually noisy...
+---------------------------------------------------------------------------*/
+
+div.monelem_panels_imode_toggleIcon {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB8AAAAaCAYAAABPY4eKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1%2B%2FAAAABV0RVh0Q3JlYXRpb24gVGltZQAzMC82LzEwBMfmVwAAABx0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzIENTNXG14zYAAANYSURBVEiJtdZbiNVVFMfxj8cx85JkIGlqSESgOGA9WIQgGmTRUyRaYFJDnUWYGV2eyiCpkIbEKJI1UqYvUkmFDxFBgpghonajSDCM7hcxLSnt4ulh%2F2c4HufMTOH8Xs75%2F%2Ffa67v3%2Bu%2B91hphGJWZNUzCXJyKiHd6xxqNhhGDTB6NOViAyzARY3EaP%2BNL7MCBiPi9Ze4leBlTsR9jcCnuiYgDbeGZeV4F7EINe7EP3%2BJ49W4GrsZ8NPAGXouIk5k5F93YFhHPVT5H4kbcjaX1ev3kWfDMPB9P4ko8ERE7BopONWcOVmMc1uBRrG8Oc5Ptq1hdr9cPdrQMTMUWfBQRCweD9ioiPsQtmbkeu7G8P3ClsZSI98EzcxqeUsLXM1RwZs7ErRiJKXgQN2Tmzoj4qsV2Hn7BYcq369UaHIqI5yPizyGCx2MPfsRVOBoR6%2FA%2BNmXmqCbbm%2FAiMiJO9cEzcwEuwLODwMZk5oXVLYA6PouIF%2FC6cvBgI37D0mreStyJroh4r9df785XYGtEHG8Hfnjb1w08Xu2qq3regtOZuaka2whV5NZieWY%2BhkV4ICJ2N%2FusZeYMJQm8NdCuuxdPH4HENGzsXjx9REQcqRxvR2dEfNBrHxF7lHywGPXW7085cEvwZkScHAheaRz%2BwngcqyAnlEPan%2Fbh5oj4rr%2FBDlyOXUMA%2Fx%2F9oFytM5SZs3t6epbWlOtxeJjg%2BzEmMye3vF%2BCYx2YhdFnTTs3OoQT2JqZ3TiC2zETyzrwrnIwhkMTqwVsxW24GLsiYmWj0dCBo2gNy7nSRfgpIjZjM6WU1ut1lHt%2BGLOHCd6J79sN1pSkMSUzJwwD%2FBoD5I9aRHyiFIVFQ3D2j1KR%2Fh7MMDPnY1JE7GwLr3434N5BnI3GFRiFzuai0Ub34aWBDGr0pcKPM%2FPpqovpT11KoVinNAvXt1lkLTNXKFesXU1HUz3HI0plWqW0QGcoIjYoERpMy7AS17b2da06o43KzLF4RanRzwwx3%2FfOHYW7lL5ubUR83p9do9Ho%2B99fDzcZDynfdxPejog%2FBoCOxHW4AxOwKiK%2BaGc%2FILzJ6ULcXznciwM4qFSzCUob3Km0UCeU3W5v5%2B8%2FwZsWMQvzlN1Nq8C%2F4ht8qkRm72B%2B%2BoP%2FC0sEOftJmUbfAAAAAElFTkSuQmCC);
+}

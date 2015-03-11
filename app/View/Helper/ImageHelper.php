@@ -140,6 +140,28 @@ class ImageHelper extends AppHelper {
 			$links .= '</div> ';
 		}
 
+        // Views links
+        $viewLinks = array();
+        foreach($files as $key => $file) {
+            if (!BookReader\Reader::hasSupported($file['format'])) continue;
+            $viewLinks[] = '<li>' . $this->Html->link($file['format'], array(
+                    'controller' => 'books',
+                    'action' => 'read',
+                    $file['book'],
+                    strtolower($file['format']),
+                ), array(
+                    'escape' => false,
+                    'target' => '_blank'
+                )) . '</li>';
+        }
+
+        if (count($viewLinks) > 0) {
+            $links .= '<div class="btn-group">';
+            $links .= '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-eye-open"></i> ' . __("Read") . ' <span class="caret"></span></button>';
+            $links .= '<ul class="dropdown-menu ' . $positionClass . '">' . implode("", $viewLinks) . '</ul>';
+            $links .= '</div> ';
+        }
+
 		// E-Mail / Share
 		$formats = array();
 		foreach($files as $file) {

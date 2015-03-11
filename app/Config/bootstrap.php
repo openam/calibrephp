@@ -126,6 +126,9 @@ CakeLog::config('error', array(
 
 App::import('Vendor', 'ImageResize', array('file' => 'image.resize.php'));
 
+App::uses('BookReader\Reader', 'Vendor');
+spl_autoload_register(array('BookReader\Reader', '__autoload'));
+
 /**
  * Custom Configurations
  */
