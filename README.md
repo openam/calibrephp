@@ -9,6 +9,7 @@ This is a simple [HTML](http://en.wikipedia.org/wiki/HTML) and [OPDS](http://en.
 * ~~Add reading epub and pdf in browser~~
 * Add user management
 * Add multi language
+* Add synology spk package
 
 ## Docs and Demo
 
