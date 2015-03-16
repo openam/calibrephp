@@ -35,4 +35,24 @@ class Rating extends AppModel {
 		)
 	);
 
+    /**
+     * @inheritdoc
+     */
+    public $filterDeny = array(
+        'foreignKey' => 'Rating.id',
+        'associationForeignKey' => 'BooksRatingsLink.id',
+        'table' => 'books_ratings_link',
+        'alias' => 'BooksRatingsLink',
+        'joins' => array(
+            'aliases' => array(
+                'books_tags_link' => 'BooksTagsLink',
+                'tags' => 'Tags'
+            ),
+            'conditions' => array(
+                'BooksTagsLink.book' => 'BooksRatingsLink.book',
+                'BooksTagsLink.tag' => 'Tags.id'
+            )
+        )
+    );
+
 }

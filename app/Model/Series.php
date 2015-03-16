@@ -54,4 +54,24 @@ class Series extends AppModel {
 		'search' => array('type' => 'like', 'field' => array('Series.name', 'Series.sort'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
+    /**
+     * @inheritdoc
+     */
+    public $filterDeny = array(
+        'foreignKey' => 'Series.id',
+        'associationForeignKey' => 'BooksSeriesLink.id',
+        'table' => 'books_series_link',
+        'alias' => 'BooksSeriesLink',
+        'joins' => array(
+            'aliases' => array(
+                'books_tags_link' => 'BooksTagsLink',
+                'tags' => 'Tags'
+            ),
+            'conditions' => array(
+                'BooksTagsLink.book' => 'BooksSeriesLink.book',
+                'BooksTagsLink.tag' => 'Tags.id'
+            )
+        )
+    );
+
 }

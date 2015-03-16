@@ -38,7 +38,14 @@ class AppController extends Controller {
 	public $components = array(
 		'DebugKit.Toolbar',
 		'RequestHandler',
-		'Session'
+		'Session',
+        'Auth' => array(
+            'unauthorizedRedirect' => array(
+                'controller' => '',
+                'action' => 'index'
+            ),
+            'authorize' => array('Controller')
+        )
 	);
 
 	public $helpers = array(
@@ -46,4 +53,26 @@ class AppController extends Controller {
 		'Form'      => array('className' => 'BoostCake.BoostCakeForm'),
 		'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
 	);
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeFilter() {
+        $this->set('loggedIn', $this->Auth->loggedIn());
+    }
+
+    /**
+     * Check if the provided user is authorized for the request.
+     *
+     * Uses the configured Authorization adapters to check whether or not a user is authorized.
+     * Each adapter will be checked in sequence, if any of them return true, then the user will
+     * be authorized for the request.
+     *
+     * @param array $user The user to check the authorization of. If empty the user in the session will be used.
+     * @param CakeRequest $request The request to authenticate for. If empty, the current request will be used.
+     * @return boolean True if $user is authorized, otherwise false
+     */
+    public function isAuthorized($user = null, CakeRequest $request = null) {
+        return (true);
+    }
 }

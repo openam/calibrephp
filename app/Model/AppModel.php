@@ -33,6 +33,86 @@ App::uses('Model', 'Model');
  */
 class AppModel extends Model {
 
+    /**
+     * Rule filter deny tags.
+     *
+     * @var array
+     * @access public
+     */
+    public $filterDeny = array();
+
+    /**
+     * Deny tags parsing list.
+     *
+     * @var array
+     * @access private
+     */
+    private $filterDenyTags = array();
+
+    /**
+     * Apply filter deny tags.
+     *
+     * @inheritdoc
+     */
+    public function __construct($id = false, $table = null, $ds = null)
+    {
+        parent::__construct($id, $table , $ds);
+
+        if (empty($this->filterDenyTags)) {
+            if (($deny = CakeSession::read('Auth.User.deny')) !== null) {
+
+                // add sql string Tags.name LIKE '%rule%'
+                $this->filterDenyTags = array_map(function($value) {
+                    return('Tags.name LIKE \'%' . addslashes(strtolower(trim($value))) . '%\'' );
+                }, array_filter(explode(',', $deny . ',')));
+            }
+
+            foreach($this->associations() as $associations) {
+                foreach($this->{$associations} as $model => $association) {
+                    if (isset($association['className'])) {
+                        $this->{$associations}{$model} = $this->{$association['className']}->beforeFind($association);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Add conditions rule for filtering results.
+     *
+     * @inheritdoc
+     */
+    public function beforeFind($query) {
+        if (!empty($this->filterDeny) && !empty($this->filterDenyTags)) {
+
+            // example sql Author.id NOT IN (SELECT BooksAuthorsLink.id FROM books_authors_link AS BooksAuthorsLink
+            $conditions = $this->filterDeny['foreignKey']
+                . ' NOT IN (SELECT ' . $this->filterDeny['associationForeignKey']
+                . ' FROM ' . $this->filterDeny['table']
+                . (isset($this->filterDeny['alias']) ? ' AS ' . $this->filterDeny['alias'] : '');
+
+            if (isset($this->filterDeny['joins'])) {
+                $joins = $this->filterDeny['joins']['aliases'];
+
+                // add joins sql string JOIN authors as Authors
+                $conditions .= array_reduce($joins, function($last, $item) use($joins) {
+                    return ($last . ' JOIN ' . array_search($item, $joins) . ' AS ' . $item);
+                });
+
+                $joinConditions = $this->filterDeny['joins']['conditions'];
+
+                // add joins sql string ON (BooksAuthorsLink.author=Authors.id AND BooksTagsLink.tag=Tags.id)
+                $conditions .= ' ON (' . array_reduce($joinConditions, function($last, $item) use($joinConditions) {
+                    return ($last . (!empty($last) ? ' AND ' : '') . array_search($item, $joinConditions) . '=' . $item);
+                }) . ')';
+            }
+
+            // add where sql string WHERE Tags.name LIKE '%rule%' OR Tags.name LIKE '%rule%'
+            $query['conditions'][] = $conditions . ' WHERE ' . implode(' OR ', $this->filterDenyTags) . ')';
+        }
+        return ($query);
+    }
+
 /**
  * getCalibrePath method
  * @return string with path to calibre location

@@ -53,4 +53,13 @@ class Tag extends AppModel {
 		'search' => array('type' => 'like', 'field' => array('Tag.name'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
+    /**
+     * @inheritdoc
+     */
+    public $filterDeny = array(
+        'foreignKey' => 'Tag.id',
+        'associationForeignKey' => 'Tags.id',
+        'table' => 'tags',
+        'alias' => 'Tags'
+    );
 }

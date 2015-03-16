@@ -53,4 +53,25 @@ class Author extends AppModel {
 		'search' => array('type' => 'like', 'field' => array('Author.name', 'Author.sort'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
+    /**
+     * @inheritdoc
+     */
+    public $filterDeny = array(
+        'foreignKey' => 'Author.id',
+        'associationForeignKey' => 'BooksAuthorsLink.id',
+        'table' => 'books_authors_link',
+        'alias' => 'BooksAuthorsLink',
+        'joins' => array(
+            'aliases' => array(
+                'authors' => 'Authors',
+                'books_tags_link' => 'BooksTagsLink',
+                'tags' => 'Tags'
+            ),
+            'conditions' => array(
+                'BooksAuthorsLink.author' => 'Authors.id',
+                'BooksTagsLink.book' => 'BooksAuthorsLink.book',
+                'BooksTagsLink.tag' => 'Tags.id'
+            )
+        )
+    );
 }

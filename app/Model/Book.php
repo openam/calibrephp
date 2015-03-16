@@ -142,4 +142,21 @@ class Book extends AppModel {
 		'search' => array('type' => 'like', 'field' => array('Book.title', 'Book.sort'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
+    /**
+     * @inheritdoc
+     */
+    public $filterDeny = array(
+        'foreignKey' => 'Book.id',
+        'associationForeignKey' => 'BooksTagsLink.book',
+        'table' => 'books_tags_link',
+        'alias' => 'BooksTagsLink',
+        'joins' => array(
+            'aliases' => array(
+                'tags' => 'Tags'
+            ),
+            'conditions' => array(
+                'BooksTagsLink.tag' => 'Tags.id'
+            )
+        )
+    );
 }

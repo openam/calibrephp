@@ -53,4 +53,24 @@ class Publisher extends AppModel {
 		'search' => array('type' => 'like', 'field' => array('Publisher.name'), 'connectorAnd' => '+', 'connectorOr' => '|'),
 	);
 
+    /**
+     * @inheritdoc
+     */
+    public $filterDeny = array(
+        'foreignKey' => 'Publisher.id',
+        'associationForeignKey' => 'BooksPublishersLink.id',
+        'table' => 'books_publishers_link',
+        'alias' => 'BooksPublishersLink',
+        'joins' => array(
+            'aliases' => array(
+                'books_tags_link' => 'BooksTagsLink',
+                'tags' => 'Tags'
+            ),
+            'conditions' => array(
+                'BooksTagsLink.book' => 'BooksPublishersLink.book',
+                'BooksTagsLink.tag' => 'Tags.id'
+            )
+        )
+    );
+
 }
