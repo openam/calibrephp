@@ -34,6 +34,13 @@ class User extends AppModel {
                 'message' => 'Please enter a valid role',
                 'allowEmpty' => false
             )
+        ),
+        'language' => array(
+            'valid' => array(
+                'rule' => array('inList', array('ru', 'en')),
+                'message' => 'Please enter a valid language',
+                'allowEmpty' => false
+            )
         )
     );
 

@@ -6,7 +6,7 @@
         <table class="table table-striped table-hover">
             <thead>
                 <?php
-                    echo $this->Html->tableHeaders(array('#', __('Username'), __('Role'), __('Deny Tags'), ''));
+                    echo $this->Html->tableHeaders(array('#', __('Username'), __('Role'), __('Deny Tags'), __('Language'), ''));
                 ?>
             </thead>
             <tbody>
@@ -18,6 +18,7 @@
                                 $user['User']['username'],
                                 $user['User']['role'],
                                 !empty($user['User']['deny']) ? $user['User']['deny'] : '-',
+                                $user['User']['language'],
                                 array(
                                     $this->Form->create(false, array('url' => array('controller' => 'users', 'action' => 'delete', $user['User']['id'])))
                                     . $this->Html->link('<i class="icon-pencil"></i>', array('controller' => 'users', 'action' => 'edit', $user['User']['id']), array('escape' => false, 'class' => 'btn btn-primary btn-xs'))

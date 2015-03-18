@@ -2,7 +2,7 @@
 	<span class="center">
 		<?php
 			echo $this->Paginator->counter(array(
-				'format' => 'Results {:start} - {:end} of {:count} | Page {:page} of {:pages}'
+				'format' => __('Results %s - %s of %s | Page %s of %s', '{:start}', '{:end}', '{:count}', '{:page}', '{:pages}')
 			));
 		?>
 		<br>

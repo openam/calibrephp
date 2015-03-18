@@ -2,7 +2,7 @@
 	<h2><?php  echo ($publisher['Publisher']['name']); ?></h2>
 </div>
 
-<h3>Related Books</h3>
+<h3><?php echo __('Related Books'); ?></h3>
 
 <?php
 	foreach ($publisher['Book'] as $key => $book) {

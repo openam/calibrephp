@@ -1,0 +1,456 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: CalibriePHP\n"
+"POT-Creation-Date: 2015-03-18 03:55+0000\n"
+"PO-Revision-Date: 2015-03-18 09:56+0700\n"
+"Last-Translator: demorfi <demorfi@gmail.com>\n"
+"Language-Team: https://github.com/demorfi/calibrephp <demorfi@gmail.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
+"X-Poedit-Basepath: /home/el/Shadow/Project/calibrephp\n"
+"X-Poedit-SearchPath-0: /home/el/Shadow/Project/calibrephp/app\n"
+
+#: Controller/AppController.php:70
+msgid "You must be logged in to view this page."
+msgstr "Вы должны войти в систему для просмотра этой страницы."
+
+#: Controller/AuthorsController.php:37
+msgid "Invalid author"
+msgstr "Автор не найден"
+
+#: Controller/BooksController.php:36;52;102;164
+msgid "Invalid book"
+msgstr "Книга не найдена"
+
+#: Controller/BooksController.php:55;105;167
+msgid "Invalid extension"
+msgstr "Неверное расширение"
+
+#: Controller/BooksController.php:73;123;185
+msgid "Invalid file name or extension"
+msgstr "Неверное имя файла или расширение"
+
+#: Controller/BooksController.php:218
+msgid "BooksController::newest not yet implemented"
+msgstr ""
+
+#: Controller/BooksController.php:227
+msgid "BooksController::random not yet implemented"
+msgstr ""
+
+#: Controller/DataController.php:34
+msgid "Invalid datum"
+msgstr "Отметка не найдена"
+
+#: Controller/PublishersController.php:37
+msgid "Invalid publisher"
+msgstr "Издатель не найден"
+
+#: Controller/RatingsController.php:31
+msgid "Invalid rating"
+msgstr "Рейтинг не найден"
+
+#: Controller/SeriesController.php:37
+msgid "Invalid series"
+msgstr "Жанр не найден"
+
+#: Controller/TagsController.php:37
+msgid "Invalid tag"
+msgstr "Тег не найден"
+
+#: Controller/UsersController.php:44
+msgid "Invalid username or password, try again"
+msgstr "Неверное имя пользователя или пароль"
+
+#: Controller/UsersController.php:76 View/Users/login.ctp:9
+msgid "Sign In"
+msgstr "Войти"
+
+#: Controller/UsersController.php:111;155
+msgid "The user has been saved"
+msgstr "Пользователь сохранен"
+
+#: Controller/UsersController.php:114;158
+msgid "The user could not be saved, try again"
+msgstr "Пользователь не сохранен"
+
+#: Controller/UsersController.php:131;150
+msgid "Invalid user"
+msgstr "Пользователь не найден"
+
+#: Controller/UsersController.php:134
+msgid "User deleted"
+msgstr "Пользователь удален"
+
+#: Controller/UsersController.php:134
+msgid "User was not deleted"
+msgstr "Пользователь не был удален"
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:18
+msgid "Debug setting does not allow access to this url."
+msgstr ""
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:27
+msgid "Alert notice message testing..."
+msgstr ""
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:30;41
+msgid "Alert success message testing..."
+msgstr ""
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:34
+msgid "Alert error message testing..."
+msgstr ""
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:45
+msgid "Alert info message testing..."
+msgstr ""
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:49
+msgid "Alert warning message testing..."
+msgstr ""
+
+#: Plugin/BoostCake/Controller/BoostCakeController.php:53
+msgid "Alert danger message testing..."
+msgstr ""
+
+#: Vendor/BookReader/Reader.php:76
+msgid "Unsupported format book"
+msgstr "Не поддерживаемый формат книги"
+
+#: View/Authors/index.ctp:2 View/Authors/search.ctp:2
+#: View/Elements/Layout/header.ctp:46
+msgid "Authors"
+msgstr "Авторы"
+
+#: View/Authors/index.ctp:5 View/Authors/search.ctp:6 View/Books/index.ctp:5
+#: View/Books/search.ctp:6 View/Publishers/index.ctp:5
+#: View/Publishers/search.ctp:6 View/Ratings/index.ctp:5
+#: View/Series/index.ctp:5 View/Series/search.ctp:6 View/Tags/index.ctp:5
+#: View/Tags/search.ctp:6
+msgid "Sort By"
+msgstr "Сортировать По"
+
+#: View/Authors/index.ctp:7 View/Authors/search.ctp:8
+#: View/Publishers/index.ctp:7 View/Publishers/search.ctp:8
+#: View/Series/index.ctp:7 View/Series/search.ctp:8 View/Tags/index.ctp:7
+#: View/Tags/search.ctp:8
+msgid "Name"
+msgstr "Имя"
+
+#: View/Authors/index.ctp:8 View/Authors/search.ctp:9
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: View/Authors/view.ctp:6
+msgid "Related Series"
+msgstr "Жанры"
+
+#: View/Authors/view.ctp:17 View/Data/view.ctp:5 View/Publishers/view.ctp:5
+#: View/Ratings/view.ctp:9 View/Series/view.ctp:5 View/Tags/view.ctp:5
+msgid "Related Books"
+msgstr "Книги по теме"
+
+#: View/Authors/xml/index.ctp:3
+msgid "Calibre Authors"
+msgstr "Авторы"
+
+#: View/Authors/xml/index.ctp:11 View/Authors/xml/view.ctp:12
+#: View/Books/xml/opds.ctp:11 View/Publishers/xml/index.ctp:11
+#: View/Publishers/xml/view.ctp:12 View/Ratings/xml/index.ctp:11
+#: View/Ratings/xml/view.ctp:12 View/Series/xml/index.ctp:11
+#: View/Series/xml/view.ctp:12 View/Tags/xml/index.ctp:11
+#: View/Tags/xml/view.ctp:12
+msgid "Home"
+msgstr "Главная"
+
+#: View/Authors/xml/index.ctp:25 View/Publishers/xml/index.ctp:25
+#: View/Ratings/xml/index.ctp:25 View/Series/xml/index.ctp:25
+#: View/Tags/xml/index.ctp:25
+msgid "%s books sorted by title"
+msgstr "книги сортируются по названию %s"
+
+#: View/Authors/xml/view.ctp:34 View/Publishers/xml/view.ctp:34
+#: View/Ratings/xml/view.ctp:34 View/Series/xml/view.ctp:26
+#: View/Tags/xml/view.ctp:34
+msgid "Book %d in the %d series"
+msgstr "%d книга в жанре %d"
+
+#: View/Books/index.ctp:2 View/Books/search.ctp:2
+#: View/Elements/Layout/header.ctp:16;47
+msgid "Books"
+msgstr "Книги"
+
+#: View/Books/index.ctp:7 View/Books/search.ctp:8
+msgid "Date Added"
+msgstr "Дата добавления"
+
+#: View/Books/index.ctp:8 View/Books/search.ctp:9 View/Books/view.ctp:14
+#: View/Elements/bookInfo.ctp:19
+msgid "Author"
+msgstr "Автор"
+
+#: View/Books/index.ctp:9 View/Books/search.ctp:10
+msgid "Title"
+msgstr "Название"
+
+#: View/Books/index.ctp:10 View/Books/search.ctp:11
+msgid "Series Index"
+msgstr "Список жанров"
+
+#: View/Books/view.ctp:15 View/Elements/bookInfo.ctp:23
+#: View/Elements/Layout/header.ctp:50 View/Series/index.ctp:2
+#: View/Series/search.ctp:2
+msgid "Series"
+msgstr "Жанры"
+
+#: View/Books/view.ctp:16 View/Elements/bookInfo.ctp:27
+msgid "Year"
+msgstr "Год"
+
+#: View/Books/view.ctp:17 View/Elements/bookInfo.ctp:31
+#: View/Ratings/index.ctp:7 View/Ratings/view.ctp:2
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: View/Books/view.ctp:19 View/Elements/bookInfo.ctp:35
+msgid "Publisher"
+msgstr "Издатель"
+
+#: View/Books/view.ctp:20 View/Elements/bookInfo.ctp:39
+#: View/Elements/Layout/header.ctp:51 View/Tags/index.ctp:2
+#: View/Tags/search.ctp:2
+msgid "Tags"
+msgstr "Теги"
+
+#: View/Books/view.ctp:22 View/Elements/bookInfo.ctp:44
+msgid "Format"
+msgstr "Формат"
+
+#: View/Books/view.ctp:33
+msgid "Summary Information"
+msgstr "Краткая информация"
+
+#: View/Books/xml/opds.ctp:3
+msgid "Calibre Home"
+msgstr "Главная"
+
+#: View/Books/xml/opds.ctp:21
+msgid "By Author"
+msgstr "По Автору"
+
+#: View/Books/xml/opds.ctp:24
+msgid "books sorted by %s authors"
+msgstr "книги группируются по авторам %s"
+
+#: View/Books/xml/opds.ctp:29
+msgid "By Publisher"
+msgstr "По Издателю"
+
+#: View/Books/xml/opds.ctp:32
+msgid "books grouped by %s publishers"
+msgstr "книги группируются по издателям %s"
+
+#: View/Books/xml/opds.ctp:37
+msgid "By Rating"
+msgstr "По Рейтингу"
+
+#: View/Books/xml/opds.ctp:40
+msgid "books grouped by %s ratings"
+msgstr "книги группируются по рейтингу %s"
+
+#: View/Books/xml/opds.ctp:45
+msgid "By series"
+msgstr "По Жанрам"
+
+#: View/Books/xml/opds.ctp:48
+msgid "books group by %s series"
+msgstr "книги группируются по жанрам %s"
+
+#: View/Books/xml/opds.ctp:53
+msgid "By tags"
+msgstr "По Тегам"
+
+#: View/Books/xml/opds.ctp:56
+msgid "books group by %s tags"
+msgstr "книги группируются по тегам %s"
+
+#: View/Data/index.ctp:2
+msgid "Formats"
+msgstr "Форматы"
+
+#: View/Elements/search.ctp:11 View/Elements/Layout/header.ctp:33
+#: View/Helper/TxtHelper.php:267
+msgid "Search"
+msgstr "Поиск"
+
+#: View/Elements/settingTabs.ctp:4
+msgid "Users"
+msgstr "Пользователи"
+
+#: View/Elements/Layout/header.ctp:6
+msgid "Toggle navigation"
+msgstr "Переключить навигацию"
+
+#: View/Elements/Layout/header.ctp:42
+msgid "Feed"
+msgstr "Лента"
+
+#: View/Elements/Layout/header.ctp:44
+msgid "Indexes"
+msgstr "Индексы"
+
+#: View/Elements/Layout/header.ctp:48 View/Publishers/index.ctp:2
+#: View/Publishers/search.ctp:2
+msgid "Publishers"
+msgstr "Издатели"
+
+#: View/Elements/Layout/header.ctp:49 View/Ratings/index.ctp:2
+msgid "Ratings"
+msgstr "Рейтинг"
+
+#: View/Elements/Layout/header.ctp:60
+msgid "Settings"
+msgstr "Настройки"
+
+#: View/Elements/Layout/header.ctp:62
+msgid "Logout"
+msgstr "Выход"
+
+#: View/Elements/Paginator/footer.ctp:5
+msgid "Results %s - %s of %s | Page %s of %s"
+msgstr "Результаты %s - %s из %s | Страница %s из %s"
+
+#: View/Helper/ImageHelper.php:80;107
+msgid "Invalid path"
+msgstr "Неверный путь"
+
+#: View/Helper/ImageHelper.php:138 View/Helper/OpdsHelper.php:155
+msgid "Download"
+msgstr "Скачать"
+
+#: View/Helper/ImageHelper.php:160
+msgid "Read"
+msgstr "Читать"
+
+#: View/Helper/ImageHelper.php:193
+msgid "Share"
+msgstr "Поделиться"
+
+#: View/Helper/ImageHelper.php:240;243
+msgid "No Cover"
+msgstr "Нет обложки"
+
+#: View/Helper/TxtHelper.php:169
+msgid "%d Stars"
+msgstr "%d Звезд"
+
+#: View/Publishers/xml/index.ctp:3
+msgid "Calibre Publishers"
+msgstr "Издатели"
+
+#: View/Ratings/view.ctp:6
+msgid ""
+"These books have been listed as %s. They probably just have not been given a "
+"rating."
+msgstr ""
+"Эти книги были перечислены в качестве %s. Они, вероятно, не передали свой "
+"рейтинг."
+
+#: View/Ratings/xml/index.ctp:3
+msgid "Calibre Ratings"
+msgstr "Рейтинг"
+
+#: View/Series/xml/index.ctp:3
+msgid "Calibre Series"
+msgstr "Жанры"
+
+#: View/Tags/xml/index.ctp:3
+msgid "Calibre Tags"
+msgstr "Теги"
+
+#: View/Users/add.ctp:12 View/Users/edit.ctp:12
+msgid "User"
+msgstr "Пользователь"
+
+#: View/Users/add.ctp:12 View/Users/edit.ctp:12
+msgid "Admin"
+msgstr "Администратор"
+
+#: View/Users/add.ctp:13 View/Users/edit.ctp:13 View/Users/index.ctp:9
+msgid "Deny Tags"
+msgstr "Запрещенные теги"
+
+#: View/Users/add.ctp:14 View/Users/edit.ctp:14
+msgid "English"
+msgstr "Английский"
+
+#: View/Users/add.ctp:14 View/Users/edit.ctp:14
+msgid "Russian"
+msgstr "Русский"
+
+#: View/Users/add.ctp:15
+msgid "New User"
+msgstr "Новый пользователь"
+
+#: View/Users/add.ctp:16
+msgid "Add"
+msgstr "Добавить"
+
+#: View/Users/edit.ctp:15
+msgid "Edit User"
+msgstr "Редактирование пользователя"
+
+#: View/Users/edit.ctp:16
+msgid "Save"
+msgstr "Сохранить"
+
+#: View/Users/index.ctp:9
+msgid "Username"
+msgstr "Логин"
+
+#: View/Users/index.ctp:9
+msgid "Role"
+msgstr "Роль"
+
+#: View/Users/index.ctp:9
+msgid "Language"
+msgstr "Язык"
+
+#: View/Users/index.ctp:35
+msgid "Add user"
+msgstr "Добавить пользователя"
+
+#: View/Users/login.ctp:5
+msgid "Please enter your username and password"
+msgstr "Пожалуйста, введите ваш логин и пароль"
+
+#: View/Users/login.ctp:7
+msgid "Password"
+msgstr "Пароль"
+
+#: Model/User.php:validation for field username
+msgid "A username is required"
+msgstr "Требуется имя пользователя"
+
+#: Model/User.php:validation for field password
+msgid "A password is required"
+msgstr "Требуется пароль"
+
+#: Model/User.php:validation for field role
+msgid "Please enter a valid role"
+msgstr "Пожалуйста, введите роль"
+
+#: Model/User.php:validation for field language
+msgid "Please enter a valid language"
+msgstr "Пожалуйста, введите язык"
+
+#~ msgid "You are not authorized to access that location"
+#~ msgstr "Вы не авторизованы для доступа к этой странице"
+
+#~ msgid "Sign in"
+#~ msgstr "Войти"

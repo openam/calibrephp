@@ -30,7 +30,7 @@
 <div>
 	<?php if (!empty($book['Comment']['text'])): ?>
 		<hr />
-		<h4>Summary Information</h4>
+		<h4><?php echo __('Summary Information'); ?></h4>
 			<?php
 				echo $book['Comment']['text'];
 			?>

@@ -2,9 +2,9 @@
 	<h2><?php echo __('Ratings'); ?></h2>
 	<div>
 		<ul class="nav nav-pills">
-			<li class="disabled"><a href="#">Sort By:</a></li>
+			<li class="disabled"><a href="#"><?php echo __('Sort By'); ?>:</a></li>
 			<?php
-				echo $this->Txt->paginateSort('rating');
+				echo $this->Txt->paginateSort('rating', __('Rating'));
 			?>
 		</ul>
 	</div>

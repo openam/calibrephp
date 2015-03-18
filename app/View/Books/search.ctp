@@ -3,12 +3,12 @@
 	<?php echo $this->element('search'); ?>
 	<div>
 		<ul class="nav nav-pills">
-			<li class="disabled"><a href="#">Sort By:</a></li>
+			<li class="disabled"><a href="#"><?php echo __('Sort By');?>:</a></li>
 			<?php
-				echo $this->Txt->paginateSort('timestamp', 'Date Added');
-				echo $this->Txt->paginateSort('author_sort', 'Author');
-				echo $this->Txt->paginateSort('sort', 'Title');
-				echo $this->Txt->paginateSort('series_index');
+				echo $this->Txt->paginateSort('timestamp', __('Date Added'));
+				echo $this->Txt->paginateSort('author_sort', __('Author'));
+				echo $this->Txt->paginateSort('sort', __('Title'));
+				echo $this->Txt->paginateSort('series_index', __('Series Index'));
 			?>
 		</ul>
 	</div>

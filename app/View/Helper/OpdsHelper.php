@@ -152,7 +152,7 @@ class OpdsHelper extends AppHelper {
 							'@href'  => $this->Html->url(array('controller' => 'books', 'action' => 'download', $file['book'] , strtolower($file['format']))),
 							'@type'  => '',
 							'@rel'   => 'http://opds-spec.org/acquisition',
-							'@title' => 'download',
+							'@title' => __('Download'),
 						);
 
 						$ebookMimeTypes = $this->getMimeTypes();

@@ -150,9 +150,10 @@ class TxtHelper extends TextHelper {
  *
  * @param integer $value
  * @param integer $possible stars available
+ * @param boolean $html use html tags
  * @return string
  */
-	public function stars($value, $possible = 5) {
+	public function stars($value, $possible = 5, $html = true) {
 		if ($value > $possible) {
 			throw new CakeException("Invalid use of TxtHelper::stars()");
 		}
@@ -160,9 +161,13 @@ class TxtHelper extends TextHelper {
 		$whole    = floor($value);
 		$fraction = ceil($value - $whole);
 
-		$stars = str_repeat('<i class="icon-star"></i> ', $whole);
-		$stars .= str_repeat('<i class="icon-star-half-empty"></i> ', $fraction);
-		$stars .= str_repeat('<i class="icon-star-empty"></i> ', $possible - $whole - $fraction);
+        if ($html) {
+            $stars = str_repeat('<i class="icon-star"></i> ', $whole);
+            $stars .= str_repeat('<i class="icon-star-half-empty"></i> ', $fraction);
+            $stars .= str_repeat('<i class="icon-star-empty"></i> ', $possible - $whole - $fraction);
+        } else {
+            $stars = __('%d Stars', $whole);
+        }
 
 		return $stars;
 	}
@@ -259,7 +264,7 @@ class TxtHelper extends TextHelper {
 	public function searchByModels($models = array('Book', 'Author', 'Publisher', 'Series', 'Tag')) {
 		sort($models);
 		$links = '<ul class="nav nav-pills">';
-		$links .= '	<li class="disabled"><a href="#">Search:</a></li>';
+		$links .= '	<li class="disabled"><a href="#">' . __('Search') . ':</a></li>';
 
 		foreach ($models as $model) {
 			$links .= '<li' . $this->activeIndex(Inflector::tableize($model)) . '>' . $this->Html->link($model,

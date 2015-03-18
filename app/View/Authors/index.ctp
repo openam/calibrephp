@@ -2,10 +2,10 @@
 	<h2><?php echo __('Authors'); ?></h2>
 	<div>
 		<ul class="nav nav-pills">
-			<li class="disabled"><a href="#">Sort By:</a></li>
+			<li class="disabled"><a href="#"><?php echo __('Sort By'); ?>:</a></li>
 			<?php
-				echo $this->Txt->paginateSort('name');
-				echo $this->Txt->paginateSort('sort', 'Last Name');
+				echo $this->Txt->paginateSort('name', __('Name'));
+				echo $this->Txt->paginateSort('sort', __('Last Name'));
 			?>
 		</ul>
 	</div>

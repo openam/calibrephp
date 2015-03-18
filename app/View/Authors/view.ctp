@@ -3,7 +3,7 @@
 </div>
 
 <?php if (!empty($series)): ?>
-	<h3>Related Series</h3>
+	<h3><?php echo __('Related Series'); ?></h3>
 	<ul class="list-group">
 			<?php foreach ($series as $key => $value): ?>
 				<li class="list-group-item">
@@ -14,7 +14,7 @@
 	</ul>
 <?php endif; ?>
 
-<h3>Related Books</h3>
+<h3><?php echo __('Related Books'); ?></h3>
 
 <?php
 	foreach ($author['Book'] as $key => $book) {

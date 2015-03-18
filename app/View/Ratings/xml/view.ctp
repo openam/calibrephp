@@ -1,7 +1,7 @@
 <?php
 	$key = $rating['Rating']['rating'];
 	$feed = $this->Opds->getDefaultXmlArray(array(
-		'title'   => $this->Txt->stars($rating['Rating']['rating'] / 2),
+		'title'   => $this->Txt->stars($rating['Rating']['rating'] / 2, 5, false),
 		'id'      => array('calibre:rating:' . $rating['Rating']['id']),
 		'updated' => $info['summary']['updated'],
 	));
@@ -9,7 +9,7 @@
 	$feed = $this->Opds->addLink($feed, array(
 		'href'  => $this->Html->url(array('controller'=>'books', 'action'=>'opds'), false),
 		'rel'   => 'start',
-		'title' => 'Home',
+		'title' => __('Home'),
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
@@ -31,7 +31,7 @@
 		);
 
 		if (!empty($book['Series'])) {
-			$entry['content'] = 'Book ' . $book['series_index'] . ' in the ' . $book['Series'][0]['sort'] . ' series';
+			$entry['content'] = __('Book %d in the %d series', $book['series_index'], $book['Series'][0]['sort']);
 		}
 		if ($book['has_cover']) {
 			$entry['thumbnail'] = $this->Image->resizeUrl($book['path'], $this->Image->resizeSettings['view']);

@@ -69,7 +69,8 @@ class UsersController extends AppController
                     $this->Auth->login(
                         array(
                             'username' => 'guest',
-                            'deny'     => $user['User']['deny']
+                            'deny'     => $user['User']['deny'],
+                            'language' => $user['User']['language']
                         )
                     );
                     $this->redirect($this->Auth->redirectUrl());
@@ -77,7 +78,7 @@ class UsersController extends AppController
             }
         }
 
-        $this->set('title_for_layout', __('Sign in'));
+        $this->set('title_for_layout', __('Sign In'));
         return (false);
     }
 

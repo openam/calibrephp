@@ -1,6 +1,6 @@
 <?php
 	$feed = $this->Opds->getDefaultXmlArray(array(
-		'title'   => 'Calibre Publishers',
+		'title'   => __('Calibre Publishers'),
 		'id'      => array('calibre:publishers'),
 		'updated' => $info['summary']['updated'],
 	));
@@ -8,7 +8,7 @@
 	$feed = $this->Opds->addLink($feed, array(
 		'href'  => $this->Html->url(array('controller'=>'books', 'action'=>'opds'), false),
 		'rel'   => 'start',
-		'title' => 'Home',
+		'title' => __('Home'),
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
@@ -22,7 +22,7 @@
 			'title'   => $publisher['name'],
 			'updated' => $publisher['updated'],
 			'id'      => 'calbire:publisher:' . $publisher['id'],
-			'content' => $this->Txt->numberToWords($publisher['count'], true) . ' books sorted by title',
+			'content' => __('%s books sorted by title', $this->Txt->numberToWords($publisher['count'], true)),
 		));
 	}
 

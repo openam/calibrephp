@@ -39,6 +39,7 @@ class AppController extends Controller {
 		'DebugKit.Toolbar',
 		'RequestHandler',
 		'Session',
+        'Cookie',
         'Auth' => array(
             'unauthorizedRedirect' => array(
                 'controller' => '',
@@ -58,6 +59,15 @@ class AppController extends Controller {
      * @inheritdoc
      */
     public function beforeFilter() {
+        $this->_setLanguage();
+
+        $locale = $this->Session->read('Config.language');
+        if ($locale
+            && file_exists(APP . 'View' . DS . $locale . DS . $this->viewPath . DS . $this->view . $this->ext)) {
+            $this->viewPath = $locale . DS . $this->viewPath;
+        }
+
+        $this->Auth->authError = __('You must be logged in to view this page.');
         $this->set('loggedIn', $this->Auth->loggedIn());
     }
 
@@ -74,5 +84,25 @@ class AppController extends Controller {
      */
     public function isAuthorized($user = null, CakeRequest $request = null) {
         return (true);
+    }
+
+    /**
+     * Change language for user interface.
+     *
+     * @access public
+     * @return void
+     */
+    public function _setLanguage() {
+        $usedLanguage = $this->Session->check('Auth.User.language')
+            ? $this->Session->read('Auth.User.language') : $this->Cookie->read('language');
+
+        if (empty($usedLanguage) || !in_array($usedLanguage, array('en', 'ru'))) {
+            $usedLanguage = Configure::read('Config.language');
+        }
+
+        if ($usedLanguage !== $this->Cookie->read('language')) {
+            $this->Cookie->write('language', $usedLanguage, false, '120 days');
+        }
+        $this->Session->write('Config.language', $usedLanguage);
     }
 }

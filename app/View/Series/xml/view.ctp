@@ -9,7 +9,7 @@
 	$feed = $this->Opds->addLink($feed, array(
 		'href'  => $this->Html->url(array('controller'=>'books', 'action'=>'opds'), false),
 		'rel'   => 'start',
-		'title' => 'Home',
+		'title' => __('Home'),
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
@@ -23,7 +23,7 @@
 			'title'     => $book['sort'],
 			'updated'   => date(DATE_ATOM, strtotime($book['last_modified'])),
 			'id'        => 'urn:uuid:' . $book['uuid'],
-			'content'   => 'Book ' . $book['series_index'] . ' in the ' . $series['Series']['sort'] . ' series',
+			'content'   => __('Book %d in the %d series', $book['series_index'], $series['Series']['sort']),
 			'author'    => $book['Author'],
 			'published' => date(DATE_ATOM, strtotime($book['pubdate'])),
 			'download'  => array('downloads' => $book['Datum'], 'bookpath' => $book['path']),

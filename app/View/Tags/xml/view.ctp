@@ -9,7 +9,7 @@
 	$feed = $this->Opds->addLink($feed, array(
 		'href'  => $this->Html->url(array('controller'=>'books', 'action'=>'opds'), false),
 		'rel'   => 'start',
-		'title' => 'Home',
+		'title' => __('Home'),
 	));
 
 	$feed = $this->Opds->addLink($feed, array(
@@ -31,7 +31,7 @@
 		);
 
 		if (!empty($book['Series'])) {
-			$entry['content'] = 'Book ' . $book['series_index'] . ' in the ' . $book['Series'][0]['sort'] . ' series';
+			$entry['content'] = __('Book %d in the %d series', $book['series_index'], $book['Series'][0]['sort']);
 		}
 		if ($book['has_cover']) {
 			$entry['thumbnail'] = $this->Image->resizeUrl($book['path'], $this->Image->resizeSettings['view']);

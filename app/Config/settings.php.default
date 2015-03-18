@@ -1,5 +1,8 @@
 <?php
 $config = array(
+	'Config' => array(
+		'language' => 'en'
+	),
 	'Settings' => array(
 		'share' => array(
 			'example@kindle.com'  => 'awz,mobi,epub',
