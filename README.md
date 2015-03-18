@@ -5,11 +5,13 @@ This is a simple [HTML](http://en.wikipedia.org/wiki/HTML) and [OPDS](http://en.
 ## History
 * Added reading epub and pdf in browser
 * Added user management. Account default admin:password. To enable authentication, change the auth option in file settings.php.default
+* Added support for multiple languages 
+* Added Russian language
 
 ## Todo
 * ~~Add reading epub and pdf in browser~~
 * ~~Add user management~~
-* Add multi language
+* ~~Add multi language~~
 * Add synology spk package
 
 ## Docs and Demo
