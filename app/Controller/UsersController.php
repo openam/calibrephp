@@ -40,14 +40,17 @@ class UsersController extends AppController
     {
         if ($this->Auth->login()) {
             return ($this->redirect($this->Auth->redirectUrl()));
-        } else if ($this->request->is('post')) {
-            $this->Auth->flash(__('Invalid username or password, try again'));
-            return (false);
+        } else {
+            if ($this->request->is('post')) {
+                $this->Auth->flash(__('Invalid username or password, try again'));
+                return (false);
+            }
         }
 
         // auth guest account
         if (!(bool)Configure::read('Settings.auth')) {
             $this->Auth->login(array('username' => 'guest'));
+            $this->Auth->flash(null);
             return ($this->redirect($this->Auth->redirectUrl()));
         }
 
@@ -63,7 +66,12 @@ class UsersController extends AppController
 
                 $user = $this->User->find('first', $options);
                 if (!empty($user)) {
-                    $this->Auth->login(array('username' => 'guest'));
+                    $this->Auth->login(
+                        array(
+                            'username' => 'guest',
+                            'deny'     => $user['User']['deny']
+                        )
+                    );
                     $this->redirect($this->Auth->redirectUrl());
                 }
             }
