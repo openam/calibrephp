@@ -29,6 +29,7 @@
                                 'checkSettingValue' => __('Database calibre not found or not readable')
                             )
                         );
+                        break;
                     case('auth'):
                         $input = array(
                             'options' => array('0' => __('Disabled'), '1' => __('Enabled')),
