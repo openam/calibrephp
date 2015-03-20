@@ -4,9 +4,10 @@ This is a simple [HTML](http://en.wikipedia.org/wiki/HTML) and [OPDS](http://en.
 
 ## History
 * Added reading epub and pdf in browser
-* Added user management. Account default admin:password. To enable authentication, change the auth option in file settings.php.default
+* Added user management. Account default admin:password. To enable authentication, change the auth option in configuration section
 * Added support for multiple languages 
 * Added Russian language
+* Added configuration section
 
 ## Todo
 * ~~Add reading epub and pdf in browser~~
