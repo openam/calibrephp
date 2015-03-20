@@ -33,7 +33,7 @@ class TxtHelper extends TextHelper {
 		if ($controller == $value && ($action == 'index' || $action == '' || $action == 'search' || $sub === true)) {
 			return ' class="active"';
 		} else {
-			return '';
+			return null;
 		}
 	}
 

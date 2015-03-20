@@ -1,16 +1,10 @@
 <?php
 $config = array(
-	'Config' => array(
-		'language' => 'en'
-	),
 	'Settings' => array(
 		'share' => array(
 			'example@kindle.com'  => 'awz,mobi,epub',
 			'example2@kindle.com' => 'awz,mobi',
 		),
-
-		// Using authorization. Account default admin:password, user:password, children:password
-		'auth' => false,
 		'ebooks' => array(
 			'mimeTypes' => array(
 				'azw'   => 'application/x-mobipocket-ebook',

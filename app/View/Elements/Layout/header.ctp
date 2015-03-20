@@ -52,17 +52,13 @@
 					</ul>
 				</li>
 
-				<?php if ((bool)Configure::read('Settings.auth')) { ?>
 				<li class="dropdown">
                 	<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> <?php echo $this->Session->read('Auth.User.username'); ?> <b class="caret"></b></a>
                 	<ul class="dropdown-menu">
-                		<?php if ($this->Session->read('Auth.User.role') === 'admin') { ?>
-                		  <li><?php echo $this->Html->link('<i class="pull-right icon-cog"></i> ' . __('Settings'), array('controller' => 'users', 'action' => 'index'), array('escape' => false)); ?></li>
-                		<?php } ?>
+                		<li><?php echo $this->Html->link('<i class="pull-right icon-cog"></i> ' . __('Settings'), array('controller' => 'settings', 'action' => 'index'), array('escape' => false)); ?></li>
                 		<li><?php echo $this->Html->link('<i class="pull-right icon-signout"></i> ' . __('Logout'), array('controller' => 'users', 'action' => 'logout'), array('escape' => false)); ?></li>
                 	</ul>
                 </li>
-                <?php } ?>
 			</ul>
 		</nav>
 		<?php } ?>

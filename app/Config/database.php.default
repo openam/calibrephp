@@ -59,15 +59,14 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Sqlite',
 		'persistent' => false,
 		'host'       => 'localhost',
-		'database'   => '/path/to/calibre_library/metadata.db',
+		'database'   => '../metadata.db'
 	);
 
     public $database = array(
         'datasource' => 'Database/Sqlite',
         'persistent' => false,
         'host'       => 'localhost',
-        'database'   => '../database.db',
-        'prefix'     => '',
+        'database'   => '../database.db'
     );
 
 	public $test = array(

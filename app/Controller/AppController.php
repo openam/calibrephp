@@ -30,6 +30,7 @@ App::uses('Controller', 'Controller');
  *
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @property Setting $Setting
  */
 class AppController extends Controller {
 
@@ -58,7 +59,15 @@ class AppController extends Controller {
     /**
      * @inheritdoc
      */
+    public $uses = array('Setting');
+
+    /**
+     * @inheritdoc
+     */
     public function beforeFilter() {
+        $this->Setting->load();
+
+        $this->_applyMetadata();
         $this->_setLanguage();
 
         $locale = $this->Session->read('Config.language');
@@ -97,12 +106,29 @@ class AppController extends Controller {
             ? $this->Session->read('Auth.User.language') : $this->Cookie->read('language');
 
         if (empty($usedLanguage) || !in_array($usedLanguage, array('en', 'ru'))) {
-            $usedLanguage = Configure::read('Config.language');
+            $usedLanguage = Configure::read('General.language');
         }
 
         if ($usedLanguage !== $this->Cookie->read('language')) {
             $this->Cookie->write('language', $usedLanguage, false, '120 days');
         }
         $this->Session->write('Config.language', $usedLanguage);
+    }
+
+    /**
+     * Change path metadata database.
+     *
+     * @access public
+     * @return void
+     */
+    public function _applyMetadata() {
+        $dbConfig = ConnectionManager::getDataSource('default')->config;
+        $userMetadata = Configure::read('General.metadata');
+
+        if ($dbConfig['database'] !== $userMetadata) {
+            $dbConfig['database'] = $userMetadata;
+            ConnectionManager::drop('default');
+            ConnectionManager::create('default', $dbConfig);
+        }
     }
 }

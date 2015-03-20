@@ -1,20 +1,22 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright 2015 demorfi <demorfi@gmail.com>
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: CalibriePHP\n"
-"POT-Creation-Date: 2015-03-18 03:55+0000\n"
-"PO-Revision-Date: 2015-03-18 09:56+0700\n"
+"Project-Id-Version: CalibrePHP\n"
+"POT-Creation-Date: 2015-03-18 12:31+0000\n"
+"PO-Revision-Date: 2015-03-18 18:52+0700\n"
 "Last-Translator: demorfi <demorfi@gmail.com>\n"
 "Language-Team: https://github.com/demorfi/calibrephp <demorfi@gmail.com>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.5.4\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop;__\n"
-"X-Poedit-Basepath: /home/el/Shadow/Project/calibrephp\n"
-"X-Poedit-SearchPath-0: /home/el/Shadow/Project/calibrephp/app\n"
+"X-Poedit-KeywordsList: __\n"
 
-#: Controller/AppController.php:70
+#: Controller/AppController.php:76
 msgid "You must be logged in to view this page."
 msgstr "Вы должны войти в систему для просмотра этой страницы."
 
@@ -58,37 +60,53 @@ msgstr "Рейтинг не найден"
 msgid "Invalid series"
 msgstr "Жанр не найден"
 
+#: Controller/SettingsController.php:43
+msgid "Invalid setting"
+msgstr "Настройка не найдена"
+
+#: Controller/SettingsController.php:48
+msgid "The settings has been saved"
+msgstr "Настройка сохранена"
+
+#: Controller/SettingsController.php:51
+msgid "The setting could not be saved, try again"
+msgstr "Настройка не сохранена"
+
 #: Controller/TagsController.php:37
 msgid "Invalid tag"
 msgstr "Тег не найден"
 
-#: Controller/UsersController.php:44
+#: Controller/UsersController.php:45
 msgid "Invalid username or password, try again"
 msgstr "Неверное имя пользователя или пароль"
 
-#: Controller/UsersController.php:76 View/Users/login.ctp:9
+#: Controller/UsersController.php:81 View/Users/login.ctp:9
 msgid "Sign In"
 msgstr "Войти"
 
-#: Controller/UsersController.php:111;155
+#: Controller/UsersController.php:116;160
 msgid "The user has been saved"
 msgstr "Пользователь сохранен"
 
-#: Controller/UsersController.php:114;158
+#: Controller/UsersController.php:119;163
 msgid "The user could not be saved, try again"
 msgstr "Пользователь не сохранен"
 
-#: Controller/UsersController.php:131;150
+#: Controller/UsersController.php:136;155
 msgid "Invalid user"
 msgstr "Пользователь не найден"
 
-#: Controller/UsersController.php:134
+#: Controller/UsersController.php:139
 msgid "User deleted"
 msgstr "Пользователь удален"
 
-#: Controller/UsersController.php:134
+#: Controller/UsersController.php:139
 msgid "User was not deleted"
 msgstr "Пользователь не был удален"
+
+#: Model/Setting.php:33
+msgid "Change the key settings are not supported"
+msgstr "Изменить ключ настройки нельзя"
 
 #: Plugin/BoostCake/Controller/BoostCakeController.php:18
 msgid "Debug setting does not allow access to this url."
@@ -137,8 +155,8 @@ msgstr "Сортировать По"
 
 #: View/Authors/index.ctp:7 View/Authors/search.ctp:8
 #: View/Publishers/index.ctp:7 View/Publishers/search.ctp:8
-#: View/Series/index.ctp:7 View/Series/search.ctp:8 View/Tags/index.ctp:7
-#: View/Tags/search.ctp:8
+#: View/Series/index.ctp:7 View/Series/search.ctp:8 View/Settings/index.ctp:9
+#: View/Tags/index.ctp:7 View/Tags/search.ctp:8
 msgid "Name"
 msgstr "Имя"
 
@@ -288,9 +306,13 @@ msgstr "Форматы"
 msgid "Search"
 msgstr "Поиск"
 
-#: View/Elements/settingTabs.ctp:4
+#: View/Elements/settingTabs.ctp:5
 msgid "Users"
 msgstr "Пользователи"
+
+#: View/Elements/settingTabs.ctp:7
+msgid "General"
+msgstr "Основные"
 
 #: View/Elements/Layout/header.ctp:6
 msgid "Toggle navigation"
@@ -313,11 +335,11 @@ msgstr "Издатели"
 msgid "Ratings"
 msgstr "Рейтинг"
 
-#: View/Elements/Layout/header.ctp:60
+#: View/Elements/Layout/header.ctp:58
 msgid "Settings"
 msgstr "Настройки"
 
-#: View/Elements/Layout/header.ctp:62
+#: View/Elements/Layout/header.ctp:59
 msgid "Logout"
 msgstr "Выход"
 
@@ -369,6 +391,50 @@ msgstr "Рейтинг"
 msgid "Calibre Series"
 msgstr "Жанры"
 
+#: View/Settings/edit.ctp:16 View/Users/add.ctp:14 View/Users/edit.ctp:14
+msgid "English"
+msgstr "Английский"
+
+#: View/Settings/edit.ctp:16 View/Users/add.ctp:14 View/Users/edit.ctp:14
+msgid "Russian"
+msgstr "Русский"
+
+#: View/Settings/edit.ctp:19 View/Settings/index.ctp:18 View/Users/index.ctp:9
+msgid "Language"
+msgstr "Язык"
+
+#: View/Settings/edit.ctp:27 View/Settings/index.ctp:21
+msgid "Book path"
+msgstr "Адрес базы calibre"
+
+#: View/Settings/edit.ctp:29
+msgid "Database calibre not found or not readable"
+msgstr "База данных calibre не найдена или недоступна для чтения"
+
+#: View/Settings/edit.ctp:34 View/Settings/index.ctp:31
+msgid "Disabled"
+msgstr "Отключено"
+
+#: View/Settings/edit.ctp:34 View/Settings/index.ctp:34
+msgid "Enabled"
+msgstr "Включено"
+
+#: View/Settings/edit.ctp:37 View/Settings/index.ctp:24
+msgid "Authorization"
+msgstr "Авторизация"
+
+#: View/Settings/edit.ctp:42
+msgid "Edit Setting"
+msgstr "Редактирование настройки"
+
+#: View/Settings/edit.ctp:43 View/Users/edit.ctp:16
+msgid "Save"
+msgstr "Сохранить"
+
+#: View/Settings/index.ctp:9
+msgid "Value"
+msgstr "Значение"
+
 #: View/Tags/xml/index.ctp:3
 msgid "Calibre Tags"
 msgstr "Теги"
@@ -385,14 +451,6 @@ msgstr "Администратор"
 msgid "Deny Tags"
 msgstr "Запрещенные теги"
 
-#: View/Users/add.ctp:14 View/Users/edit.ctp:14
-msgid "English"
-msgstr "Английский"
-
-#: View/Users/add.ctp:14 View/Users/edit.ctp:14
-msgid "Russian"
-msgstr "Русский"
-
 #: View/Users/add.ctp:15
 msgid "New User"
 msgstr "Новый пользователь"
@@ -405,10 +463,6 @@ msgstr "Добавить"
 msgid "Edit User"
 msgstr "Редактирование пользователя"
 
-#: View/Users/edit.ctp:16
-msgid "Save"
-msgstr "Сохранить"
-
 #: View/Users/index.ctp:9
 msgid "Username"
 msgstr "Логин"
@@ -416,10 +470,6 @@ msgstr "Логин"
 #: View/Users/index.ctp:9
 msgid "Role"
 msgstr "Роль"
-
-#: View/Users/index.ctp:9
-msgid "Language"
-msgstr "Язык"
 
 #: View/Users/index.ctp:35
 msgid "Add user"
@@ -432,6 +482,10 @@ msgstr "Пожалуйста, введите ваш логин и пароль"
 #: View/Users/login.ctp:7
 msgid "Password"
 msgstr "Пароль"
+
+#: Model/Setting.php:validation for field value
+msgid "checkSettingValue"
+msgstr ""
 
 #: Model/User.php:validation for field username
 msgid "A username is required"
@@ -448,9 +502,3 @@ msgstr "Пожалуйста, введите роль"
 #: Model/User.php:validation for field language
 msgid "Please enter a valid language"
 msgstr "Пожалуйста, введите язык"
-
-#~ msgid "You are not authorized to access that location"
-#~ msgstr "Вы не авторизованы для доступа к этой странице"
-
-#~ msgid "Sign in"
-#~ msgstr "Войти"

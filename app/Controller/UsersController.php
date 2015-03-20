@@ -26,7 +26,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        $this->User->recursive = 1;
+        $this->User->recursive = 0;
         $this->set('users', $this->paginate());
     }
 
@@ -48,7 +48,7 @@ class UsersController extends AppController
         }
 
         // auth guest account
-        if (!(bool)Configure::read('Settings.auth')) {
+        if (!(bool)Configure::read('General.auth')) {
             $this->Auth->login(array('username' => 'guest'));
             $this->Auth->flash(null);
             return ($this->redirect($this->Auth->redirectUrl()));
