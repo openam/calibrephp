@@ -18,7 +18,7 @@
                                 $name = __('Language');
                                 break;
                             case('metadata'):
-                                $name = __('Book path');
+                                $name = __('Alternate book path');
                                 break;
                             case('auth'):
                                 $name = __('Authorization');

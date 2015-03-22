@@ -22,9 +22,10 @@
                     case('metadata'):
                         $input = array(
                             'type' => 'text',
+                            'required' => false,
                             'class' => 'form-control',
                             'div' => array('class' => 'form-group'),
-                            'label' => __('Book path'),
+                            'label' => __('Alternate book path'),
                             'error' => array(
                                 'checkSettingValue' => __('Database calibre not found or not readable')
                             )

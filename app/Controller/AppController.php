@@ -125,7 +125,7 @@ class AppController extends Controller {
         $dbConfig = ConnectionManager::getDataSource('default')->config;
         $userMetadata = Configure::read('General.metadata');
 
-        if ($dbConfig['database'] !== $userMetadata) {
+        if (!empty($userMetadata) && $dbConfig['database'] !== $userMetadata) {
             $dbConfig['database'] = $userMetadata;
             ConnectionManager::drop('default');
             ConnectionManager::create('default', $dbConfig);

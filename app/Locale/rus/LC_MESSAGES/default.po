@@ -404,8 +404,8 @@ msgid "Language"
 msgstr "Язык"
 
 #: View/Settings/edit.ctp:27 View/Settings/index.ctp:21
-msgid "Book path"
-msgstr "Адрес базы calibre"
+msgid "Alternate book path"
+msgstr "Альтернативный адрес базы calibre"
 
 #: View/Settings/edit.ctp:29
 msgid "Database calibre not found or not readable"
