@@ -4,16 +4,22 @@ This is a simple [HTML](http://en.wikipedia.org/wiki/HTML) and [OPDS](http://en.
 
 ## History
 * Added reading epub and pdf in browser
-* Added user management. Account default admin:password. To enable authentication, change the auth option in configuration section
-* Added support for multiple languages 
+* Added user management
+  * Enable authentication by changing the auth option in configuration section
+  * Default account `username:password` setups:
+    * `admin:password`
+    * `user:password`
+    * `children:password`
+* Added support for multiple languages
 * Added Russian language
 * Added configuration section
 
 ## Todo
-* ~~Add reading epub and pdf in browser~~
-* ~~Add user management~~
-* ~~Add multi language~~
-* Add synology spk package
+* [ ] Dockerize the application
+* [x] Multiple language support
+* [x] Reading epub and pdf in browser
+* [ ] Synology spk package
+* [x] User management
 
 ## Docs and Demo
 
