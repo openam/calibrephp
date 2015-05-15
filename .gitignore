@@ -20,10 +20,8 @@ Thumbs.db
 /dist
 /tags
 
-/app/Config/database.php
-/app/Config/settings.php
-/app/Config/core.php
 /app/Config/email.php
+/app/Config/settings.php
 
 /app/webroot/css/.sass-cache
 /app/webroot/js/combined/*.js

@@ -62,12 +62,12 @@ class DATABASE_CONFIG {
 		'database'   => '../metadata.db'
 	);
 
-    public $database = array(
-        'datasource' => 'Database/Sqlite',
-        'persistent' => false,
-        'host'       => 'localhost',
-        'database'   => '../database.db'
-    );
+	public $database = array(
+		'datasource' => 'Database/Sqlite',
+		'persistent' => false,
+		'host'       => 'localhost',
+		'database'   => '../database.db'
+	);
 
 	public $test = array(
 		'datasource' => 'Database/Sqlite',
