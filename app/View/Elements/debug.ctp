@@ -106,7 +106,7 @@
 	 */
 		App::uses('Validation', 'Utility');
 		if (!Validation::alphaNumeric('cakephp')) {
-			echo '<p><div class="alert">';
+			echo '<p><div class="alert alert-danger">';
 				echo __d('cake_dev', 'PCRE has not been compiled with Unicode support.');
 				echo '<br/>';
 				echo __d('cake_dev', 'Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring');
@@ -122,7 +122,7 @@
 				echo __d('cake_dev', 'GD Version: ' . $info['GD Version'] . ' is installed.');
 			echo '</div>';
 		} else {
-			echo '<div class="alert">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'GD image library is not installed. You need to install it to get image conversion to work.');
 			echo '</div>';
 		}
@@ -135,7 +135,7 @@
 				echo __d('cake_dev', 'DebugKit plugin is present');
 			echo '</div>';
 		else:
-			echo '<div class="alert">';
+			echo '<div class="alert alert-danger">';
 				echo __d('cake_dev', 'DebugKit is not installed. It will help you inspect and debug different aspects of your application. You can install it from %s', $this->Html->link('github', 'https://github.com/cakephp/debug_kit'));
 			echo '</div>';
 		endif;
