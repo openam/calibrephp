@@ -53,6 +53,12 @@
  * unix_socket =>
  * For MySQL to connect via socket specify the `unix_socket` parameter instead of `host` and `port`
  */
+
+// Copy initial database if it doesn't already exist
+if ( !file_exists( '../database.db' ) || filesize( '../database.db' ) == 0 ) {
+	copy( '../database.db.default', '../database.db' );
+}
+
 class DATABASE_CONFIG {
 
 	public $default = array(
