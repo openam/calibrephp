@@ -7,12 +7,32 @@ This application is also available as a docker container. You can run this appli
 
 ```bash
 docker run -d --name calibrephp \
-	-p 8888:80 \
-	-v <path-to-your-calibre-library>:/library \
-	openam/calibrephp
+  -p 8888:80 \
+  -v <path-to-your-calibre-library>:/library \
+  openam/calibrephp
 ```
 
 This will make the application available on port 8888 on the dockerhost. You can then change the `Alternate book path` setting to `/library/metadata.db` which will use the library volume provided to the container.
+
+## Manual Setup
+### Requirements
+CalibrePHP has the following Requirements:
+* HTTP Server. e.g. Apache with mod_rewrite
+* PHP 5.3.0 or greater
+* PHP Sqlite 3 support
+* GD Image library
+* Calibre library and sub-directories need to be readable and executable by the webserver.
+
+### Installation
+* Clone the repository to your webserver.
+* Copy `app/Config/email.php.default` to `app/Config/email.php`
+  * Update the settings as needed, This is needed if you're going to use the send feature below.
+* Copy `app/Config/settings.php.default` to `app/Config/settings.php`
+  * Configure the email setting want to be sent, or set as an empty array() to disable.
+* Update `app/Config/core.php` to modify the following if desired.
+  * Change `Security.salt` from the default.
+  * Change `Security.cipherSeed` from the default.
+  * Change `debug` to the desired level.
 
 ## History
 * Added reading epub and pdf in browser
@@ -33,6 +53,12 @@ This will make the application available on port 8888 on the dockerhost. You can
 * [ ] Synology spk package
 * [x] User management
 
-## Docs and Demo
+## Reporting issues
+If you have any issues with with the application please open an issue on [GitHub](https://github.com/openam/calibrephp/issues).
+
+## Contributing
+If you'd like to contribute, review the [Roadmap](https://github.com/openam/calibrephp/wiki/Roadmap) for planned features. You can fork the project add features and send pull requests.
+
+## Demo and Screenshots
 
 Please see the [documentation](http://openam.github.io/calibrephp/) for additional information, or visit the [demo](http://calibre.fakewaffle.com/demo) to see it in action.
