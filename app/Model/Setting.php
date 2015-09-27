@@ -54,9 +54,8 @@ class Setting extends AppModel
      * @access public
      * @return bool
      */
-    public function checkSettingValue($check)
-    {
-        return ($this->field('key') !== 'metadata' || (empty($check['value']) || is_readable($check['value'])));
+    public function checkSettingValue($check) {
+        return ( $this->field('key') !== 'metadata' || ( empty( $check[ 'value' ] ) || is_readable( $check[ 'value' ] ) && is_file( $check[ 'value' ] ) ) );
     }
 
     /**
