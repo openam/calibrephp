@@ -62,10 +62,9 @@
 
 					<ul>
 						<li>Copy/Clone the repository to your webserver.</li>
-						<li>Copy/Rename <code>app/Config/database.php.default</code> to <code>app/Config/database.php</code>.
+						<li>Copy/Rename <code>app/Config/email.php.default</code> to <code>app/Config/email.php</code>.
 							<ul>
-								<li>change <code>$default['database']</code> to match the location of your calibre database.</li>
-								<li>The path either needs to be the full path from '/', or relative from the app/webroot/ directory.</li>
+								<li>update the email settings as required.</li>
 							</ul>
 						</li>
 						<li>Copy/Rename <code>app/Config/settings.php.default</code> to <code>app/Config/settings.php</code>.
@@ -73,13 +72,14 @@
 								<li>change the e-mails to what you want, or set as an empty array() to disable.</li>
 							</ul>
 						</li>
-						<li>Copy/Rename <code>app/Config/core.php.default</code> to <code>app/Config/core.php</code>.
+						<li>Update <code>app/Config/core.php</code> to modify the following if wanted.
 							<ul>
 								<li>change <code>Security.salt</code> from the default.</li>
 								<li>change <code>Security.cipherSeed</code> from the default.</li>
 								<li>change <code>debug</code> to the desired level.</li>
 							</ul>
 						</li>
+						<li>Update settings in the user dropdown to adjust where your calibre library location is.</li>
 					</ul>
 
 					<h2>
