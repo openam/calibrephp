@@ -2,8 +2,8 @@
 $config = array(
 	'Settings' => array(
 		'share' => array(
-			'example@kindle.com'  => 'awz,mobi,epub',
-			'example2@kindle.com' => 'awz,mobi',
+			// 'example@kindle.com'  => 'awz,mobi,epub',
+			// 'example2@kindle.com' => 'awz,mobi'
 		),
 		'ebooks' => array(
 			'mimeTypes' => array(
