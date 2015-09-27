@@ -36,53 +36,6 @@
 					<p>This is a simple <a href="http://en.wikipedia.org/wiki/HTML">HTML</a> and <a href="http://en.wikipedia.org/wiki/OPDS">OPDS</a> web server to access a database created by the <a href="http://calibre-ebook.com">Calibre</a> application. CalibrePHP was written using <a href="http://cakephp.org">CakePHP</a>.</p>
 
 					<h2>
-						<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>
-						Requirements
-					</h2>
-
-					<p>The master branch has the following requirements:</p>
-
-					<ul>
-						<li>HTTP Server. For example: Apache with mod_rewrite</li>
-						<li>PHP 5.3.0 or greater.</li>
-						<li>PHP Sqlite 3 support.</li>
-						<li>GD Image Library.</li>
-					</ul>
-
-					<p>Other Requirements:</p>
-					<ul>
-						<li>Calibre library directory and sub-directories need to be readble and executable by apache.</li>
-					</ul>
-
-
-					<h2>
-						<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>
-						Installation
-					</h2>
-
-					<ul>
-						<li>Copy/Clone the repository to your webserver.</li>
-						<li>Copy/Rename <code>app/Config/email.php.default</code> to <code>app/Config/email.php</code>.
-							<ul>
-								<li>update the email settings as required.</li>
-							</ul>
-						</li>
-						<li>Copy/Rename <code>app/Config/settings.php.default</code> to <code>app/Config/settings.php</code>.
-							<ul>
-								<li>change the e-mails to what you want, or set as an empty array() to disable.</li>
-							</ul>
-						</li>
-						<li>Update <code>app/Config/core.php</code> to modify the following if wanted.
-							<ul>
-								<li>change <code>Security.salt</code> from the default.</li>
-								<li>change <code>Security.cipherSeed</code> from the default.</li>
-								<li>change <code>debug</code> to the desired level.</li>
-							</ul>
-						</li>
-						<li>Update settings in the user dropdown to adjust where your calibre library location is.</li>
-					</ul>
-
-					<h2>
 						<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>
 						Demo
 					</h2>
@@ -100,20 +53,6 @@
 					</h3>
 					<img src="images/phone-1.png">
 					<img src="images/phone-2.png">
-
-					<h2>
-						<a name="reporting-issues" class="anchor" href="#reporting-issues"><span class="octicon octicon-link"></span></a>
-						Reporting issues
-					</h2>
-
-					<p>If you have an issues with CalibrePHP please open an issue on github <a href="https://github.com/openam/calibrephp/issues">https://github.com/openam/calibrephp/issues</a>.</p>
-
-					<h2>
-						<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>
-						Contributing
-					</h2>
-
-					<p>If you'd like to contribute to CalibrePHP, review the <a href="https://github.com/openam/calibrephp/wiki/Roadmap">Roadmap</a> for planned features.  You can fork the project add features and send pull requests, or open issues on github.</p>
 				</section>
 
 				<aside id="sidebar">
