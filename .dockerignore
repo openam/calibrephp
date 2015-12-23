@@ -1,0 +1,7 @@
+.editorconfig
+.gitignore
+.git
+.vagrant
+README.md
+Vagrantfile
+VagrantSetup.sh
