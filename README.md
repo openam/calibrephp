@@ -8,11 +8,15 @@ This application is also available as a docker container. You can run this appli
 ```bash
 docker run -d --name calibrephp \
   -p 8888:80 \
+  -e BASE_URL=default \
+  --restart="always" \
   -v <path-to-your-calibre-library>:/library \
   openam/calibrephp
 ```
 
 This will make the application available on port 8888 on the dockerhost. You can then change the `Alternate book path` setting to `/library/metadata.db` which will use the library volume provided to the container.
+
+The `BASE_URL` is optional, but allows you to access your files via `http://dockerhost:8888/default`
 
 ## Manual Setup
 ### Requirements
