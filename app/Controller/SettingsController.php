@@ -45,10 +45,10 @@ class SettingsController extends AppController
 
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Setting->save($this->request->data)) {
-                $this->Session->setFlash(__('The settings has been saved'));
+                $this->Session->setFlash(__('The settings has been saved'), 'Flash/success');
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Session->setFlash(__('The setting could not be saved, try again'));
+            $this->Session->setFlash(__('The setting could not be saved, try again'), 'Flash/error');
         }
 
         $this->request->data = $this->Setting->findById($id);

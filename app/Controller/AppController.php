@@ -65,6 +65,7 @@ class AppController extends Controller {
      * @inheritdoc
      */
     public function beforeFilter() {
+		$this->Auth->flash['element'] = 'Flash/error';
         $this->Setting->load();
 
         $this->_applyMetadata();
