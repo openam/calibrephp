@@ -146,10 +146,11 @@ class Book extends AppModel {
      * @inheritdoc
      */
     public $filterDeny = array(
-        'foreignKey' => 'Book.id',
+        'foreignKey'            => 'Book.id',
         'associationForeignKey' => 'BooksTagsLink.book',
-        'table' => 'books_tags_link',
-        'alias' => 'BooksTagsLink',
+        'table'                 => 'books_tags_link',
+        'alias'                 => 'BooksTagsLink',
+
         'joins' => array(
             'aliases' => array(
                 'tags' => 'Tags'

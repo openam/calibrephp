@@ -35,6 +35,7 @@ class BooksController extends AppController {
 		if (!$this->Book->exists($id)) {
 			throw new NotFoundException(__('Invalid book'));
 		}
+
 		$options = array('conditions' => array('Book.' . $this->Book->primaryKey => $id));
 		$this->set('book', $this->Book->find('first', $options));
 	}
@@ -51,17 +52,18 @@ class BooksController extends AppController {
 		if (!$this->Book->exists($id)) {
 			throw new NotFoundException(__('Invalid book'));
 		}
+
 		if (!$extension) {
 			throw new NotFoundException(__('Invalid extension'));
 		}
-		$extension = strtolower($extension);
 
 		$options = array(
 			'conditions' => array('Book.' . $this->Book->primaryKey => $id),
 			'recursive'  => 1,
 		);
 
-		$book = $this->Book->find('first', $options);
+		$book      = $this->Book->find('first', $options);
+		$extension = strtolower($extension);
 
 		$fileName = '';
 		foreach ($book['Datum'] as $file) {
@@ -81,10 +83,10 @@ class BooksController extends AppController {
 			$this->Book->getCalibrePath() . $book['Book']['path'] . DS . $fileName . '.' . $extension,
 			array(
 				'download' => true,
-				'name' => "$fileName.$extension",
+				'name'     => "$fileName.$extension",
 			)
-
 		);
+
 		// Return response object to prevent controller from trying to render a view
 		return $this->response;
 	}
@@ -101,24 +103,26 @@ class BooksController extends AppController {
         if (!$this->Book->exists($id)) {
             throw new NotFoundException(__('Invalid book'));
         }
+
         if (!$extension) {
             throw new NotFoundException(__('Invalid extension'));
         }
-        $extension = strtolower($extension);
 
         $options = array(
             'conditions' => array('Book.' . $this->Book->primaryKey => $id),
             'recursive'  => 1,
         );
 
-        $book = $this->Book->find('first', $options);
+        $book      = $this->Book->find('first', $options);
+		$extension = strtolower($extension);
 
-        $fileName = '';
+		$fileName = '';
         foreach ($book['Datum'] as $file) {
             if ($file['format'] == strtoupper($extension)) {
                 $fileName = $file['name'];
             }
         }
+
         if (!$fileName) {
             throw new NotFoundException(__('Invalid file name or extension'));
         }
@@ -134,7 +138,7 @@ class BooksController extends AppController {
         $this->autoRender = false;
         $this->layout = false;
         $this->set(array(
-            'book' => $book,
+            'book'   => $book,
             'reader' => $bookReader->read($this->request)
         ));
 

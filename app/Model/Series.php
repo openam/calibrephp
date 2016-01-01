@@ -58,18 +58,19 @@ class Series extends AppModel {
      * @inheritdoc
      */
     public $filterDeny = array(
-        'foreignKey' => 'Series.id',
+        'foreignKey'            => 'Series.id',
         'associationForeignKey' => 'BooksSeriesLink.id',
-        'table' => 'books_series_link',
-        'alias' => 'BooksSeriesLink',
+        'table'                 => 'books_series_link',
+        'alias'                 => 'BooksSeriesLink',
+
         'joins' => array(
             'aliases' => array(
                 'books_tags_link' => 'BooksTagsLink',
-                'tags' => 'Tags'
+                'tags'            => 'Tags'
             ),
             'conditions' => array(
                 'BooksTagsLink.book' => 'BooksSeriesLink.book',
-                'BooksTagsLink.tag' => 'Tags.id'
+                'BooksTagsLink.tag'  => 'Tags.id'
             )
         )
     );

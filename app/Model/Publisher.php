@@ -57,18 +57,19 @@ class Publisher extends AppModel {
      * @inheritdoc
      */
     public $filterDeny = array(
-        'foreignKey' => 'Publisher.id',
+        'foreignKey'            => 'Publisher.id',
         'associationForeignKey' => 'BooksPublishersLink.id',
-        'table' => 'books_publishers_link',
-        'alias' => 'BooksPublishersLink',
+        'table'                 => 'books_publishers_link',
+        'alias'                 => 'BooksPublishersLink',
+
         'joins' => array(
             'aliases' => array(
                 'books_tags_link' => 'BooksTagsLink',
-                'tags' => 'Tags'
+                'tags'            => 'Tags'
             ),
             'conditions' => array(
                 'BooksTagsLink.book' => 'BooksPublishersLink.book',
-                'BooksTagsLink.tag' => 'Tags.id'
+                'BooksTagsLink.tag'  => 'Tags.id'
             )
         )
     );

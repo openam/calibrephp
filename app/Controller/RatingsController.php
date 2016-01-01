@@ -30,6 +30,7 @@ class RatingsController extends AppController {
 		if (!$this->Rating->exists($id)) {
 			throw new NotFoundException(__('Invalid rating'));
 		}
+
 		$options = array(
 			'conditions' => array(
 				'Rating.' . $this->Rating->primaryKey => $id

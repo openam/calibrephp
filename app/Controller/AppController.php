@@ -43,7 +43,7 @@ class AppController extends Controller {
         'Auth' => array(
             'unauthorizedRedirect' => array(
                 'controller' => '',
-                'action' => 'index'
+                'action'     => 'index'
             ),
             'authorize' => array('Controller')
         )
@@ -112,6 +112,7 @@ class AppController extends Controller {
         if ($usedLanguage !== $this->Cookie->read('language')) {
             $this->Cookie->write('language', $usedLanguage, false, '120 days');
         }
+
         $this->Session->write('Config.language', $usedLanguage);
     }
 
@@ -122,7 +123,7 @@ class AppController extends Controller {
      * @return void
      */
     public function _applyMetadata() {
-        $dbConfig = ConnectionManager::getDataSource('default')->config;
+        $dbConfig     = ConnectionManager::getDataSource('default')->config;
         $userMetadata = Configure::read('General.metadata');
 
         if (!empty($userMetadata) && $dbConfig['database'] !== $userMetadata) {

@@ -57,20 +57,21 @@ class Author extends AppModel {
      * @inheritdoc
      */
     public $filterDeny = array(
-        'foreignKey' => 'Author.id',
+        'foreignKey'            => 'Author.id',
         'associationForeignKey' => 'BooksAuthorsLink.id',
-        'table' => 'books_authors_link',
-        'alias' => 'BooksAuthorsLink',
+        'table'                 => 'books_authors_link',
+        'alias'                 => 'BooksAuthorsLink',
+
         'joins' => array(
             'aliases' => array(
-                'authors' => 'Authors',
+                'authors'         => 'Authors',
                 'books_tags_link' => 'BooksTagsLink',
-                'tags' => 'Tags'
+                'tags'            => 'Tags'
             ),
             'conditions' => array(
                 'BooksAuthorsLink.author' => 'Authors.id',
-                'BooksTagsLink.book' => 'BooksAuthorsLink.book',
-                'BooksTagsLink.tag' => 'Tags.id'
+                'BooksTagsLink.book'      => 'BooksAuthorsLink.book',
+                'BooksTagsLink.tag'       => 'Tags.id'
             )
         )
     );

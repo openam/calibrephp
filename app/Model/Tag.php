@@ -57,9 +57,9 @@ class Tag extends AppModel {
      * @inheritdoc
      */
     public $filterDeny = array(
-        'foreignKey' => 'Tag.id',
+        'foreignKey'            => 'Tag.id',
         'associationForeignKey' => 'Tags.id',
-        'table' => 'tags',
-        'alias' => 'Tags'
+        'table'                 => 'tags',
+        'alias'                 => 'Tags'
     );
 }
