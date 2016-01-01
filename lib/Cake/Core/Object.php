@@ -11,11 +11,12 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       Cake.Core
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('CakeLog', 'Log');
 App::uses('Dispatcher', 'Routing');
+App::uses('Router', 'Routing');
 App::uses('Set', 'Utility');
 
 /**
@@ -29,8 +30,7 @@ App::uses('Set', 'Utility');
 class Object {
 
 /**
- * constructor, no-op
- *
+ * Constructor, no-op
  */
 	public function __construct() {
 	}
@@ -82,18 +82,18 @@ class Object {
 		if ($arrayUrl && !isset($extra['data'])) {
 			$extra['data'] = array();
 		}
-		$extra = array_merge(array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1), $extra);
+		$extra += array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1);
 		$data = isset($extra['data']) ? $extra['data'] : null;
 		unset($extra['data']);
 
-		if (is_string($url) && strpos($url, FULL_BASE_URL) === 0) {
-			$url = Router::normalize(str_replace(FULL_BASE_URL, '', $url));
+		if (is_string($url) && strpos($url, Router::fullBaseUrl()) === 0) {
+			$url = Router::normalize(str_replace(Router::fullBaseUrl(), '', $url));
 		}
 		if (is_string($url)) {
 			$request = new CakeRequest($url);
 		} elseif (is_array($url)) {
 			$params = $url + array('pass' => array(), 'named' => array(), 'base' => false);
-			$params = array_merge($params, $extra);
+			$params = $extra + $params;
 			$request = new CakeRequest(Router::reverse($params));
 		}
 		if (isset($data)) {
@@ -110,9 +110,9 @@ class Object {
  * Calls a method on this object with the given parameters. Provides an OO wrapper
  * for `call_user_func_array`
  *
- * @param string $method  Name of the method to call
- * @param array $params  Parameter list to use when calling $method
- * @return mixed  Returns the result of the method call
+ * @param string $method Name of the method to call
+ * @param array $params Parameter list to use when calling $method
+ * @return mixed Returns the result of the method call
  */
 	public function dispatchMethod($method, $params = array()) {
 		switch (count($params)) {
@@ -137,7 +137,7 @@ class Object {
  * Stop execution of the current script. Wraps exit() making
  * testing easier.
  *
- * @param integer|string $status see http://php.net/exit for values
+ * @param int|string $status see http://php.net/exit for values
  * @return void
  */
 	protected function _stop($status = 0) {
@@ -148,17 +148,18 @@ class Object {
  * Convenience method to write a message to CakeLog. See CakeLog::write()
  * for more information on writing to logs.
  *
- * @param string $msg Log message.
- * @param integer|string $type Type of message being written. Either a valid
- *    LOG_* constant or a string matching the recognized levels.
- * @return boolean Success of log write.
- * @see CakeLog::write()
+ * @param string $msg Log message
+ * @param int $type Error type constant. Defined in app/Config/core.php.
+ * @param null|string|array $scope The scope(s) a log message is being created in.
+ *    See CakeLog::config() for more information on logging scopes.
+ * @return bool Success of log write
  */
-	public function log($msg, $type = LOG_ERR) {
+	public function log($msg, $type = LOG_ERR, $scope = null) {
 		if (!is_string($msg)) {
 			$msg = print_r($msg, true);
 		}
-		return CakeLog::write($type, $msg);
+
+		return CakeLog::write($type, $msg, $scope);
 	}
 
 /**
@@ -188,14 +189,13 @@ class Object {
  *
  * @param array $properties The name of the properties to merge.
  * @param string $class The class to merge the property with.
- * @param boolean $normalize Set to true to run the properties through Hash::normalize() before merging.
+ * @param bool $normalize Set to true to run the properties through Hash::normalize() before merging.
  * @return void
  */
 	protected function _mergeVars($properties, $class, $normalize = true) {
 		$classProperties = get_class_vars($class);
 		foreach ($properties as $var) {
-			if (
-				isset($classProperties[$var]) &&
+			if (isset($classProperties[$var]) &&
 				!empty($classProperties[$var]) &&
 				is_array($this->{$var}) &&
 				$this->{$var} != $classProperties[$var]

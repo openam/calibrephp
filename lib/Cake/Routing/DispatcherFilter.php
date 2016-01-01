@@ -1,8 +1,5 @@
 <?php
 /**
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -14,7 +11,7 @@
  * @link		  http://cakephp.org CakePHP(tm) Project
  * @package		  Cake.Routing
  * @since		  CakePHP(tm) v 2.2
- * @license		  MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('CakeEventListener', 'Event');
@@ -34,6 +31,22 @@ abstract class DispatcherFilter implements CakeEventListener {
  * @var int
  */
 	public $priority = 10;
+
+/**
+ * Settings for this filter
+ *
+ * @var array
+ */
+	public $settings = array();
+
+/**
+ * Constructor.
+ *
+ * @param array $settings Configuration settings for the filter.
+ */
+	public function __construct($settings = array()) {
+		$this->settings = Hash::merge($this->settings, $settings);
+	}
 
 /**
  * Returns the list of events this filter listens to.
@@ -65,7 +78,7 @@ abstract class DispatcherFilter implements CakeEventListener {
  *
  * @param CakeEvent $event container object having the `request`, `response` and `additionalParams`
  *	keys in the data property.
- * @return CakeResponse|boolean
+ * @return CakeResponse|bool
  */
 	public function beforeDispatch(CakeEvent $event) {
 	}

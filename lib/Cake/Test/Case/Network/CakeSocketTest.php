@@ -2,8 +2,6 @@
 /**
  * SocketTest file
  *
- * PHP 5
- *
  * CakePHP(tm) Tests <http://book.cakephp.org/2.0/en/development/testing.html>
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -15,7 +13,7 @@
  * @link          http://book.cakephp.org/2.0/en/development/testing.html CakePHP(tm) Tests
  * @package       Cake.Test.Case.Network
  * @since         CakePHP(tm) v 1.2.0.4206
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
 App::uses('CakeSocket', 'Network');
@@ -58,7 +56,7 @@ class CakeSocketTest extends CakeTestCase {
 		$this->assertSame($config, array(
 			'persistent'	=> false,
 			'host'			=> 'localhost',
-			'protocol'		=> getprotobyname('tcp'),
+			'protocol'		=> 'tcp',
 			'port'			=> 80,
 			'timeout'		=> 30
 		));
@@ -73,7 +71,7 @@ class CakeSocketTest extends CakeTestCase {
 
 		$config['host'] = 'www.cakephp.org';
 		$config['port'] = 23;
-		$config['protocol'] = 17;
+		$config['protocol'] = 'udp';
 
 		$this->assertSame($this->Socket->config, $config);
 	}
@@ -120,7 +118,7 @@ class CakeSocketTest extends CakeTestCase {
  *
  * @dataProvider invalidConnections
  * @expectedException SocketException
- * return void
+ * @return void
  */
 	public function testInvalidConnection($data) {
 		$this->Socket->config = array_merge($this->Socket->config, $data);
@@ -369,7 +367,37 @@ class CakeSocketTest extends CakeTestCase {
 		$this->Socket = new CakeSocket($config);
 		$this->Socket->connect();
 		$result = $this->Socket->context();
-		$this->assertEquals($config['context'], $result);
+		$this->assertSame($config['context']['ssl']['capture_peer'], $result['ssl']['capture_peer']);
 	}
 
+/**
+ * test configuring the context from the flat keys.
+ *
+ * @return void
+ */
+	public function testConfigContext() {
+		$this->skipIf(!extension_loaded('openssl'), 'OpenSSL is not enabled cannot test SSL.');
+		$config = array(
+			'host' => 'smtp.gmail.com',
+			'port' => 465,
+			'timeout' => 5,
+			'ssl_verify_peer' => true,
+			'ssl_allow_self_signed' => false,
+			'ssl_verify_depth' => 5,
+			'ssl_verify_host' => true,
+		);
+		$this->Socket = new CakeSocket($config);
+
+		$this->Socket->connect();
+		$result = $this->Socket->context();
+
+		$this->assertTrue($result['ssl']['verify_peer']);
+		$this->assertFalse($result['ssl']['allow_self_signed']);
+		$this->assertEquals(5, $result['ssl']['verify_depth']);
+		$this->assertEquals('smtp.gmail.com', $result['ssl']['CN_match']);
+		$this->assertArrayNotHasKey('ssl_verify_peer', $this->Socket->config);
+		$this->assertArrayNotHasKey('ssl_allow_self_signed', $this->Socket->config);
+		$this->assertArrayNotHasKey('ssl_verify_host', $this->Socket->config);
+		$this->assertArrayNotHasKey('ssl_verify_depth', $this->Socket->config);
+	}
 }
