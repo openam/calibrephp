@@ -4,8 +4,6 @@
  *
  * Use it to configure core behavior of Cake.
  *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -17,8 +15,10 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+//setLocale(LC_ALL, 'deu');
+//Configure::write('Config.language', 'deu');
 
 /**
  * CakePHP Debug Level:
@@ -45,7 +45,7 @@
  * - `handler` - callback - The callback to handle errors. You can set this to any callable type,
  *   including anonymous functions.
  *   Make sure you add App::uses('MyHandler', 'Error'); when using a custom handler class
- * - `level` - int - The level of errors you are interested in capturing.
+ * - `level` - integer - The level of errors you are interested in capturing.
  * - `trace` - boolean - Include stack traces for errors in log files.
  *
  * @see ErrorHandler for more information on error handling and configuration.
@@ -70,6 +70,9 @@
  * - `renderer` - string - The class responsible for rendering uncaught exceptions. If you choose a custom class you
  *   should place the file for that class in app/Lib/Error. This class needs to implement a render method.
  * - `log` - boolean - Should Exceptions be logged?
+ * - `skipLog` - array - list of exceptions to skip for logging. Exceptions that
+ *   extend one of the listed exceptions will also be skipped for logging.
+ *   Example: `'skipLog' => array('NotFoundException', 'UnauthorizedException')`
  *
  * @see ErrorHandler for more information on exception handling and configuration.
  */
@@ -106,6 +109,33 @@
 	//Configure::write('App.baseUrl', env('SCRIPT_NAME'));
 
 /**
+ * To configure CakePHP to use a particular domain URL
+ * for any URL generation inside the application, set the following
+ * configuration variable to the http(s) address to your domain. This
+ * will override the automatic detection of full base URL and can be
+ * useful when generating links from the CLI (e.g. sending emails)
+ */
+	//Configure::write('App.fullBaseUrl', 'http://example.com');
+
+/**
+ * Web path to the public images directory under webroot.
+ * If not set defaults to 'img/'
+ */
+	//Configure::write('App.imageBaseUrl', 'img/');
+
+/**
+ * Web path to the CSS files directory under webroot.
+ * If not set defaults to 'css/'
+ */
+	//Configure::write('App.cssBaseUrl', 'css/');
+
+/**
+ * Web path to the js files directory under webroot.
+ * If not set defaults to 'js/'
+ */
+	//Configure::write('App.jsBaseUrl', 'js/');
+
+/**
  * Uncomment the define below to use CakePHP prefix routes.
  *
  * The value of the define determines the names of the routes
@@ -119,13 +149,11 @@
  * Enables:
  *	`admin_index()` and `/admin/controller/index`
  *	`manager_index()` and `/manager/controller/index`
- *
  */
 	//Configure::write('Routing.prefixes', array('admin'));
 
 /**
  * Turn off all caching application-wide.
- *
  */
 	//Configure::write('Cache.disable', true);
 
@@ -136,7 +164,6 @@
  * public $cacheAction inside your controllers to define caching settings.
  * You can either set it controller-wide by setting public $cacheAction = true,
  * or in each action using $this->cacheAction = true.
- *
  */
 	//Configure::write('Cache.check', true);
 
@@ -185,7 +212,6 @@
  *
  * To use database sessions, run the app/Config/Schema/sessions.php schema using
  * the cake shell command: cake schema create Sessions
- *
  */
 	Configure::write('Session', array(
 		'defaults' => 'php'
@@ -224,7 +250,7 @@
  * Plug in your own custom JavaScript compressor by dropping a script in your webroot to handle the
  * output, and setting the config below to the name of the script.
  *
- * To use, prefix your JavaScript link URLs with '/cjs/' instead of '/js/' or use JavaScriptHelper::link().
+ * To use, prefix your JavaScript link URLs with '/cjs/' instead of '/js/' or use JsHelper::link().
  */
 	//Configure::write('Asset.filter.js', 'custom_javascript_output_filter.php');
 
@@ -242,7 +268,14 @@
 	//date_default_timezone_set('UTC');
 
 /**
- *
+ * `Config.timezone` is available in which you can set users' timezone string.
+ * If a method of CakeTime class is called with $timezone parameter as null and `Config.timezone` is set,
+ * then the value of `Config.timezone` will be used. This feature allows you to set users' timezone just
+ * once instead of passing it each time in function calls.
+ */
+	//Configure::write('Config.timezone', 'Europe/Paris');
+
+/**
  * Cache Engine Configuration
  * Default settings provided below
  *
@@ -255,7 +288,8 @@
  * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
  * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
  * 		'lock' => false, //[optional]  use file locking
- * 		'serialize' => true, [optional]
+ * 		'serialize' => true, //[optional]
+ * 		'mask' => 0664, //[optional]
  *	));
  *
  * APC (http://pecl.php.net/package/APC)
@@ -278,18 +312,20 @@
  *		'password' => 'password', //plaintext password (xcache.admin.pass)
  *	));
  *
- * Memcache (http://www.danga.com/memcached/)
+ * Memcached (http://www.danga.com/memcached/)
+ *
+ * Uses the memcached extension. See http://php.net/memcached
  *
  * 	 Cache::config('default', array(
- *		'engine' => 'Memcache', //[required]
+ *		'engine' => 'Memcached', //[required]
  *		'duration' => 3600, //[optional]
  *		'probability' => 100, //[optional]
  * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
  * 		'servers' => array(
  * 			'127.0.0.1:11211' // localhost, default port 11211
  * 		), //[optional]
- * 		'persistent' => true, // [optional] set this to false for non-persistent connections
- * 		'compress' => false, // [optional] compress data in Memcache (slower, but uses less memory)
+ * 		'persistent' => 'my_connection', // [optional] The name of the persistent connection.
+ * 		'compress' => false, // [optional] compress data in Memcached (slower, but uses less memory)
  *	));
  *
  *  Wincache (http://php.net/wincache)

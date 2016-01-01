@@ -1,11 +1,5 @@
 <?php
 /**
- * This is core configuration file.
- *
- * Use it to configure core behaviour of Cake.
- *
- * PHP 5
- *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -17,9 +11,12 @@
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Config
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
- *
+ * @license       http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+
+/**
  * Database configuration class.
+ *
  * You can specify multiple configurations for production, development and testing.
  *
  * datasource => The name of a supported datasource; valid options are as follows:
@@ -43,15 +40,29 @@
  * on a per-table basis with the Model::$tablePrefix property.
  *
  * schema =>
- * For Postgres/Sqlserver specifies which schema you would like to use the tables in. Postgres defaults to 'public'. For Sqlserver, it defaults to empty and use
+ * For Postgres/Sqlserver specifies which schema you would like to use the tables in.
+ * Postgres defaults to 'public'. For Sqlserver, it defaults to empty and use
  * the connected user's default schema (typically 'dbo').
  *
  * encoding =>
  * For MySQL, Postgres specifies the character encoding to use when connecting to the
  * database. Uses database default not specified.
  *
+ * sslmode =>
+ * For Postgres specifies whether to 'disable', 'allow', 'prefer', or 'require' SSL for the 
+ * connection. The default value is 'allow'.
+ *
  * unix_socket =>
  * For MySQL to connect via socket specify the `unix_socket` parameter instead of `host` and `port`
+ *
+ * settings =>
+ * Array of key/value pairs, on connection it executes SET statements for each pair
+ * For MySQL : http://dev.mysql.com/doc/refman/5.6/en/set-statement.html
+ * For Postgres : http://www.postgresql.org/docs/9.2/static/sql-set.html
+ * For Sql Server : http://msdn.microsoft.com/en-us/library/ms190356.aspx
+ *
+ * flags =>
+ * A key/value array of driver specific connection options.
  */
 
 // Copy initial database if it doesn't already exist

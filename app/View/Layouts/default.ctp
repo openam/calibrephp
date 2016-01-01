@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><?php echo $title_for_layout; ?></title>
+		<title><?php echo $this->fetch('title'); ?></title>
 		<?php
 			echo $this->Html->charset();
 			echo $this->Html->meta('description', 'Calibre Web Server');
