@@ -27,4 +27,8 @@ RUN apt-get update && \
 
 RUN a2enmod rewrite
 
-RUN chown --recursive root:www-data /var/www/html
+RUN chown --recursive root:www-data /var/www/html && \
+	chmod -R 775 /var/www/html/app && \
+	chmod +x run.sh
+
+CMD [ "./run.sh" ]
