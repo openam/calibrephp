@@ -20,9 +20,17 @@ class BooksController extends AppController {
  * @return void
  */
 	public function index() {
-		$this->Book->recursive = 1;
-		$this->set('books', $this->paginate());
+		if ($this->layoutPath == 'xml') {
+			$this->Book->recursive = 0;
+			$books = $this->paginate();
+			$info    = $this->Book->getInfo();
+			$this->set(compact('books', 'info'));
+ 		} else {
+ 			$this->Book->recursive = 1;
+			$this->set('books', $this->paginate());
+                }
 	}
+
 
 /**
  * view method
